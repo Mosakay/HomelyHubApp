@@ -149,7 +149,7 @@ const SignUp2 = ({navigation}) => {
             </View>
     
         </AuthLayout>
-    )
+    ,
 }
 
 export default SignUp2
