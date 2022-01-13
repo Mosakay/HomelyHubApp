@@ -6,7 +6,7 @@ import {FormInput, TextButton} from '../../components';
 import {utils} from '../../utils';
 
 
-const SingUp2 = ({navigation}) => {
+const SignUp2 = ({navigation}) => {
 
 
     const [password, setPassword] = React.useState('');
@@ -152,4 +152,4 @@ const SingUp2 = ({navigation}) => {
     )
 }
 
-export default SingUp2
+export default SignUp2

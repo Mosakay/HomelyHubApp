@@ -5,7 +5,7 @@ import MainLayout from "./MainLayout"
 import AuthLayout from "./Authentication/AuthLayout"
 import SignIn from "./Authentication/SignIn"
 import SignUp from "./Authentication/SignUp"
-import SignUp2 from "./Authentication/SingUp2"
+import SignUp2 from "./Authentication/SignUp2"
 import Otp from "./Authentication/Otp"
 import ForgotPassword from './Authentication/ForgotPassword'
 
