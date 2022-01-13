@@ -132,7 +132,7 @@ const SignUp2 = ({navigation}) => {
           </Text>
 
           <TextButton
-          label="Sing In"
+          label="Sign In"
           buttonContainerStyle={{
             backgroundColor: null,
             marginLeft: 3,

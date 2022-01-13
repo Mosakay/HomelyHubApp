@@ -205,7 +205,7 @@ const SignIn = ({navigation}) => {
           </Text>
 
           <TextButton
-          label="Sing Up"
+          label="Sign Up"
           buttonContainerStyle={{
             backgroundColor: null,
             marginLeft: 3,
