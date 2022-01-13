@@ -31,7 +31,7 @@ const SignIn = ({navigation}) => {
       title="Let's Sign You In"
       subtitle="Welcome back, you've been missed!">
       <Text
-        style={{textAlign: 'center', ...FONTS.body3, marginTop: SIZES.base}}>
+        style={{textAlign: 'center', ...FONTS.body3}}>
         Continue with Social Media
       </Text>
       <View
@@ -205,7 +205,7 @@ const SignIn = ({navigation}) => {
           </Text>
 
           <TextButton
-          label="Sing Up"
+          label="Sign Up"
           buttonContainerStyle={{
             backgroundColor: null,
             marginLeft: 3,
