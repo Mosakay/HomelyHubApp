@@ -4,6 +4,7 @@ import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import {FormInput, TextButton} from '../../components';
 import {utils} from '../../utils';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 const SignUp2 = ({navigation}) => {
@@ -11,6 +12,8 @@ const SignUp2 = ({navigation}) => {
 
     const [password, setPassword] = React.useState('');
     const [showPass, setShowPass] = React.useState(false);
+    const [password2, setPassword2] = React.useState('');
+    const [showPass2, setShowPass2] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState("")
 
     function isEnableSignUp() {
@@ -18,6 +21,7 @@ const SignUp2 = ({navigation}) => {
       }
 
     return (
+      <ScrollView>
         <AuthLayout
         title="Sign Up"
         subtitle="Next let's secure the account..."
@@ -77,10 +81,10 @@ const SignUp2 = ({navigation}) => {
           iconStyle={{paddingRight: SIZES.base}}
           iconSize={19}
           label="Confirm Password"
-          secureTextEntry={!showPass}
+          secureTextEntry={!showPass2}
           autoCompleteType="password"
           containerStyle={{marginTop: SIZES.padding}}
-          onChange={value => setPassword(value)}
+          onChange={value => setPassword2(value)}
           appendComponent={
             <TouchableOpacity
               style={{
@@ -88,9 +92,9 @@ const SignUp2 = ({navigation}) => {
                 alignItems: 'flex-end',
                 justifyContent: 'center',
               }}
-              onPress={() => setShowPass(!showPass)}>
+              onPress={() => setShowPass2(!showPass2)}>
               <Image
-                source={showPass ? icons.eye_close : icons.eye}
+                source={showPass2 ? icons.eye_close : icons.eye}
                 style={{height: 20, width: 20, tintColor: COLORS.gray}}
               />
             </TouchableOpacity>
@@ -149,6 +153,7 @@ const SignUp2 = ({navigation}) => {
             </View>
     
         </AuthLayout>
+      </ScrollView>
     )
 }
 
