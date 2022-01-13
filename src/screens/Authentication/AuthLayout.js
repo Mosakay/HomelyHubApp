@@ -27,6 +27,7 @@ const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
         <View
         style={{
             alignItems:'center'
+            
         }}
         >
             <Image 
@@ -42,7 +43,7 @@ const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
         {/* Title & Subtitle */}
             <View
             style={{
-                marginTop: SIZES.radius,
+                marginTop: SIZES.base,
                 ...titleContainerStyle
             }}
             >
