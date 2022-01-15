@@ -6,6 +6,7 @@ import {FormInput, TextButton} from '../../components';
 import {utils} from '../../utils';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import { string } from 'yup/lib/locale';
 
 const SignUp = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -20,7 +21,7 @@ const SignUp = ({navigation}) => {
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 
-  const loginValidationSchema = yup.object().shape({
+  const signUpValidationSchema = yup.object().shape({
     email: yup
       .string()
       .email('Please enter valid email')
@@ -33,19 +34,22 @@ const SignUp = ({navigation}) => {
         .string()
         .min(3, ({min}) => `Surname must be at least ${min} characters long.`)
         .required('First name is required!'),
-        phone: yup
+        phoneNumber: yup
         .string()
-        .matches(phoneRegExp,
-           'Phone number is not valid'
-        )
+        .min(3, ({min}) => `Surname must be at least ${min} characters long.`)
+        .matches(phoneRegExp, 'Enter a valid phone number')
+        .required('Phone number is required'),
+        
   });
+
+  
 
   return (
     <Formik
-    initialValues={{email: '', password: '', firstName: '', surname: '', phone: ''}}
+    initialValues={{email: '', password: '', firstName: '', surname: '', phoneNumber: '',}}
     validateOnMount={true}
     onSubmit={values => console.log(values)}
-    validationSchema={loginValidationSchema}>
+    validationSchema={signUpValidationSchema}>
     {({
         handleChange,
         handleBlur,
@@ -185,14 +189,12 @@ const SignUp = ({navigation}) => {
                   {errors.surname}
                 </Text>
               )}     
-                   {/* phone input
-                    For some reasion the phone number is just keep deleting its self and wont retain the informatin
-                   */}
+                   {/* phone input*/}
 
           <FormInput
-          onChangeText={handleChange('Phone')}
-          onBlur={handleBlur('Phone')}
-          value={values.phone}  
+          onChangeText={handleChange('phoneNumber')}
+          onBlur={handleBlur('phoneNumber')}
+          value={values.phoneNumber}  
           label="Phone Number"
           iconName="smartphone"
           iconStyle={{paddingRight: SIZES.base}}
@@ -201,7 +203,7 @@ const SignUp = ({navigation}) => {
           containerStyle={{marginTop: SIZES.radius}}
           onChange={(value) => {setPhoneNumber(value)}}
           errorMsg={phoneNumberError}
-          // keyboardType="numeric"
+          keyboardType="numeric"
           appendComponent={
             <View
             style={{justifyContent:'center'}}
@@ -287,3 +289,4 @@ const SignUp = ({navigation}) => {
 };
 
 export default SignUp;
+

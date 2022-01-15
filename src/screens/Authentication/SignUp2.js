@@ -104,7 +104,7 @@ const SignUp2 = ({navigation}) => {
                 </Text>
               )}        
 
-        <View
+        {/* <View
         style={{
             marginTop: SIZES.padding,
             marginLeft: SIZES.padding
@@ -113,7 +113,7 @@ const SignUp2 = ({navigation}) => {
             <Text style={{...FONTS.body4}}>* Password must be 8 characters long.</Text>
             <Text style={{...FONTS.body4}}>* Must include atleast one uppercase letter</Text>
             <Text style={{...FONTS.body4}}>* A mixture of letters and numbers.</Text>
-        </View>
+        </View> */}
 
         <FormInput
         placeholder="Confirm your password"
