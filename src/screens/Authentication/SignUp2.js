@@ -47,7 +47,7 @@ const SignUp2 = ({navigation}) => {
         errors,
         isValid,
       }) => (
-      <ScrollView>
+      // <ScrollView>
         <AuthLayout
         title="Sign Up"
         subtitle="Next let's secure the account..."
@@ -193,7 +193,7 @@ const SignUp2 = ({navigation}) => {
             </View>
     
         </AuthLayout>
-      </ScrollView>
+      // </ScrollView>
       )}
       </Formik>
     )
