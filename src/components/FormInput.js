@@ -3,6 +3,7 @@ import {View, Text, TextInput} from 'react-native';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {FONTS, SIZES, COLORS} from '../constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { baseProps } from 'react-native-gesture-handler/lib/typescript/handlers/gestureHandlers';
 
 const FormInput = ({
   containerStyle,
@@ -21,6 +22,9 @@ const FormInput = ({
   iconName,
   iconSize,
   iconColor,
+  onChangeText,
+  onBlur,
+  value,
 }) => {
   return (
     <View style={{...containerStyle}}>
@@ -54,7 +58,10 @@ const FormInput = ({
           keyboardType={keyboardType}
           autoCompleteType={autoCompleteType}
           autoCapitalize={autoCapitalize}
-          onChangeText={(text) => onChange(text)}
+          // onChangeText={(text) => onChange(text)}
+          onChangeText={onChangeText}
+          onBlur={onBlur}
+          value={value}
           // iconColor={iconColor}
           // iconSize={iconSize}
           // iconName={iconName}

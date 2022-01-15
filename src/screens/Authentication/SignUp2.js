@@ -4,6 +4,9 @@ import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import {FormInput, TextButton} from '../../components';
 import {utils} from '../../utils';
+import { ScrollView } from 'react-native-gesture-handler';
+import {Formik} from 'formik';
+import * as yup from 'yup';
 
 
 const SignUp2 = ({navigation}) => {
@@ -11,13 +14,40 @@ const SignUp2 = ({navigation}) => {
 
     const [password, setPassword] = React.useState('');
     const [showPass, setShowPass] = React.useState(false);
+    const [password2, setPassword2] = React.useState('');
+    const [showPass2, setShowPass2] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState("")
 
     function isEnableSignUp() {
         return password != '' && passwordError == '';
       }
+    const loginValidationSchema = yup.object().shape({
+      password: yup
+        .string()
+        .min(8, ({min}) => `Password must be at least ${min} characters.`)
+        .required('Password is required!')
+        .matches(
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+          "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+        ,    
+    });
 
     return (
+      <Formik
+        initialValues={{password: ''}}
+        validateOnMount={true}
+        onSubmit={values => console.log(values)}
+        validationSchema={loginValidationSchema}>
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        values,
+        touched,
+        errors,
+        isValid,
+      }) => (
+      <ScrollView>
         <AuthLayout
         title="Sign Up"
         subtitle="Next let's secure the account..."
@@ -30,19 +60,22 @@ const SignUp2 = ({navigation}) => {
             }}
             >
             <FormInput
-            placeholder="Create your password"
-          iconName="lock"
-          iconStyle={{paddingRight: SIZES.base}}
-          iconSize={19}
-          label="Password"
-          secureTextEntry={!showPass}
-          autoCompleteType="password"
-          containerStyle={{marginTop: SIZES.radius}}
-          onChange={value => {
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+              placeholder="Create your password"
+              iconName="lock"
+              iconStyle={{paddingRight: SIZES.base}}
+              iconSize={19}
+              label="Password"
+              secureTextEntry={!showPass}
+              autoCompleteType="password"
+              containerStyle={{marginTop: SIZES.radius}}
+          // onChange={value => {
 
-            utils.validatePassword(value, setPasswordError)
-              setPassword(value)
-            }}
+          //   utils.validatePassword(value, setPasswordError)
+          //     setPassword(value)
+          //   }}
             errorMsg={passwordError}
           appendComponent={
             <TouchableOpacity
@@ -59,6 +92,17 @@ const SignUp2 = ({navigation}) => {
             </TouchableOpacity>
           }
         />
+          {errors.password && touched.password && (
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: COLORS.red,
+                    fontWeight: 'bold',
+                    marginTop: 5,
+                  }}>
+                  {errors.password}
+                </Text>
+              )}        
 
         <View
         style={{
@@ -77,10 +121,10 @@ const SignUp2 = ({navigation}) => {
           iconStyle={{paddingRight: SIZES.base}}
           iconSize={19}
           label="Confirm Password"
-          secureTextEntry={!showPass}
+          secureTextEntry={!showPass2}
           autoCompleteType="password"
           containerStyle={{marginTop: SIZES.padding}}
-          onChange={value => setPassword(value)}
+          onChange={value => setPassword2(value)}
           appendComponent={
             <TouchableOpacity
               style={{
@@ -88,9 +132,9 @@ const SignUp2 = ({navigation}) => {
                 alignItems: 'flex-end',
                 justifyContent: 'center',
               }}
-              onPress={() => setShowPass(!showPass)}>
+              onPress={() => setShowPass2(!showPass2)}>
               <Image
-                source={showPass ? icons.eye_close : icons.eye}
+                source={showPass2 ? icons.eye_close : icons.eye}
                 style={{height: 20, width: 20, tintColor: COLORS.gray}}
               />
             </TouchableOpacity>
@@ -149,6 +193,9 @@ const SignUp2 = ({navigation}) => {
             </View>
     
         </AuthLayout>
+      </ScrollView>
+      )}
+      </Formik>
     )
 }
 
