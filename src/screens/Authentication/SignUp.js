@@ -26,20 +26,19 @@ const SignUp = ({navigation}) => {
       .string()
       .email('Please enter valid email')
       .required('Email address is required!'),
-      firstName: yup
-        .string()
-        .min(3, ({min}) => `First name must be at least ${min} characters long.`)
-        .required('First name is required!'),
-      surname: yup
-        .string()
-        .min(3, ({min}) => `Surname must be at least ${min} characters long.`)
-        .required('First name is required!'),
-        phoneNumber: yup
-        .string()
-        .min(3, ({min}) => `Surname must be at least ${min} characters long.`)
-        .matches(phoneRegExp, 'Enter a valid phone number')
-        .required('Phone number is required'),
-        
+    firstName: yup
+      .string()
+      .min(3, ({min}) => `First name must be at least ${min} characters long.`)
+      .required('First name is required!'),
+    surname: yup
+      .string()
+      .min(3, ({min}) => `Surname must be at least ${min} characters long.`)
+      .required('First name is required!'),
+    // phoneNumber: yup
+    //   .number()
+    //   .min(10, ({min}) => `Surname must be at least ${min} characters long.`)
+    //   .matches(phoneRegExp, 'Enter a valid phone number')
+    //   .required('Phone number is required'),
   });
 
   
