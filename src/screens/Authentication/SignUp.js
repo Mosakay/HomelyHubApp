@@ -184,7 +184,10 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.surname}
                 </Text>
-              )}          
+              )}     
+                   {/* phone input
+                    For some reasion the phone number is just keep deleting its self and wont retain the informatin
+                   */}
 
           <FormInput
           onChangeText={handleChange('Phone')}
@@ -198,7 +201,7 @@ const SignUp = ({navigation}) => {
           containerStyle={{marginTop: SIZES.radius}}
           onChange={(value) => {setPhoneNumber(value)}}
           errorMsg={phoneNumberError}
-          keyboardType="numeric"
+          // keyboardType="numeric"
           appendComponent={
             <View
             style={{justifyContent:'center'}}
