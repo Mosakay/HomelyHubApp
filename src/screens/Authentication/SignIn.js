@@ -6,18 +6,15 @@ import {
   Image,
   StyleSheet,
   TextInput,
+  ScrollView
 } from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {FormInput, CustomSwitch, TextButton} from '../../components';
-import {utils} from '../../utils';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -29,9 +26,6 @@ const SignIn = ({navigation}) => {
 
   const onToggleSwitch = () => setSaveMe(!saveMe);
 
-  // function isEnableSignIn() {
-  //   return email != '' && password != '' && emailError == '';
-  // }
 
   const loginValidationSchema = yup.object().shape({
     email: yup
@@ -44,7 +38,7 @@ const SignIn = ({navigation}) => {
       .required('Password is required!')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        // "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character" this message makes no sence here 
+        "Must contain One Uppercase, One Lowercase, One Number and One Special Case Character"
         )
       ,
   });
@@ -166,12 +160,11 @@ const SignIn = ({navigation}) => {
             />
             {errors.email && touched.email && (
               <Text
-                style={{
-                  fontSize: 14,
-                  color: COLORS.red,
-                  fontWeight: 'bold',
-                  marginTop: 5,
-                }}>
+              style={{
+                ...FONTS.body4,
+                color: COLORS.red,
+                marginTop: 5,
+              }}>
                 {errors.email}
               </Text>
             )}
@@ -205,12 +198,11 @@ const SignIn = ({navigation}) => {
 
             {errors.password && touched.password && (
               <Text
-                style={{
-                  fontSize: 14,
-                  color: COLORS.red,
-                  fontWeight: 'bold',
-                  marginTop: 5,
-                }}>
+              style={{
+                ...FONTS.body4,
+                color: COLORS.red,
+                marginTop: 5,
+              }}>
                 {errors.password}
               </Text>
             )}
@@ -263,7 +255,7 @@ const SignIn = ({navigation}) => {
                   marginTop: SIZES.padding,
                   borderRadius: SIZES.radius + 5,
                   backgroundColor: isValid
-                    ? COLORS.green2
+                    ? COLORS.primary
                     : COLORS.transparentPrimary,
                 }}
               />

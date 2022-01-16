@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, Text, TextInput} from 'react-native';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import {FONTS, SIZES, COLORS} from '../constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { baseProps } from 'react-native-gesture-handler/lib/typescript/handlers/gestureHandlers';
+
 
 const FormInput = ({
   containerStyle,
