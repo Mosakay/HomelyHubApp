@@ -6,6 +6,7 @@ import {
   Image,
   StyleSheet,
   TextInput,
+  ScrollView
 } from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
@@ -17,7 +18,6 @@ import {utils} from '../../utils';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = React.useState('');
