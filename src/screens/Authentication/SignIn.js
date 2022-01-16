@@ -138,6 +138,7 @@ const SignIn = ({navigation}) => {
               // onChange={value => {
               //   utils.validateEmail(value, setEmailError);
               //   setEmail(value);
+              // old valadtion methed
               // }}
               errorMsg={emailError}
               appendComponent={
