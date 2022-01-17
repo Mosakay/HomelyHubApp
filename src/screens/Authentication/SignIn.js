@@ -10,11 +10,8 @@ import {
 } from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {FormInput, CustomSwitch, TextButton} from '../../components';
-import {utils} from '../../utils';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -29,9 +26,6 @@ const SignIn = ({navigation}) => {
 
   const onToggleSwitch = () => setSaveMe(!saveMe);
 
-  function isEnableSignIn() {
-    return email != '' && password != '' && emailError == '';
-  }
 
   const loginValidationSchema = yup.object().shape({
     email: yup
@@ -44,7 +38,8 @@ const SignIn = ({navigation}) => {
       .required('Password is required!')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+        "Must contain One Uppercase, One Lowercase, One Number and One Special Case Character"
+        )
       ,
   });
 
@@ -52,7 +47,10 @@ const SignIn = ({navigation}) => {
     <Formik
       initialValues={{email: '', password: ''}}
       validateOnMount={true}
-      onSubmit={values => console.log(values)}
+      onSubmit={values => alert(JSON.stringify(values))
+      // call login service here where we can pass these values
+      
+      }
       validationSchema={loginValidationSchema}>
       {({
         handleChange,
@@ -144,20 +142,11 @@ const SignIn = ({navigation}) => {
               appendComponent={
                 <View style={{justifyContent: 'center'}}>
                   <Image
-                    source={
-                      email == '' || (email != '' && emailError == '')
-                        ? icons.correct
-                        : icons.cancel
-                    }
+                    source={ !errors.email ? icons.correct : icons.cross }
                     style={{
                       height: 20,
                       width: 20,
-                      tintColor:
-                        email == ''
-                          ? COLORS.gray
-                          : email != '' && emailError == ''
-                          ? COLORS.green
-                          : COLORS.red,
+                      tintColor: !errors.email ? COLORS.primary : COLORS.red
                     }}
                   />
                 </View>
@@ -165,12 +154,11 @@ const SignIn = ({navigation}) => {
             />
             {errors.email && touched.email && (
               <Text
-                style={{
-                  fontSize: 14,
-                  color: COLORS.red,
-                  fontWeight: 'bold',
-                  marginTop: 5,
-                }}>
+              style={{
+                ...FONTS.body4,
+                color: COLORS.red,
+                marginTop: 5,
+              }}>
                 {errors.email}
               </Text>
             )}
@@ -185,7 +173,7 @@ const SignIn = ({navigation}) => {
               secureTextEntry={!showPass}
               autoCompleteType="password"
               containerStyle={{marginTop: SIZES.radius}}
-              onChange={value => setPassword(value)}
+              // onChange={value => setPassword(value)}
               appendComponent={
                 <TouchableOpacity
                   style={{
@@ -204,12 +192,11 @@ const SignIn = ({navigation}) => {
 
             {errors.password && touched.password && (
               <Text
-                style={{
-                  fontSize: 14,
-                  color: COLORS.red,
-                  fontWeight: 'bold',
-                  marginTop: 5,
-                }}>
+              style={{
+                ...FONTS.body4,
+                color: COLORS.red,
+                marginTop: 5,
+              }}>
                 {errors.password}
               </Text>
             )}
@@ -222,7 +209,8 @@ const SignIn = ({navigation}) => {
                 marginTop: SIZES.radius,
                 justifyContent: 'space-between',
               }}>
-              {/* <CustomSwitch value={saveMe} onChange={onToggleSwitch} /> */}
+              
+
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Switch
                   value={saveMe}
@@ -252,8 +240,8 @@ const SignIn = ({navigation}) => {
             {/* Sign In */}
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
               <TextButton
+                onPress={handleSubmit}
                 label="Sign In"
-                // disabled={isEnableSignIn() ? false : true}
                 disabled={!isValid}
                 buttonContainerStyle={{
                   height: 50,
@@ -262,7 +250,7 @@ const SignIn = ({navigation}) => {
                   marginTop: SIZES.padding,
                   borderRadius: SIZES.radius + 5,
                   backgroundColor: isValid
-                    ? COLORS.green2
+                    ? COLORS.primary
                     : COLORS.transparentPrimary,
                 }}
               />
