@@ -23,7 +23,7 @@ const MainLayout = ({navigation}) => {
         activeColor={COLORS.primary}
         inactiveColor={COLORS.transparentPrimary}
         labelStyle={{fontSize: 12}}
-        barStyle={{backgroundColor: COLORS.gray3}}>
+        barStyle={{backgroundColor: COLORS.white, padding: 5}}>
         <Tab.Screen
           name="Home"
           component={Home}
@@ -66,6 +66,7 @@ const MainLayout = ({navigation}) => {
         />
       </Tab.Navigator>
     </NavigationContainer>
+
   );
 };
 
