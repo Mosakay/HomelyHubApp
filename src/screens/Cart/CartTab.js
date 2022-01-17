@@ -7,6 +7,7 @@ import {
 const CartTab = () => {
     return (
         <View>
+            <Text>Menu Screen</Text>
         </View>
     )
 }

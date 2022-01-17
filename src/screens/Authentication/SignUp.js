@@ -353,13 +353,14 @@ const SignUp = ({navigation}) => {
                 <TextButton
                   label="Next"
                   // disabled={isEnableSignUp() ? false : true}
+                  disabled={!isValid}
                   buttonContainerStyle={{
                     height: 50,
                     width: SIZES.width / 2,
                     alignItems: 'center',
                     marginTop: SIZES.padding,
                     borderRadius: SIZES.radius + 5,
-                    backgroundColor: COLORS.green2,
+                    backgroundColor: isValid ? COLORS.primary : COLORS.transparentPrimary,
                   }}
                   onPress={() => navigation.navigate('SignUp2')}
                 />

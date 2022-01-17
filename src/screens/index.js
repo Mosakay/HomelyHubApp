@@ -15,6 +15,7 @@ import Home from "./Home/Home"
 //Settings
 
 import Settings from "./Settings/Settings"
+import Account from "./Settings/Account"
 
 // Search
 import Search from "./Search/Search";
@@ -42,5 +43,6 @@ export {
     CartTab,
     Favourite,
     Notification,
-    Settings
+    Settings,
+    Account
 }
