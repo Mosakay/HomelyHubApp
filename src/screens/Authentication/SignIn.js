@@ -300,7 +300,7 @@ const SignIn = ({navigation}) => {
               </Text>
 
               <TextButton
-                label="@Guest"
+                label="Guest"
                 buttonContainerStyle={{
                   backgroundColor: null,
                   marginLeft: 3,
