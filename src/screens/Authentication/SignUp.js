@@ -28,10 +28,11 @@ const SignUp = ({navigation}) => {
   const [surnameError, setSurnameError] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState('');
 
-  const phoneInput = React.useRef(null);
-  const getPhoneNumber = () => {
-    Alert.alert(phoneNumber);
-  };
+
+  // const phoneInput = React.useRef(null);
+  // const getPhoneNumber = () => {
+  //   Alert.alert(phoneNumber);
+  // };
 
   const signUpValidationSchema = yup.object().shape({
     email: yup
@@ -45,12 +46,24 @@ const SignUp = ({navigation}) => {
     surname: yup
       .string()
       .min(3, ({min}) => `Surname must be at least ${min} characters long.`)
-      .required('First name is required!'),
+      .required('Surname name is required!'),
+    postcode: yup
+      .string()
+      .matches(
+        /^([A-Za-z][A-Ha-hJ-Yj-y]?[0-9][A-Za-z0-9]? ?[0-9][A-Za-z]{2}|[Gg][Ii][Rr] ?0[Aa]{2})$/,
+        'Enter a correct postcode!',
+      )
+      .required('You must enter a postcode!'),
     phoneNumber: yup
-      .number()
+      .string()
       .typeError("That doesn't look like a phone number")
-      .positive("A phone number can't start with a minus")
-      .integer("A phone number can't include a decimal point")
+      // .positive("A phone number can't start with a minus")
+      // .integer("A phone number can't include a decimal point")
+      .matches(
+        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+        'Your number is not correct!',
+      )
+      .min(8, ({min}) => `Phone number must contain at least ${min} numbers.`)
       .required('A phone number is required'),
   });
 
@@ -62,6 +75,7 @@ const SignUp = ({navigation}) => {
         firstName: '',
         surname: '',
         phoneNumber: '',
+        postcode: '',
       }}
       validateOnMount={true}
       onSubmit={values => console.log(values)}
@@ -182,7 +196,9 @@ const SignUp = ({navigation}) => {
                 label="Surname"
                 placeholder="Type your surname here"
                 containerStyle={{marginTop: SIZES.radius}}
-                // onChange={(value) => {setSurname(value)}}
+                onChange={value => {
+                  setSurname(value);
+                }}
                 errorMsg={surnameError}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
@@ -217,9 +233,52 @@ const SignUp = ({navigation}) => {
                 </Text>
               )}
 
+              {/* POSTCODE */}
+
+              <FormInput
+                onChangeText={handleChange('postcode')}
+                onBlur={handleBlur('postcode')}
+                value={values.postcode}
+                label="Postcode"
+                placeholder="Enter your postcode here"
+                containerStyle={{marginTop: SIZES.radius}}
+                // onChange={(value) => {setSurname(value)}}
+                appendComponent={
+                  <View style={{justifyContent: 'center'}}>
+                    <Image
+                      source={
+                        surname == '' || (surname != '' && surnameError == '')
+                          ? icons.correct
+                          : icons.cancel
+                      }
+                      style={{
+                        height: 20,
+                        width: 20,
+                        tintColor:
+                          surname == ''
+                            ? COLORS.gray
+                            : surname != '' && surnameError == ''
+                            ? COLORS.green
+                            : COLORS.red,
+                      }}
+                    />
+                  </View>
+                }
+              />
+              {errors.postcode && touched.postcode && (
+                <Text
+                  style={{
+                    ...FONTS.body4,
+                    color: COLORS.red,
+                    marginTop: 5,
+                  }}>
+                  {errors.postcode}
+                </Text>
+              )}
+
               {/* phone input*/}
 
-              {/* <FormInput
+              <FormInput
                 onChangeText={handleChange('phoneNumber')}
                 onBlur={handleBlur('phoneNumber')}
                 value={values.phoneNumber}
@@ -229,9 +288,9 @@ const SignUp = ({navigation}) => {
                 iconSize={19}
                 placeholder="Type your phone number here"
                 containerStyle={{marginTop: SIZES.radius}}
-                // onChange={value => {
-                //   setPhoneNumber(value);
-                // }}
+                onChange={value => {
+                  setPhoneNumber(value);
+                }}
                 errorMsg={phoneNumberError}
                 keyboardType="numeric"
                 appendComponent={
@@ -266,11 +325,11 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.phoneNumber}
                 </Text>
-              )} */}
+              )}
 
               {/* PHONE NUMBER INPUT */}
 
-              <View
+              {/* <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
@@ -300,9 +359,6 @@ const SignUp = ({navigation}) => {
                 ref={phoneInput}
                 defaultValue={phoneNumber}
                 defaultCode="GB"
-                layout="first"
-                withShadow
-                autoFocus
                 containerStyle={{
                   width: '100%',
                   height: 55,
@@ -326,7 +382,7 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.phoneNumber}
                 </Text>
-              )}
+              )} */}
 
               {/* Footer */}
 
