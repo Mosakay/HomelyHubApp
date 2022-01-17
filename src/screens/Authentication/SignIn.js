@@ -47,7 +47,10 @@ const SignIn = ({navigation}) => {
     <Formik
       initialValues={{email: '', password: ''}}
       validateOnMount={true}
-      onSubmit={values => console.log(values)}
+      onSubmit={values => alert(JSON.stringify(values))
+      // call login service here where we can pass these values
+      
+      }
       validationSchema={loginValidationSchema}>
       {({
         handleChange,
@@ -206,7 +209,8 @@ const SignIn = ({navigation}) => {
                 marginTop: SIZES.radius,
                 justifyContent: 'space-between',
               }}>
-              {/* <CustomSwitch value={saveMe} onChange={onToggleSwitch} /> */}
+              
+
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Switch
                   value={saveMe}
@@ -236,8 +240,8 @@ const SignIn = ({navigation}) => {
             {/* Sign In */}
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
               <TextButton
+                onPress={handleSubmit}
                 label="Sign In"
-                // disabled={isEnableSignIn() ? false : true}
                 disabled={!isValid}
                 buttonContainerStyle={{
                   height: 50,
