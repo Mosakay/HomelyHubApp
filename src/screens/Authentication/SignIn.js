@@ -238,8 +238,12 @@ const SignIn = ({navigation}) => {
             </View>
 
             {/* Sign In */}
+
+  
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
               <TextButton
+                iconName="login"
+                iconSize={22}
                 onPress={handleSubmit}
                 label="Sign In"
                 disabled={!isValid}
@@ -300,7 +304,7 @@ const SignIn = ({navigation}) => {
                   color: COLORS.darkGray,
                   ...FONTS.body3,
                 }}>
-                Continue as
+               Continue as
               </Text>
 
               <TextButton
