@@ -1,9 +1,8 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
+import {View, Text, TouchableOpacity, Image } from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import {FormInput, TextButton} from '../../components';
-import {utils} from '../../utils';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 
@@ -14,9 +13,7 @@ const SignUp2 = ({navigation}) => {
   const [showPass2, setShowPass2] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState('');
 
-  function isEnableSignUp() {
-    return password != '' && passwordError == '';
-  }
+
   const signupValidationSchema = yup.object().shape({
     password: yup
       .string()
@@ -50,7 +47,6 @@ const SignUp2 = ({navigation}) => {
         errors,
         isValid,
       }) => (
-        // <ScrollView>
         <AuthLayout title="Sign Up" subtitle="Next let's secure the account...">
           <View
             style={{
@@ -156,7 +152,6 @@ const SignUp2 = ({navigation}) => {
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
               <TextButton
                 label="Sign Up"
-                // disabled={isEnableSignUp() ? false : true}
                 disabled={!isValid}
                 buttonContainerStyle={{
                   height: 50,
@@ -202,7 +197,6 @@ const SignUp2 = ({navigation}) => {
             </View>
           </View>
         </AuthLayout>
-        // </ScrollView>
       )}
     </Formik>
   );

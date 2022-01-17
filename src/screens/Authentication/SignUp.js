@@ -11,7 +11,6 @@ import {
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import {FormInput, TextButton} from '../../components';
-import {utils} from '../../utils';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import PhoneInput from 'react-native-phone-number-input';
@@ -27,7 +26,6 @@ const SignUp = ({navigation}) => {
   const [firstNameError, setFirstNameError] = React.useState('');
   const [surnameError, setSurnameError] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState('');
-
 
   // const phoneInput = React.useRef(null);
   // const getPhoneNumber = () => {
@@ -116,20 +114,11 @@ const SignUp = ({navigation}) => {
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={
-                        email == '' || (email != '' && emailError == '')
-                          ? icons.correct
-                          : icons.cancel
-                      }
+                      source={!errors.email ? icons.correct : icons.cross}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor:
-                          email == ''
-                            ? COLORS.gray
-                            : email != '' && emailError == ''
-                            ? COLORS.green
-                            : COLORS.red,
+                        tintColor: !errors.email ? COLORS.primary : COLORS.red,
                       }}
                     />
                   </View>
@@ -146,6 +135,8 @@ const SignUp = ({navigation}) => {
                 </Text>
               )}
 
+              {/* FIRSTNAME */}
+
               <FormInput
                 onChangeText={handleChange('firstName')}
                 onBlur={handleBlur('firstName')}
@@ -158,21 +149,13 @@ const SignUp = ({navigation}) => {
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={
-                        firstname == '' ||
-                        (firstname != '' && firstNameError == '')
-                          ? icons.correct
-                          : icons.cancel
-                      }
+                      source={!errors.firstName ? icons.correct : icons.cross}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor:
-                          firstname == ''
-                            ? COLORS.gray
-                            : firstname != '' && firstNameError == ''
-                            ? COLORS.green
-                            : COLORS.red,
+                        tintColor: !errors.firstName
+                          ? COLORS.green
+                          : COLORS.red,
                       }}
                     />
                   </View>
@@ -189,6 +172,8 @@ const SignUp = ({navigation}) => {
                 </Text>
               )}
 
+              {/* SURNAME */}
+
               <FormInput
                 onChangeText={handleChange('surname')}
                 onBlur={handleBlur('surname')}
@@ -203,20 +188,13 @@ const SignUp = ({navigation}) => {
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={
-                        surname == '' || (surname != '' && surnameError == '')
-                          ? icons.correct
-                          : icons.cancel
-                      }
+                      source={!errors.surname ? icons.correct : icons.cross}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor:
-                          surname == ''
-                            ? COLORS.gray
-                            : surname != '' && surnameError == ''
-                            ? COLORS.green
-                            : COLORS.red,
+                        tintColor: !errors.surname
+                          ? COLORS.primary
+                          : COLORS.red,
                       }}
                     />
                   </View>
@@ -246,20 +224,13 @@ const SignUp = ({navigation}) => {
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={
-                        surname == '' || (surname != '' && surnameError == '')
-                          ? icons.correct
-                          : icons.cancel
-                      }
+                      source={!errors.postcode ? icons.correct : icons.cross}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor:
-                          surname == ''
-                            ? COLORS.gray
-                            : surname != '' && surnameError == ''
-                            ? COLORS.green
-                            : COLORS.red,
+                        tintColor: !errors.postcode
+                          ? COLORS.primary
+                          : COLORS.red,
                       }}
                     />
                   </View>
@@ -296,21 +267,13 @@ const SignUp = ({navigation}) => {
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={
-                        phoneNumber == '' ||
-                        (phoneNumber != '' && phoneNumberError == '')
-                          ? icons.correct
-                          : icons.cancel
-                      }
+                      source={!errors.phoneNumber ? icons.correct : icons.cross}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor:
-                          phoneNumber == ''
-                            ? COLORS.gray
-                            : phoneNumber != '' && phoneNumberError == ''
-                            ? COLORS.green
-                            : COLORS.red,
+                        tintColor: !errors.phoneNumber
+                          ? COLORS.primary
+                          : COLORS.red,
                       }}
                     />
                   </View>

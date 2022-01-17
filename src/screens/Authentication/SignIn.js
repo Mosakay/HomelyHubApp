@@ -139,20 +139,11 @@ const SignIn = ({navigation}) => {
               appendComponent={
                 <View style={{justifyContent: 'center'}}>
                   <Image
-                    source={
-                      email == '' || (email != '' && emailError == '')
-                        ? icons.correct
-                        : icons.cancel
-                    }
+                    source={ !errors.email ? icons.correct : icons.cross }
                     style={{
                       height: 20,
                       width: 20,
-                      tintColor:
-                        email == ''
-                          ? COLORS.gray
-                          : email != '' && emailError == ''
-                          ? COLORS.green
-                          : COLORS.red,
+                      tintColor: !errors.email ? COLORS.primary : COLORS.red
                     }}
                   />
                 </View>
