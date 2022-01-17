@@ -314,7 +314,7 @@ const SignIn = ({navigation}) => {
                   color: COLORS.darkGray,
                   fontWeight: 'bold',
                 }}
-                onPress={() => navigation.navigate('CustomDrawer')}
+                onPress={() => navigation.navigate('MainLayout')}
               />
             </View>
           </View>

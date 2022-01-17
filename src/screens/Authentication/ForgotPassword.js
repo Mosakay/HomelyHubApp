@@ -3,15 +3,13 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import {TextButton, FormInput} from '../../components';
-import {utils} from '../../utils';
+
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
  
- function isEnableSendEmail() {
-   return email != "" && emailError == ""
- }
+
  
   return (
     <AuthLayout
@@ -65,7 +63,6 @@ const ForgotPassword = ({navigation}) => {
 
       <TextButton
         label="Send Email"
-        disabled={isEnableSendEmail() ? false : true}
         buttonContainerStyle={{
           height: 55,
           alignItems: 'center',

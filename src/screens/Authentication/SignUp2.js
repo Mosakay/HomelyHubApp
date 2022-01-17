@@ -147,22 +147,6 @@ const SignUp2 = ({navigation}) => {
               </Text>
             )}
 
-            <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-              <TextButton
-                label="Back"
-                buttonContainerStyle={{
-                  height: 50,
-                  width: SIZES.width / 2,
-                  alignItems: 'center',
-                  marginTop: SIZES.padding * 1,
-                  borderRadius: SIZES.radius + 3,
-                  backgroundColor: isValid
-                    ? COLORS.transparentPrimary
-                    : COLORS.primary,
-                }}
-                onPress={() => navigation.navigate('SignUp')}
-              />
-            </View>
 
             {/* Footer */}
 
