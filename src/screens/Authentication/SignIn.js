@@ -15,6 +15,7 @@ import {FormInput, CustomSwitch, TextButton} from '../../components';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import DeviceInfo from 'react-native-device-info';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -22,9 +23,9 @@ const SignIn = ({navigation}) => {
   const [emailError, setEmailError] = React.useState('');
 
   const [showPass, setShowPass] = React.useState(false);
-  const [saveMe, setSaveMe] = React.useState(false);
+  const [rememberMe, setRememberMe] = React.useState(false);
 
-  const onToggleSwitch = () => setSaveMe(!saveMe);
+  const onToggleSwitch = () => setRememberMe(!rememberMe);
 
 
   const loginValidationSchema = yup.object().shape({
@@ -43,9 +44,15 @@ const SignIn = ({navigation}) => {
       ,
   });
 
+  let deviceId = DeviceInfo.getDeviceId();
+  console.log(deviceId);
+
   return (
     <Formik
-      initialValues={{email: '', password: ''}}
+      initialValues={{
+       email: '',
+       password: '',
+      }}
       validateOnMount={true}
       onSubmit={values => alert(JSON.stringify(values))
       // call login service here where we can pass these values
@@ -213,7 +220,7 @@ const SignIn = ({navigation}) => {
 
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Switch
-                  value={saveMe}
+                  value={rememberMe}
                   onValueChange={onToggleSwitch}
                   color="#1EB091"
                 />
@@ -221,7 +228,7 @@ const SignIn = ({navigation}) => {
                   style={{
                     ...FONTS.body4,
                   }}>
-                  Save Me
+                  Remember Me
                 </Text>
               </View>
               <TextButton
