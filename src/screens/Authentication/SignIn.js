@@ -16,6 +16,7 @@ import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import DeviceInfo from 'react-native-device-info';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -68,7 +69,7 @@ const SignIn = ({navigation}) => {
         errors,
         isValid,
       }) => (
-        <ScrollView>
+        
         <AuthLayout
           title="Let's Sign You In"
           subtitle="Welcome back, you've been missed!">
@@ -329,10 +330,8 @@ const SignIn = ({navigation}) => {
               />
             </View>
           </View>
-          {/* <Ionicons name="share-social-outline" size={22} />
-      <MaterialIcons name="arrow-forward-ios" size={22} color="black" /> */}
         </AuthLayout>
-        </ScrollView>
+        
       )}
     </Formik>
   );

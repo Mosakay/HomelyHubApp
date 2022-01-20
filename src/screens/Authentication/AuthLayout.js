@@ -6,6 +6,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
     return (
+        <KeyboardAwareScrollView>
         <View
         style={{
             flex: 1,
@@ -59,6 +60,7 @@ const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
         </KeyboardAwareScrollView>  
 
         </View>
+        </KeyboardAwareScrollView>
     )
 }
 

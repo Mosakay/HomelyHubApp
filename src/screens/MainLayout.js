@@ -48,6 +48,7 @@ const MainLayout = ({navigation}) => {
           name="Account"
           component={Account}
           options={{
+            title: 'My Account',
             tabBarLabel: 'Account',
             tabBarIcon: ({color}) => (
               <MaterialIcons name="person-outline" color={color} size={26} />
