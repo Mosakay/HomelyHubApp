@@ -4,7 +4,7 @@ import { View, Text } from 'react-native'
 const Account = () => {
     return (
         <View>
-            <Text>Account Screen</Text>
+            <Text>If if if if else if if else if? if else? if?</Text>
         </View>
     )
 }

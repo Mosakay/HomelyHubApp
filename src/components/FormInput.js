@@ -3,7 +3,6 @@ import {View, Text, TextInput} from 'react-native';
 import {FONTS, SIZES, COLORS} from '../constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-
 const FormInput = ({
   containerStyle,
   label,
@@ -48,7 +47,7 @@ const FormInput = ({
         }}>
 
         {prependComponent}
-
+        
         <TextInput
           style={{flex: 1, ...inputStyle}}
           placeholder={placeholder}

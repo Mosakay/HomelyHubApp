@@ -16,7 +16,7 @@ import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import DeviceInfo from 'react-native-device-info';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const SignIn = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -43,16 +43,19 @@ const SignIn = ({navigation}) => {
         "Must contain One Uppercase, One Lowercase, One Number and One Special Case Character"
         )
       ,
+    devideId: yup
+      .string(),
   });
 
-  let deviceId = DeviceInfo.getDeviceId();
-  console.log(deviceId);
+  let idD = DeviceInfo.getDeviceId();
+  console.log(idD);
 
   return (
     <Formik
       initialValues={{
        email: '',
        password: '',
+       deviceId: {idD},
       }}
       validateOnMount={true}
       onSubmit={values => alert(JSON.stringify(values))
@@ -69,7 +72,7 @@ const SignIn = ({navigation}) => {
         errors,
         isValid,
       }) => (
-        
+        <ScrollView style={{backgroundColor: COLORS.white}}>
         <AuthLayout
           title="Let's Sign You In"
           subtitle="Welcome back, you've been missed!">
@@ -331,7 +334,7 @@ const SignIn = ({navigation}) => {
             </View>
           </View>
         </AuthLayout>
-        
+        </ScrollView>
       )}
     </Formik>
   );

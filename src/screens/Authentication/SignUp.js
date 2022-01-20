@@ -6,6 +6,7 @@ import {
   Image,
   Alert,
   StyleSheet,
+  ScrollView
 } from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
@@ -104,6 +105,7 @@ const SignUp = ({navigation}) => {
         errors,
         isValid,
       }) => (
+          <ScrollView>
           <AuthLayout
             title="Getting Started"
             subtitle="First let's get to know you..."
@@ -452,6 +454,7 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
           </AuthLayout>
+          </ScrollView>
       )}
     </Formik>
   );
