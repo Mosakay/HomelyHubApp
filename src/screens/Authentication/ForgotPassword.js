@@ -70,7 +70,21 @@ const ForgotPassword = ({navigation}) => {
                   />
                 </View>
               }
+              prependComponent={
+                
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={ !errors.email ? icons.correct : icons.cross }
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.email ? COLORS.primary : COLORS.red
+                    }}
+                  />
+                </View>
+              }
             />
+            
             {errors.email && touched.email && (
               <Text
               style={{

@@ -3,9 +3,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 
+
 import {
     OnBoarding,
-
     SignIn,
     SignUp,
     SignUp2,
@@ -13,7 +13,7 @@ import {
     Otp,
     MainLayout
 } from './src/screens'
-
+import store from "./src/store"
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -23,6 +23,7 @@ const App = () => {
     }, [])
 
     return (
+
         <NavigationContainer>
             <Stack.Navigator
                 screenOptions={{
@@ -67,6 +68,7 @@ const App = () => {
 
             </Stack.Navigator>
         </NavigationContainer>
+
     )
 }
 
