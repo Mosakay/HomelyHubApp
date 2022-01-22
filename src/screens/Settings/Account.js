@@ -1,59 +1,111 @@
 import React from 'react'
-import { View, Text} from 'react-native'
+import { View, Text, Image} from 'react-native'
 import {Navigation} from '@react-navigation/native';
 import { TextButton } from '../../components';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Icon } from 'react-native-elements';
 
 const Account = () => {
     return (
         
         <View style={{
+            flex: 1,
 
         }}>
             {/* if user is loged in */}
             <View style={{
+                backgroundColor: COLORS.white,
             }}>
                 <Text style={{
-                    padding: 22,
+                    padding:22,
+                    alignSelf: 'center',
                     backgroundColor:Colors.white,
                     fontSize: SIZES.body2,
-                    alignItem: 'center',
                     color: COLORS.black,
-                    justifyContent: 'flex-start'
+                    justifyContent: 'flex-end'
                 }}>My Account</Text>
             </View>
-            <View>
-                <Text style={{
-                    padding: 22,
-                    backgroundColor:Colors.white,
-                    fontSize: SIZES.body2,
-                    alignItem: 'center',
-                    color: COLORS.black,
-                    justifyContent: 'flex-start',
-                    bordertop: 5,
-                }}>
-                    Welcome {/*{User.name}*/}
-                </Text>
+            <View style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: COLORS.darkGray,
+                
+            }}/>
+            <View sytle={{
+                paddingTop: 22,
+                backgroundColor:Colors.white,
+                justifyContent: 'flex-start',
+                borderWidth: 1,
+                borderColor: "thistle",
+                borderRadius: 50,
+                paddingLeft:30,
+                paddingRight:30,
+                textShadowColor:'#585858',
+                textShadowOffset:{width: 5, height: 5},
+                textShadowRadius:10,
+
+                flex: 1
+            }}>
+                <Image source={require('../../assets/images/bg.png')} 
+                    style={{
+                        width: 40, 
+                        height: 40,
+                        // justifyContent: 'center',
+                        // alignSelf:'center'
+                    }}/>
+                    {/* user profle pic called from backend */}
+                <View>
+                    <Text style={{   
+                        alignSelf: 'center',
+                        color: COLORS.black,
+                        fontSize: SIZES.body3,
+                    
+                    }}>
+                        Welcome 
+                    </Text>
+                    <Text style={{
+                        color: COLORS.black,
+                        alignSelf: 'center',
+                        fontSize: SIZES.body2, 
+                    }}>
+                        Username here {/*{User.name}*/}
+                    </Text>
+                </View>
+                <View style={{
+                    borderTopWidth: 1,
+                    borderTopColor: COLORS.darkGray,
+                
+            }}/>
             </View>
             <View>
-                <TextButton
-                    iconName="person-outline"
-                    label="Edit Profile"
-                    iconSize={24}
-                    labelStyle={{
-                        color: COLORS.black,
-                        justifyContent:'flex-start',
-                    }}
-                    buttonContainerStyle={{
-                        backgroundColor: COLORS.white,
-                        height: 50,
-                        alignItems: 'flex-start',
-                        justifyContent: 'center',
-                        // flexDirection:'row-reverse'
-                    }}
-                />
+                <View
+                style={{}}>
+                    <MaterialIcons
+                        iconName="person-outline"
+                        iconSize={md-38}
+                        labelStyle={{
+                            color: COLORS.black,
+                            // justifyContent:'flex-start',
+                        }}>personoutlineempty md-38</MaterialIcons>
+                    <TextButton
+                        iconName="person-outline"
+                        label="Edit Profile"
+                        iconSize={24}
+                        labelStyle={{
+                            color: COLORS.black,
+                            justifyContent:'flex-start',
+                        }}
+                        buttonContainerStyle={{
+                            backgroundColor: COLORS.white,
+                            height: 50,
+                            alignItems: 'flex-start',
+                            justifyContent: 'center',
+                            // flexDirection:'row-reverse'
+                        }}
+                    />
+                </View>
+                
                 <TextButton
                     iconName="push-pin"
                     label="Saved Addresses"
@@ -69,7 +121,8 @@ const Account = () => {
                     }}
                 />
                 <TextButton
-                    iconName="bell"
+                // bell icon
+                    iconName="login"
                     label="Contact Preferences"
                     iconSize={24}
                     labelStyle={{
@@ -124,7 +177,7 @@ const Account = () => {
                     borderRadius: SIZES.radius + 5,
                     backgroundColor: COLORS.primary,
                   }}
-                onPress={() => navigation.navigate('')}
+                // onPress={() => navigation.navigate('')}
             />
             </View>
             {/* if user is not loged in */}
