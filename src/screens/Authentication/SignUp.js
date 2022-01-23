@@ -15,6 +15,11 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import PhoneInput from 'react-native-phone-number-input';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
+
+
+
 
 const SignUp = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -26,6 +31,11 @@ const SignUp = ({navigation}) => {
   const [firstNameError, setFirstNameError] = React.useState('');
   const [lastNameError, setLastNameError] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState('');
+
+ 
+  const val = useContext(AuthContext)
+
+  const {register} = useContext(AuthContext);
 
   const phoneInput = React.useRef(null);
   const getPhoneNumber = () => {
@@ -124,11 +134,6 @@ const SignUp = ({navigation}) => {
                 label="Email"
                 keyboardType="email-address"
                 autoCompleteType="email"
-                // onChange={value => {
-                //   utils.validateEmail(value, setEmailError);
-                //   setEmail(value);
-                // }}
-                errorMsg={emailError}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -155,7 +160,7 @@ const SignUp = ({navigation}) => {
 
               {/* UserName */}
 
-              <FormInput
+              {/* <FormInput
                 onChangeText={handleChange('userName')}
                 onBlur={handleBlur('userName')}
                 value={values.userName}
@@ -188,7 +193,7 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.userName}
                 </Text>
-              )}
+              )} */}
 
               {/* FIRSTNAME */}
 

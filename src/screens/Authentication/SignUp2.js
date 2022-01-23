@@ -5,6 +5,10 @@ import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import {FormInput, TextButton} from '../../components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
+
+
 
 const SignUp2 = ({navigation}) => {
   const [password, setPassword] = React.useState('');
@@ -12,6 +16,10 @@ const SignUp2 = ({navigation}) => {
   const [password2, setPassword2] = React.useState('');
   const [showPass2, setShowPass2] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState('');
+
+  const val = useContext(AuthContext)
+  
+  const {register} = useContext(AuthContext);
 
 
   const signupValidationSchema = yup.object().shape({
@@ -36,7 +44,7 @@ const SignUp2 = ({navigation}) => {
         confirmPassword: '',
       }}
       validateOnMount={true}
-      onSubmit={values => console.log(values)}
+      onSubmit={(values => console.log(values))}
       validationSchema={signupValidationSchema}>
       {({
         handleChange,
@@ -53,6 +61,8 @@ const SignUp2 = ({navigation}) => {
               flex: 1,
               marginTop: SIZES.padding,
             }}>
+
+            <Text>{val}</Text>
             <FormInput
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
@@ -65,11 +75,7 @@ const SignUp2 = ({navigation}) => {
               secureTextEntry={!showPass}
               autoCompleteType="password"
               containerStyle={{marginTop: SIZES.radius}}
-              // onChange={value => {
-
-              //   utils.validatePassword(value, setPasswordError)
-              //     setPassword(value)
-              //   }}
+              onChange={value => setPassword(value)}
               appendComponent={
                 <TouchableOpacity
                   style={{
@@ -165,6 +171,7 @@ const SignUp2 = ({navigation}) => {
                     : COLORS.primary,
                 }}
                 onPress={() => navigation.navigate('Otp')}
+               
               />
             </View>
 

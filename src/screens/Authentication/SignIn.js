@@ -16,15 +16,21 @@ import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import DeviceInfo from 'react-native-device-info';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 
 const SignIn = ({navigation}) => {
+
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
 
   const [showPass, setShowPass] = React.useState(false);
   const [rememberMe, setRememberMe] = React.useState(false);
+
+  const val = useContext(AuthContext)
 
   const onToggleSwitch = () => setRememberMe(!rememberMe);
 
@@ -133,7 +139,7 @@ const SignIn = ({navigation}) => {
           <View style={{flex: 1, marginTop: SIZES.padding}}>
             
             {/* Form Inputs */}
-
+            <Text>{val}</Text>
             <FormInput
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
@@ -143,13 +149,7 @@ const SignIn = ({navigation}) => {
               iconSize={19}
               label="Email"
               keyboardType="email-address"
-              autoCompleteType="email"
-              // onChange={value => {
-              //   utils.validateEmail(value, setEmailError);
-              //   setEmail(value);
-              // old valadtion methed
-              // }}
-              errorMsg={emailError}
+              onChange={value => setEmail(value)}
               appendComponent={
                 <View style={{justifyContent: 'center'}}>
                   <Image
@@ -184,7 +184,7 @@ const SignIn = ({navigation}) => {
               secureTextEntry={!showPass}
               autoCompleteType="password"
               containerStyle={{marginTop: SIZES.radius}}
-              // onChange={value => setPassword(value)}
+              onChange={value => setPassword(value)}
               appendComponent={
                 <TouchableOpacity
                   style={{
