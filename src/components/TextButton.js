@@ -1,11 +1,9 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { FONTS, COLORS, SIZES } from '../constants';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 
-
-const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress, iconColor, iconName, iconSize }) => {
+const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress, appendComponent, prependComponent, }) => {
     return (
         <TouchableOpacity
         style={{
@@ -17,6 +15,8 @@ const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress,
         disabled={disabled}
         onPress={onPress}
         >
+
+            {appendComponent}
             <View style={{flexDirection:'row'}}>
             <Text
             style={{
@@ -27,13 +27,8 @@ const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress,
             >
                 {label} 
             </Text>
-            <MaterialIcons
-              style={{paddingHorizontal: SIZES.base}}
-              name={iconName}
-              size={iconSize}
-              color={iconColor}
-            />
             </View>
+            {prependComponent}
         </TouchableOpacity>
     )
 }

@@ -15,16 +15,24 @@ import {FormInput, CustomSwitch, TextButton} from '../../components';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import DeviceInfo from 'react-native-device-info';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
+
 
 const SignIn = ({navigation}) => {
+
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
 
   const [showPass, setShowPass] = React.useState(false);
-  const [saveMe, setSaveMe] = React.useState(false);
+  const [rememberMe, setRememberMe] = React.useState(false);
 
-  const onToggleSwitch = () => setSaveMe(!saveMe);
+  const val = useContext(AuthContext)
+
+  const onToggleSwitch = () => setRememberMe(!rememberMe);
 
 
   const loginValidationSchema = yup.object().shape({
@@ -41,11 +49,20 @@ const SignIn = ({navigation}) => {
         "Must contain One Uppercase, One Lowercase, One Number and One Special Case Character"
         )
       ,
+    devideId: yup
+      .string(),
   });
+
+  let idD = DeviceInfo.getDeviceId();
+  console.log(idD);
 
   return (
     <Formik
-      initialValues={{email: '', password: ''}}
+      initialValues={{
+       email: '',
+       password: '',
+       deviceId: {idD},
+      }}
       validateOnMount={true}
       onSubmit={values => alert(JSON.stringify(values))
       // call login service here where we can pass these values
@@ -61,7 +78,7 @@ const SignIn = ({navigation}) => {
         errors,
         isValid,
       }) => (
-        <ScrollView>
+        <ScrollView style={{backgroundColor: COLORS.white}}>
         <AuthLayout
           title="Let's Sign You In"
           subtitle="Welcome back, you've been missed!">
@@ -122,7 +139,7 @@ const SignIn = ({navigation}) => {
           <View style={{flex: 1, marginTop: SIZES.padding}}>
             
             {/* Form Inputs */}
-
+            <Text>{val}</Text>
             <FormInput
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
@@ -132,13 +149,7 @@ const SignIn = ({navigation}) => {
               iconSize={19}
               label="Email"
               keyboardType="email-address"
-              autoCompleteType="email"
-              // onChange={value => {
-              //   utils.validateEmail(value, setEmailError);
-              //   setEmail(value);
-              // old valadtion methed
-              // }}
-              errorMsg={emailError}
+              onChange={value => setEmail(value)}
               appendComponent={
                 <View style={{justifyContent: 'center'}}>
                   <Image
@@ -173,7 +184,7 @@ const SignIn = ({navigation}) => {
               secureTextEntry={!showPass}
               autoCompleteType="password"
               containerStyle={{marginTop: SIZES.radius}}
-              // onChange={value => setPassword(value)}
+              onChange={value => setPassword(value)}
               appendComponent={
                 <TouchableOpacity
                   style={{
@@ -213,7 +224,7 @@ const SignIn = ({navigation}) => {
 
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Switch
-                  value={saveMe}
+                  value={rememberMe}
                   onValueChange={onToggleSwitch}
                   color="#1EB091"
                 />
@@ -221,7 +232,7 @@ const SignIn = ({navigation}) => {
                   style={{
                     ...FONTS.body4,
                   }}>
-                  Save Me
+                  Remember Me
                 </Text>
               </View>
               <TextButton
@@ -242,8 +253,6 @@ const SignIn = ({navigation}) => {
   
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
               <TextButton
-                iconName="login"
-                iconSize={22}
                 onPress={handleSubmit}
                 label="Sign In"
                 disabled={!isValid}
@@ -318,12 +327,10 @@ const SignIn = ({navigation}) => {
                   color: COLORS.darkGray,
                   fontWeight: 'bold',
                 }}
-                onPress={() => navigation.navigate('MainLayout')}
+                onPress={() => navigation.navigate('AppStack')}
               />
             </View>
           </View>
-          {/* <Ionicons name="share-social-outline" size={22} />
-      <MaterialIcons name="arrow-forward-ios" size={22} color="black" /> */}
         </AuthLayout>
         </ScrollView>
       )}

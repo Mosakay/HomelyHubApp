@@ -1,5 +1,9 @@
 import OnBoarding from "./OnBoarding/OnBoarding"
-import MainLayout from "./MainLayout"
+
+//Routes
+
+import AppStack from "../routes/AppStack"
+import AuthStack from "../routes/AuthStack"
 
 // Authentication
 import AuthLayout from "./Authentication/AuthLayout"
@@ -12,10 +16,14 @@ import ForgotPassword from './Authentication/ForgotPassword'
 // Home
 import Home from "./Home/Home"
 
+//Account
+
+import Account from "./Account/Account"
+
 //Settings
 
 import Settings from "./Settings/Settings"
-import Account from "./Settings/Account"
+
 
 // Search
 import Search from "./Search/Search";
@@ -30,8 +38,6 @@ import Favourite from "./Favourite/Favourite";
 import Notification from "./Notification/Notification"
 export {
     OnBoarding,
-    MainLayout,
-
     AuthLayout,
     SignIn,
     SignUp,
@@ -44,5 +50,7 @@ export {
     Favourite,
     Notification,
     Settings,
-    Account
+    Account,
+    AppStack,
+    AuthStack,
 }

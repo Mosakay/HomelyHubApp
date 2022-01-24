@@ -5,6 +5,8 @@ import { TextButton } from '../../components';
 
 const OnBoarding = ({navigation}) => {
 
+
+
     const scrollX = React.useRef(new Animated.Value(0)).current;
     const flatListRef = React.useRef()
 
@@ -134,7 +136,7 @@ const OnBoarding = ({navigation}) => {
                 <TextButton
                 label="Let's Get Started"
                 buttonContainerStyle={{height: 60, borderRadius: SIZES.radius}}
-                onPress={() => navigation.replace("SignIn")}
+                onPress={() => navigation.navigate("SignIn")}
                 />
             </View>
             }

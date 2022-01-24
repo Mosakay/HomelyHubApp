@@ -2,11 +2,9 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Image,
-  ScrollView,
   Alert,
-  StyleSheet,
+  ScrollView
 } from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
@@ -15,36 +13,46 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import PhoneInput from 'react-native-phone-number-input';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
+
+
 
 const SignUp = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [firstname, setFirstName] = React.useState('');
-  const [surname, setSurname] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
   const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [postcode, setPostcode] = React.useState('');
 
   const [emailError, setEmailError] = React.useState('');
   const [firstNameError, setFirstNameError] = React.useState('');
-  const [surnameError, setSurnameError] = React.useState('');
+  const [lastNameError, setLastNameError] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState('');
 
-  // const phoneInput = React.useRef(null);
+ 
+  const phoneInput = React.useRef(null);
   // const getPhoneNumber = () => {
   //   Alert.alert(phoneNumber);
   // };
+
 
   const signUpValidationSchema = yup.object().shape({
     email: yup
       .string()
       .email('Please enter valid email')
       .required('Email address is required!'),
+    userName: yup
+      .string()
+      .required('Username address is required!'),
     firstName: yup
       .string()
       .min(3, ({min}) => `First name must be at least ${min} characters long.`)
       .required('First name is required!'),
-    surname: yup
+    lastName: yup
       .string()
-      .min(3, ({min}) => `Surname must be at least ${min} characters long.`)
-      .required('Surname name is required!'),
+      .min(3, ({min}) => `Last name must be at least ${min} characters long.`)
+      .required('Last name name is required!'),
     postcode: yup
       .string()
       .matches(
@@ -55,8 +63,6 @@ const SignUp = ({navigation}) => {
     phoneNumber: yup
       .string()
       .typeError("That doesn't look like a phone number")
-      // .positive("A phone number can't start with a minus")
-      // .integer("A phone number can't include a decimal point")
       .matches(
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
         'Your number is not correct!',
@@ -69,14 +75,18 @@ const SignUp = ({navigation}) => {
     <Formik
       initialValues={{
         email: '',
+        userName: '',
         password: '',
         firstName: '',
-        surname: '',
+        lastName: '',
         phoneNumber: '',
         postcode: '',
       }}
       validateOnMount={true}
-      onSubmit={values => console.log(values)}
+      onSubmit={values => alert(JSON.stringify(values))
+        // call login service here where we can pass these values
+        
+        }
       validationSchema={signUpValidationSchema}>
       {({
         handleChange,
@@ -87,7 +97,7 @@ const SignUp = ({navigation}) => {
         errors,
         isValid,
       }) => (
-        <ScrollView>
+          <ScrollView>
           <AuthLayout
             title="Getting Started"
             subtitle="First let's get to know you..."
@@ -106,11 +116,7 @@ const SignUp = ({navigation}) => {
                 label="Email"
                 keyboardType="email-address"
                 autoCompleteType="email"
-                // onChange={value => {
-                //   utils.validateEmail(value, setEmailError);
-                //   setEmail(value);
-                // }}
-                errorMsg={emailError}
+                onChange={value => setEmail(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -135,6 +141,41 @@ const SignUp = ({navigation}) => {
                 </Text>
               )}
 
+              {/* UserName */}
+
+              <FormInput
+                onChangeText={handleChange('userName')}
+                onBlur={handleBlur('userName')}
+                value={values.userName}
+                label="Username"
+                placeholder="Type your username here!"
+                containerStyle={{marginTop: SIZES.radius}}
+                appendComponent={
+                  <View style={{justifyContent: 'center'}}>
+                    <Image
+                      source={!errors.userName ? icons.correct : icons.cross}
+                      style={{
+                        height: 20,
+                        width: 20,
+                        tintColor: !errors.userName
+                          ? COLORS.green
+                          : COLORS.red,
+                      }}
+                    />
+                  </View>
+                }
+              />
+              {errors.userName && touched.userName && (
+                <Text
+                  style={{
+                    ...FONTS.body4,
+                    color: COLORS.red,
+                    marginTop: 5,
+                  }}>
+                  {errors.userName}
+                </Text>
+              )}
+
               {/* FIRSTNAME */}
 
               <FormInput
@@ -144,8 +185,7 @@ const SignUp = ({navigation}) => {
                 label="First Name"
                 placeholder="Type your first name here"
                 containerStyle={{marginTop: SIZES.radius}}
-                // onChange={(value) => {setFirstName(value)}}
-                errorMsg={firstNameError}
+                onChange={value => setFirstName(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -175,24 +215,21 @@ const SignUp = ({navigation}) => {
               {/* SURNAME */}
 
               <FormInput
-                onChangeText={handleChange('surname')}
-                onBlur={handleBlur('surname')}
-                value={values.surname}
-                label="Surname"
-                placeholder="Type your surname here"
+                onChangeText={handleChange('lastName')}
+                onBlur={handleBlur('lastName')}
+                value={values.lastName}
+                label="Last name"
+                placeholder="Type your last name here"
                 containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => {
-                  setSurname(value);
-                }}
-                errorMsg={surnameError}
+                onChange={value => setLastName(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={!errors.surname ? icons.correct : icons.cross}
+                      source={!errors.lastName ? icons.correct : icons.cross}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor: !errors.surname
+                        tintColor: !errors.lastName
                           ? COLORS.primary
                           : COLORS.red,
                       }}
@@ -200,14 +237,14 @@ const SignUp = ({navigation}) => {
                   </View>
                 }
               />
-              {errors.surname && touched.surname && (
+              {errors.lastName && touched.lastName && (
                 <Text
                   style={{
                     ...FONTS.body4,
                     color: COLORS.red,
                     marginTop: 5,
                   }}>
-                  {errors.surname}
+                  {errors.lastName}
                 </Text>
               )}
 
@@ -220,7 +257,7 @@ const SignUp = ({navigation}) => {
                 label="Postcode"
                 placeholder="Enter your postcode here"
                 containerStyle={{marginTop: SIZES.radius}}
-                // onChange={(value) => {setSurname(value)}}
+                onChange={value => setPostcode(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -249,7 +286,7 @@ const SignUp = ({navigation}) => {
 
               {/* phone input*/}
 
-              <FormInput
+              {/* <FormInput
                 onChangeText={handleChange('phoneNumber')}
                 onBlur={handleBlur('phoneNumber')}
                 value={values.phoneNumber}
@@ -259,10 +296,7 @@ const SignUp = ({navigation}) => {
                 iconSize={19}
                 placeholder="Type your phone number here"
                 containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => {
-                  setPhoneNumber(value);
-                }}
-                errorMsg={phoneNumberError}
+                onChange={value => setPhoneNumber(value)}
                 keyboardType="numeric"
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
@@ -288,11 +322,11 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.phoneNumber}
                 </Text>
-              )}
+              )} */}
 
               {/* PHONE NUMBER INPUT */}
 
-              {/* <View
+              <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
@@ -345,14 +379,13 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.phoneNumber}
                 </Text>
-              )} */}
+              )}
 
               {/* Footer */}
 
               <View style={{justifyContent: 'center', flexDirection: 'row'}}>
                 <TextButton
                   label="Next"
-                  // disabled={isEnableSignUp() ? false : true}
                   disabled={!isValid}
                   buttonContainerStyle={{
                     height: 50,
@@ -360,7 +393,9 @@ const SignUp = ({navigation}) => {
                     alignItems: 'center',
                     marginTop: SIZES.padding,
                     borderRadius: SIZES.radius + 5,
-                    backgroundColor: isValid ? COLORS.primary : COLORS.transparentPrimary,
+                    backgroundColor: isValid
+                      ? COLORS.primary
+                      : COLORS.transparentPrimary,
                   }}
                   onPress={() => navigation.navigate('SignUp2')}
                 />
@@ -396,7 +431,7 @@ const SignUp = ({navigation}) => {
               </View>
             </View>
           </AuthLayout>
-        </ScrollView>
+          </ScrollView>
       )}
     </Formik>
   );
