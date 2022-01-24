@@ -16,10 +16,14 @@ import ForgotPassword from './Authentication/ForgotPassword'
 // Home
 import Home from "./Home/Home"
 
+//Account
+
+import Account from "./Account/Account"
+
 //Settings
 
 import Settings from "./Settings/Settings"
-import Account from "./Settings/Account"
+
 
 // Search
 import Search from "./Search/Search";

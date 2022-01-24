@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { FONTS, COLORS, SIZES } from '../constants';
 
 
-const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress, iconColor, iconName, iconSize }) => {
+const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress, appendComponent, prependComponent, }) => {
     return (
         <TouchableOpacity
         style={{
@@ -15,6 +15,8 @@ const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress,
         disabled={disabled}
         onPress={onPress}
         >
+
+            {appendComponent}
             <View style={{flexDirection:'row'}}>
             <Text
             style={{
@@ -26,6 +28,7 @@ const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress,
                 {label} 
             </Text>
             </View>
+            {prependComponent}
         </TouchableOpacity>
     )
 }

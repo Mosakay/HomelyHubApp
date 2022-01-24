@@ -1,9 +1,12 @@
+
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import {COLORS, SIZES, FONTS, constants, icons} from '../constants';
 import {Home, Settings, Notification, Favourite, CartTab, Account} from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {NavigationContainer} from '@react-navigation/native';
+
 
 const Tab = createMaterialBottomTabNavigator();
 
