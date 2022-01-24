@@ -16,8 +16,9 @@ const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress,
         onPress={onPress}
         >
 
+            
+            <View style={{flexDirection:'row', alignItems: 'center'}}>
             {appendComponent}
-            <View style={{flexDirection:'row'}}>
             <Text
             style={{
                 color: COLORS.white,
@@ -27,8 +28,9 @@ const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress,
             >
                 {label} 
             </Text>
-            </View>
             {prependComponent}
+            </View>
+            
         </TouchableOpacity>
     )
 }

@@ -49,8 +49,8 @@ const MyAccount = () => {
       {/* TEXT INPUT */}
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Ionicons name="share-social-outline" size={22} />
+          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: SIZES.padding}}>
+            <Ionicons name="person-outline" size={22} />
             <Text
               style={{
                 marginLeft: 5,
@@ -58,11 +58,12 @@ const MyAccount = () => {
               }}>
               Edit Profile
             </Text>
+            <Ionicons style={{paddingLeft: SIZES.padding * 8}}  name="chevron-forward-outline" size={22} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Ionicons name="exit-outline" size={22} />
+          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: SIZES.padding}}>
+            <Ionicons name="navigate-outline" size={22} />
             <Text
               style={{
                 marginLeft: 5,
@@ -70,11 +71,12 @@ const MyAccount = () => {
               }}>
               My Addresses
             </Text>
+            <Ionicons style={{paddingLeft: SIZES.padding * 7}}  name="chevron-forward-outline" size={22} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Ionicons name="exit-outline" size={22} />
+          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: SIZES.padding}}>
+            <Ionicons name="cash-outline" size={22} />
             <Text
               style={{
                 marginLeft: 5,
@@ -82,11 +84,12 @@ const MyAccount = () => {
               }}>
               Payment Methods
             </Text>
+            <Ionicons style={{paddingLeft: SIZES.padding * 5.7}}  name="chevron-forward-outline" size={22} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Ionicons name="exit-outline" size={22} />
+          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: SIZES.padding}}>
+            <Ionicons name="notifications-outline" size={22} />
             <Text
               style={{
                 marginLeft: 5,
@@ -94,24 +97,29 @@ const MyAccount = () => {
               }}>
               Contact Preferences
             </Text>
+            <Ionicons style={{paddingLeft: SIZES.padding * 5}}  name="chevron-forward-outline" size={22} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: SIZES.padding}}>
             <Ionicons name="exit-outline" size={22} />
             <Text
               style={{
                 marginLeft: 5,
-                ...FONTS.body4,
+                ...FONTS.body3,
               }}>
               Sign Out
             </Text>
+            <Ionicons style={{paddingLeft: SIZES.width / 2}} name="chevron-forward-outline" size={22} />
           </View>
         </TouchableOpacity>
       </View>
 
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
       <TextButton
+        appendComponent={
+          <Ionicons style={{paddingRight: SIZES.base}} name="headset-outline" size={30} />
+        }
         label="Click here for help options"
         labelStyle={{...FONTS.body3}}
         buttonContainerStyle={{
@@ -123,6 +131,8 @@ const MyAccount = () => {
         }}
       />
       </View>
+      
+
     </View>
   );
 };
