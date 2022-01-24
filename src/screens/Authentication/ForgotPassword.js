@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
-import {TextButton, FormInput} from '../../components';
+import {TextButton, TextButton2, FormInput} from '../../components';
 
 
 const ForgotPassword = ({navigation}) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
-import {TextButton} from '../../components';
+import {TextButton, TextButton2} from '../../components';
 
 const Otp = ({navigation}) => {
   return (

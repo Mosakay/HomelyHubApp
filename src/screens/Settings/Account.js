@@ -1,11 +1,10 @@
 import React from 'react'
 import { View, Text, Image} from 'react-native'
 import {Navigation} from '@react-navigation/native';
-import { TextButton } from '../../components';
+import { TextButton2 } from '../../components';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { Icon } from 'react-native-elements';
 
 const Account = () => {
     return (
@@ -80,22 +79,23 @@ const Account = () => {
             </View>
             <View>
                 <View
-                style={{}}>
-                    <MaterialIcons
+                style={{
+                    backgroundColor:Colors.white,
+                }}>
+                    {/* <MaterialIcons
                         iconName="person-outline"
-                        iconSize={md-38}
+                        iconSize={38}
                         labelStyle={{
                             color: COLORS.black,
                             // justifyContent:'flex-start',
-                        }}>personoutlineempty md-38</MaterialIcons>
-                    <TextButton
-                        iconName="person-outline"
+                        }}>personoutline <TextButton
+                        // iconName="person-outline"
                         label="Edit Profile"
-                        iconSize={24}
-                        labelStyle={{
-                            color: COLORS.black,
-                            justifyContent:'flex-start',
-                        }}
+                        // iconSize={24}
+                        // labelStyle={{
+                        //     color: COLORS.black,
+                        //     justifyContent:'flex-start',
+                        // }}
                         buttonContainerStyle={{
                             backgroundColor: COLORS.white,
                             height: 50,
@@ -103,12 +103,41 @@ const Account = () => {
                             justifyContent: 'center',
                             // flexDirection:'row-reverse'
                         }}
+                    /></MaterialIcons> */}
+                    <TextButton2
+                        iconName="person-outline"
+                        label="Edit Profile"
+                        iconSize={24}
+                        labelStyle={{
+                            color: COLORS.black,
+                        }}
+                        buttonContainerStyle={{
+                            backgroundColor: COLORS.white,
+                            height: 50,
+                            alignItems: 'flex-start',
+                            justifyContent: 'center',
+                        }}
                     />
                 </View>
-                
+{/*                 
                 <TextButton
                     iconName="push-pin"
                     label="Saved Addresses"
+                    iconSize={24}
+                    labelStyle={{
+                        color: COLORS.black,
+                        flexDirection:'row-reverse'
+                    }}
+                    buttonContainerStyle={{
+                        backgroundColor: COLORS.white,
+                        height: 50,
+                        alignItems: 'flex-start',
+                        justifyContent: 'center',
+                    }}
+                />
+                                <TextButton
+                    iconName="push-pin"
+                    label="Saved Payment Methods"
                     iconSize={24}
                     labelStyle={{
                         color: COLORS.black,
@@ -178,7 +207,7 @@ const Account = () => {
                     backgroundColor: COLORS.primary,
                   }}
                 // onPress={() => navigation.navigate('')}
-            />
+            /> */}
             </View>
             {/* if user is not loged in */}
         </View>
