@@ -1,8 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import { FONTS, COLORS, SIZES } from '../constants';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
 
 
 const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress, iconColor, iconName, iconSize }) => {
@@ -27,12 +25,6 @@ const TextButton = ({label, buttonContainerStyle, disabled, labelStyle, onPress,
             >
                 {label} 
             </Text>
-            <MaterialIcons
-              style={{paddingHorizontal: SIZES.base}}
-              name={iconName}
-              size={iconSize}
-              color={iconColor}
-            />
             </View>
         </TouchableOpacity>
     )

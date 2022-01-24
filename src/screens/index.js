@@ -1,5 +1,9 @@
 import OnBoarding from "./OnBoarding/OnBoarding"
-import MainLayout from "./MainLayout"
+
+//Routes
+
+import AppStack from "../routes/AppStack"
+import AuthStack from "../routes/AuthStack"
 
 // Authentication
 import AuthLayout from "./Authentication/AuthLayout"
@@ -30,8 +34,6 @@ import Favourite from "./Favourite/Favourite";
 import Notification from "./Notification/Notification"
 export {
     OnBoarding,
-    MainLayout,
-
     AuthLayout,
     SignIn,
     SignUp,
@@ -44,5 +46,7 @@ export {
     Favourite,
     Notification,
     Settings,
-    Account
+    Account,
+    AppStack,
+    AuthStack,
 }

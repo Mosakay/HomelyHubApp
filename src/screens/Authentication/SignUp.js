@@ -2,10 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Image,
   Alert,
-  StyleSheet,
   ScrollView
 } from 'react-native';
 import {AuthLayout} from '..';
@@ -20,12 +18,12 @@ import { useContext } from 'react';
 
 
 
-
 const SignUp = ({navigation}) => {
   const [email, setEmail] = React.useState('');
   const [firstname, setFirstName] = React.useState('');
   const [lastName, setLastName] = React.useState('');
   const [phoneNumber, setPhoneNumber] = React.useState('');
+  const [postcode, setPostcode] = React.useState('');
 
   const [emailError, setEmailError] = React.useState('');
   const [firstNameError, setFirstNameError] = React.useState('');
@@ -33,27 +31,11 @@ const SignUp = ({navigation}) => {
   const [phoneNumberError, setPhoneNumberError] = React.useState('');
 
  
-  const val = useContext(AuthContext)
-
-  const {register} = useContext(AuthContext);
-
   const phoneInput = React.useRef(null);
-  const getPhoneNumber = () => {
-    Alert.alert(phoneNumber);
-  };
+  // const getPhoneNumber = () => {
+  //   Alert.alert(phoneNumber);
+  // };
 
-  // {
-  //   "email": "string",
-  //   "userName": "string",
-  //   "password": "string",
-  //   "confirmPassword": "string",
-  //   "allowedMarketing": true,
-  //   "firstName": "string",
-  //   "lastName": "string",
-  //   "countryId": 0,
-  //   "userType": 1,
-  //   "deviceId": "string"
-  // }
 
   const signUpValidationSchema = yup.object().shape({
     email: yup
@@ -134,6 +116,7 @@ const SignUp = ({navigation}) => {
                 label="Email"
                 keyboardType="email-address"
                 autoCompleteType="email"
+                onChange={value => setEmail(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -160,15 +143,13 @@ const SignUp = ({navigation}) => {
 
               {/* UserName */}
 
-              {/* <FormInput
+              <FormInput
                 onChangeText={handleChange('userName')}
                 onBlur={handleBlur('userName')}
                 value={values.userName}
                 label="Username"
                 placeholder="Type your username here!"
                 containerStyle={{marginTop: SIZES.radius}}
-                // onChange={(value) => {setFirstName(value)}}
-                errorMsg={firstNameError}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -193,7 +174,7 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.userName}
                 </Text>
-              )} */}
+              )}
 
               {/* FIRSTNAME */}
 
@@ -204,8 +185,7 @@ const SignUp = ({navigation}) => {
                 label="First Name"
                 placeholder="Type your first name here"
                 containerStyle={{marginTop: SIZES.radius}}
-                // onChange={(value) => {setFirstName(value)}}
-                errorMsg={firstNameError}
+                onChange={value => setFirstName(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -241,10 +221,7 @@ const SignUp = ({navigation}) => {
                 label="Last name"
                 placeholder="Type your last name here"
                 containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => {
-                  setLastName(value);
-                }}
-                errorMsg={lastNameError}
+                onChange={value => setLastName(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -280,7 +257,7 @@ const SignUp = ({navigation}) => {
                 label="Postcode"
                 placeholder="Enter your postcode here"
                 containerStyle={{marginTop: SIZES.radius}}
-                // onChange={(value) => {setSurname(value)}}
+                onChange={value => setPostcode(value)}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -319,10 +296,7 @@ const SignUp = ({navigation}) => {
                 iconSize={19}
                 placeholder="Type your phone number here"
                 containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => {
-                  setPhoneNumber(value);
-                }}
-                errorMsg={phoneNumberError}
+                onChange={value => setPhoneNumber(value)}
                 keyboardType="numeric"
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
@@ -412,7 +386,6 @@ const SignUp = ({navigation}) => {
               <View style={{justifyContent: 'center', flexDirection: 'row'}}>
                 <TextButton
                   label="Next"
-                  // disabled={isEnableSignUp() ? false : true}
                   disabled={!isValid}
                   buttonContainerStyle={{
                     height: 50,
@@ -425,7 +398,6 @@ const SignUp = ({navigation}) => {
                       : COLORS.transparentPrimary,
                   }}
                   onPress={() => navigation.navigate('SignUp2')}
-                  // onPress={handleSubmit}
                 />
               </View>
 

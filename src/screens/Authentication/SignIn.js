@@ -253,8 +253,6 @@ const SignIn = ({navigation}) => {
   
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
               <TextButton
-                iconName="login"
-                iconSize={22}
                 onPress={handleSubmit}
                 label="Sign In"
                 disabled={!isValid}
@@ -329,7 +327,7 @@ const SignIn = ({navigation}) => {
                   color: COLORS.darkGray,
                   fontWeight: 'bold',
                 }}
-                onPress={() => navigation.navigate('MainLayout')}
+                onPress={() => navigation.navigate('AppStack')}
               />
             </View>
           </View>

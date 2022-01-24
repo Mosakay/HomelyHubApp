@@ -17,9 +17,6 @@ const SignUp2 = ({navigation}) => {
   const [showPass2, setShowPass2] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState('');
 
-  const val = useContext(AuthContext)
-  
-  const {register} = useContext(AuthContext);
 
 
   const signupValidationSchema = yup.object().shape({
@@ -62,7 +59,6 @@ const SignUp2 = ({navigation}) => {
               marginTop: SIZES.padding,
             }}>
 
-            <Text>{val}</Text>
             <FormInput
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
