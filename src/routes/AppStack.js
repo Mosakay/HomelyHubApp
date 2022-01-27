@@ -90,16 +90,6 @@ const AppStack = ({navigation}) => {
           ),
         }}
       />
-      {/* <Tab.Screen
-          name="S"
-          component={AccountNavigation}
-          // options={{
-          //   tabBarLabel: 'Test',
-          //   tabBarIcon: ({color}) => (
-          //     <MaterialIcons name="settings" color={color} size={26} />
-          //   ),
-          // }}
-        /> */}
     </Tab.Navigator>
   );
 };
