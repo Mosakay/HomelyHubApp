@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 import EditProfile from './EditProfile';
 import SavedAddress from './SavedAddress';
 import PaymentMethods from './PaymentMethods';
@@ -8,9 +8,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
 
-const MyAccount = () => {
+const MyAccount = (navigation) => {
   return (
     <View style={{flex: 1}}>
+      <ScrollView>
       <View
         style={{
           alignItems: 'center',
@@ -75,7 +76,8 @@ const MyAccount = () => {
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {}} style={{paddingVertical: 15}}>
-          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: SIZES.padding}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', paddingHorizontal: SIZES.padding}}
+          >
             <Ionicons name="cash-outline" size={22} />
             <Text
               style={{
@@ -132,7 +134,7 @@ const MyAccount = () => {
       />
       </View>
       
-
+      </ScrollView>
     </View>
   );
 };

@@ -2,14 +2,9 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
-<<<<<<< HEAD
-import {TextButton, TextButton2, FormInput} from '../../components';
-
-=======
 import {TextButton, FormInput} from '../../components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
->>>>>>> origin/layout
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = React.useState('');

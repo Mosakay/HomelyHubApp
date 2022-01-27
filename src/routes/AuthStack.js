@@ -10,6 +10,7 @@ import {
   Otp,
 } from '../screens';
 import AppStack from './AppStack';
+import PaymentMethods from '../screens/Account/PaymentMethods';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +34,8 @@ const AuthStack = () => {
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
 
       <Stack.Screen name="Otp" component={Otp} />
+
+      <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
     </Stack.Navigator>
   );
 };
