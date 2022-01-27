@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, ScrollView} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
@@ -18,6 +18,7 @@ const Account = ({navigation}) => {
         }}>
         <Text style={{...FONTS.h3, color: COLORS.black}}>My Account</Text>
       </View>
+      <ScrollView>
       <View
         style={{
           flexDirection: 'row',
@@ -142,6 +143,7 @@ const Account = ({navigation}) => {
           }}
         />
       </View>
+      </ScrollView>
     </View>
   );
 };
