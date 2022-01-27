@@ -5,26 +5,55 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TextButton from '../../components/TextButton';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
-import PropTypes from 'prop-types';
+import { Checkbox } from 'react-native-paper';
 
 const SavedAddress = ({navigation}) => {
+  const [toggleCheckBox, setToggleCheckBox] = React.useState(false)
+  
+  // Add address
+
+  const addAddress = async item => {
+    const id = Math.floor(Math.random() * 10000) + 1;
+    const newAddress = {id, ...item};
+    setAddress([...address, newAddress]);
+  };
+
+  //Delete Address
+
+
+  //Checkbox
+
+  const toggleCheck = (id) => {
+    setAddress(
+      address.map((item) =>
+      item.id === id ? { ...item, checkbox: !item.checkbox } : item
+      )
+    )
+    console.log(id)
+  };
+
+
+  const deleteAddress = id => {
+    setAddress(address.filter(item => item.id !== id));
+  };
+
   const [address, setAddress] = React.useState([
     {
       id: '0',
       name: 'Mr Boris Account',
-      address: '6 Kingsway, Flat No. 15, London, SW150VH',
+      address: '6 Kingsway, Flat No. 15, London, SW150VH, United Kingdom',
       checkbox: true,
     },
     {
       id: '1',
       name: 'Mr Biden Account',
-      address: '26 Edward St, London, SW75DT',
+      address: '1 White House , Washington, SW75DT, United States',
       checkbox: false,
     },
     {
       id: '2',
       name: 'Mr Putin Account',
-      address: 'No. 3, 90 Avenue, London, BB75DE',
+      address: 'No. 2, Moscow, WW33WW, Russia URSS',
       checkbox: false,
     },
   ]);
@@ -57,42 +86,63 @@ const SavedAddress = ({navigation}) => {
 
       {/* FLATLIST  */}
       <View>
-        <FlatList
-          data={address}
-          keyExtractor={item => `${item.id}`}
-          renderItem={({item}) => {
-            return (
-              <View
-                style={{
-                  borderWidth: 1,
-                  borderColor: COLORS.gray3,
-                  maxWidth: SIZES.width / 0.5,
-                  minHeight: SIZES.height / 7,
-                  marginHorizontal: SIZES.padding + 15,
-                  marginTop: SIZES.padding,
-                  backgroundColor: COLORS.white,
-                }}>
+        {address.length > 0 ? (
+          <FlatList
+            data={address}
+            keyExtractor={item => item.id}
+            renderItem={({item}) => {
+              return (
                 <View
                   style={{
-                    flex: 1,
-                    paddingLeft: SIZES.padding * 2,
-                    paddingRight: SIZES.base,
-                    paddingVertical: SIZES.padding,
+                    borderWidth: 1,
+                    borderColor: COLORS.gray3,
+                    maxWidth: SIZES.width / 0.5,
+                    minHeight: SIZES.height / 7,
+                    marginHorizontal: SIZES.padding + 15,
+                    marginTop: SIZES.padding,
+                    backgroundColor: COLORS.white,
                   }}>
-                  <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-                    <Text style={{color: COLORS.black, ...FONTS.body4}}>
-                    {item.name}
-                  </Text>
-                  <Icon name="clear" size={25} color={COLORS.red} />
+                  <Checkbox status='indeterminate' onPress={() => toggleCheck(item.id)} color={COLORS.transparentPrimary} />
+                  <View
+                    style={{
+                      paddingLeft: SIZES.padding * 2,
+                      paddingRight: SIZES.radius,
+                      paddingVertical: SIZES.padding,
+                      paddingTop: -SIZES.padding,
+                      borderLeftWidth: item.checkbox ? 2 : 0,
+                      borderLeftColor: item.checkbox ? COLORS.primary : COLORS.gray3
+                    }}>
+                    <View
+                      style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                      }}>
+                      <Text style={{color: COLORS.black, ...FONTS.body4}}>
+                        {item.name}
+                      </Text>
+                      <TouchableOpacity onPress={() => deleteAddress(item.id)}>
+                        <Icon name="clear" size={25} color={COLORS.red} />
+                      </TouchableOpacity>
+                    </View>
+                    <Text
+                      style={{
+                        color: COLORS.black,
+                        ...FONTS.body5,
+                        paddingRight: SIZES.padding * 2,
+                      }}>
+                      {item.address}
+                    </Text>
                   </View>
-                  <Text style={{color: COLORS.black, ...FONTS.body5, paddingRight: SIZES.padding * 2}}>
-                    {item.address}
-                  </Text>
                 </View>
-              </View>
-            );
-          }}
-        />
+              );
+            }}
+          />
+        ) : (
+          <View style={{marginVertical:SIZES.padding}}>
+          <Text style={{color:COLORS.red, textAlign:'center'}}>No Addresses to Show... </Text>
+          <Text style={{color:COLORS.red, textAlign:'center'}}>Please add your address!</Text>
+          </View>
+        )}
       </View>
 
       {/* ADD NEW ADDRESS BUTTON */}
