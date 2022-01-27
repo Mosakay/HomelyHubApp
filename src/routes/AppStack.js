@@ -1,72 +1,107 @@
-
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import {COLORS, SIZES, FONTS, constants, icons} from '../constants';
-import {Home, Settings, Notification, Favourite, CartTab, Account} from '../screens';
+import {
+  Home,
+  Settings,
+  Notification,
+  Favourite,
+  CartTab,
+  Account,
+} from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {NavigationContainer} from '@react-navigation/native';
-
+import EditProfile from '../screens/Account/EditProfile';
+import SavedAddress from '../screens/Account/SavedAddress';
+import PaymentMethods from '../screens/Account/PaymentMethods';
+import ContactPref from '../screens/Account/ContactPref';
+import {createStackNavigator} from '@react-navigation/stack';
 
 const Tab = createMaterialBottomTabNavigator();
+const Stack = createStackNavigator();
 
+const AccountNavigation = ({navigation}) => {
+  return (
+    <NavigationContainer independent="true">
+      <Stack.Navigator
+        initialRouteName="AppStack"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="SavedAddress" component={SavedAddress} />
+        <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
+        <Stack.Screen name="ContactPref" component={ContactPref} />
+        <Stack.Screen name="AppStack" component={AppStack} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
+export default AccountNavigation;
 
 const AppStack = ({navigation}) => {
-    return (
-      <NavigationContainer independent="true">
-        <Tab.Navigator
-          initialRouteName="Home"
-          activeColor={COLORS.primary}
-          inactiveColor={COLORS.transparentPrimary}
-          labelStyle={{fontSize: 12}}
-          barStyle={{backgroundColor: COLORS.white, padding: 5}}>
-          <Tab.Screen
-            name="Home"
-            component={Home}
-            options={{
-              tabBarLabel: 'Menu',
-              tabBarIcon: ({color}) => (
-                <MaterialIcons name="restaurant-menu" color={color} size={26} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="CartTab"
-            component={CartTab}
-            options={{
-              tabBarLabel: 'Orders',
-              tabBarIcon: ({color}) => (
-                <MaterialIcons name="reorder" color={color} size={26} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Account"
-            component={Account}
-            options={{
-              title: 'My Account',
-              tabBarLabel: 'Account',
-              tabBarIcon: ({color}) => (
-                <MaterialIcons name="person-outline" color={color} size={26} />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Settings"
-            component={Settings}
-            options={{
-              tabBarLabel: 'Settings',
-              tabBarIcon: ({color}) => (
-                <MaterialIcons name="settings" color={color} size={26} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-  
-    );
-  };
-  
-  export default AppStack;
-  
+  return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      activeColor={COLORS.primary}
+      inactiveColor={COLORS.transparentPrimary}
+      labelStyle={{fontSize: 12}}
+      barStyle={{backgroundColor: COLORS.white, padding: 5}}>
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Menu',
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="restaurant-menu" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="CartTab"
+        component={CartTab}
+        options={{
+          tabBarLabel: 'Orders',
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="reorder" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={Account}
+        options={{
+          title: 'My Account',
+          tabBarLabel: 'Account',
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="person-outline" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({color}) => (
+            <MaterialIcons name="settings" color={color} size={26} />
+          ),
+        }}
+      />
+      {/* <Tab.Screen
+          name="S"
+          component={AccountNavigation}
+          // options={{
+          //   tabBarLabel: 'Test',
+          //   tabBarIcon: ({color}) => (
+          //     <MaterialIcons name="settings" color={color} size={26} />
+          //   ),
+          // }}
+        /> */}
+    </Tab.Navigator>
+  );
+};
+
+// export default AppStack;
