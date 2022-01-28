@@ -1,64 +1,60 @@
 import {View, Text, FlatList} from 'react-native';
-import React from 'react';
+import React, { useState } from "react";
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TextButton from '../../components/TextButton';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
-import { Checkbox } from 'react-native-paper';
-
-const SavedAddress = ({navigation}) => {
-  const [toggleCheckBox, setToggleCheckBox] = React.useState(false)
-  
-  // Add address
-
-  const addAddress = async item => {
-    const id = Math.floor(Math.random() * 10000) + 1;
-    const newAddress = {id, ...item};
-    setAddress([...address, newAddress]);
-  };
-
-  //Delete Address
+import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import AddAddress from './AddAddress';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
-  //Checkbox
-
-  const toggleCheck = (id) => {
-    setAddress(
-      address.map((item) =>
-      item.id === id ? { ...item, checkbox: !item.checkbox } : item
-      )
-    )
-    console.log(id)
-  };
-
-
-  const deleteAddress = id => {
-    setAddress(address.filter(item => item.id !== id));
-  };
-
+const SavedAddress = ({navigation, onAdd}) => {
+  const [showAddAddress, setShowAddAddress] = React.useState(false)
   const [address, setAddress] = React.useState([
     {
       id: '0',
       name: 'Mr Boris Account',
-      address: '6 Kingsway, Flat No. 15, London, SW150VH, United Kingdom',
+      text: '6 Kingsway, Flat No. 15, London, SW150VH, United Kingdom',
       checkbox: true,
     },
     {
       id: '1',
       name: 'Mr Biden Account',
-      address: '1 White House , Washington, SW75DT, United States',
-      checkbox: false,
-    },
-    {
-      id: '2',
-      name: 'Mr Putin Account',
-      address: 'No. 2, Moscow, WW33WW, Russia URSS',
+      text: '1 White House , Washington, SW75DT, United States',
       checkbox: false,
     },
   ]);
 
+  // Add address
+
+  const addAddres = (item) => {
+    const id = Math.floor(Math.random() * 10000) + 1;
+    const newAddress = {id, ...item};
+    setAddress([...address, newAddress]);
+  };
+
+  //Checkbox
+
+  const toggleCheck = id => {
+    setAddress(
+      address.map(item =>
+        item.id === id ? {...item, checkbox: !item.checkbox} : item,
+      ),
+    );
+    console.log(id);
+  };
+
+  //Delete Address
+
+  const deleteAddress = id => {
+    setAddress(address.filter(item => item.id !== id));
+  };
+
+
+
   return (
+    <KeyboardAwareScrollView>
     <View style={{flex: 1}}>
       {/* HEADER */}
 
@@ -86,6 +82,7 @@ const SavedAddress = ({navigation}) => {
 
       {/* FLATLIST  */}
       <View>
+       
         {address.length > 0 ? (
           <FlatList
             data={address}
@@ -102,55 +99,74 @@ const SavedAddress = ({navigation}) => {
                     marginTop: SIZES.padding,
                     backgroundColor: COLORS.white,
                   }}>
-                  <Checkbox status='indeterminate' onPress={() => toggleCheck(item.id)} color={COLORS.transparentPrimary} />
                   <View
                     style={{
-                      paddingLeft: SIZES.padding * 2,
-                      paddingRight: SIZES.radius,
-                      paddingVertical: SIZES.padding,
-                      paddingTop: -SIZES.padding,
-                      borderLeftWidth: item.checkbox ? 2 : 0,
-                      borderLeftColor: item.checkbox ? COLORS.primary : COLORS.gray3
+                      borderLeftWidth: item.checkbox ? 4 : 0,
+                      borderLeftColor: item.checkbox
+                        ? COLORS.green
+                        : COLORS.gray3,
                     }}>
+                    <FAIcon
+                      name="circle"
+                      onPress={() => toggleCheck(item.id)}
+                      color={item.checkbox ? COLORS.orange : COLORS.black}
+                      style={{marginLeft: 10, marginTop: 10}}
+                    />
+
                     <View
                       style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
+                        paddingLeft: SIZES.padding * 2,
+                        paddingRight: SIZES.radius,
+                        paddingVertical: SIZES.padding,
+                        paddingTop: -SIZES.padding,
                       }}>
-                      <Text style={{color: COLORS.black, ...FONTS.body4}}>
-                        {item.name}
+                      <View
+                        style={{
+                          flexDirection: 'row',
+                          justifyContent: 'space-between',
+                        }}>
+                        <Text style={{color: COLORS.black, ...FONTS.body4}}>
+                          {item.name}
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => deleteAddress(item.id)}>
+                          <Icon name="clear" size={25} color={COLORS.red} />
+                        </TouchableOpacity>
+                      </View>
+                      <Text
+                        style={{
+                          color: COLORS.black,
+                          ...FONTS.body5,
+                          paddingRight: SIZES.padding * 2,
+                        }}>
+                        {item.text}
                       </Text>
-                      <TouchableOpacity onPress={() => deleteAddress(item.id)}>
-                        <Icon name="clear" size={25} color={COLORS.red} />
-                      </TouchableOpacity>
                     </View>
-                    <Text
-                      style={{
-                        color: COLORS.black,
-                        ...FONTS.body5,
-                        paddingRight: SIZES.padding * 2,
-                      }}>
-                      {item.address}
-                    </Text>
                   </View>
                 </View>
               );
             }}
           />
         ) : (
-          <View style={{marginVertical:SIZES.padding}}>
-          <Text style={{color:COLORS.red, textAlign:'center'}}>No Addresses to Show... </Text>
-          <Text style={{color:COLORS.red, textAlign:'center'}}>Please add your address!</Text>
+          <View style={{marginVertical: SIZES.padding}}>
+            <Text style={{color: COLORS.red, textAlign: 'center'}}>
+              No Addresses to Show...{' '}
+            </Text>
+            <Text style={{color: COLORS.red, textAlign: 'center'}}>
+              Please add your address!
+            </Text>
           </View>
         )}
       </View>
+
+      { showAddAddress && <AddAddress onAdd={addAddres} />}
 
       {/* ADD NEW ADDRESS BUTTON */}
 
       <View>
         <TextButton
-          onPress={() => {}}
-          label="Add New Address"
+          onPress={() => setShowAddAddress(!showAddAddress)}
+          label={showAddAddress ? 'Close' : 'Add new address'}
           buttonContainerStyle={{
             borderWidth: 1,
             borderColor: COLORS.gray3,
@@ -164,13 +180,18 @@ const SavedAddress = ({navigation}) => {
             color: COLORS.black,
             ...FONTS.body4,
           }}
-          appendComponent={
-            <Icon
-              name="add"
+          appendComponent={ showAddAddress ?
+             <Icon
+              name="close"
               size={25}
-              color={COLORS.black}
+              color={COLORS.red}
               style={{padding: 5}}
-            />
+            /> : <Icon
+            name="add"
+            size={25}
+            color={COLORS.green2}
+            style={{padding: 5}}
+          />
           }
         />
       </View>
@@ -189,6 +210,7 @@ const SavedAddress = ({navigation}) => {
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
         <TextButton
           label="Continue"
+          onPress={() => navigation.goBack()}
           labelStyle={{...FONTS.body3}}
           buttonContainerStyle={{
             height: 50,
@@ -200,6 +222,7 @@ const SavedAddress = ({navigation}) => {
         />
       </View>
     </View>
+    </KeyboardAwareScrollView>
   );
 };
 
