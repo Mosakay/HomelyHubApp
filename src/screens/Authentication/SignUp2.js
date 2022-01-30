@@ -7,7 +7,10 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
-
+import axios from 'axios';
+import { BASE_URL } from '../../context/config';
+import DeviceInfo from 'react-native-device-info';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const SignUp2 = ({navigation}) => {
@@ -16,17 +19,30 @@ const SignUp2 = ({navigation}) => {
   const [password2, setPassword2] = React.useState('');
   const [showPass2, setShowPass2] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState('');
+  const [formFields, setFormFields] = React.useState({})
 
+
+  React.useEffect(() => {
+    (async () => {
+      const store = await AsyncStorage.getItem('fields')
+      setFormFields(prev => ({...prev, ...JSON.parse(store)}))
+    })()
+  }, [])
+
+  React.useEffect(() => console.log({formFields}), [formFields])
+
+  let idD = DeviceInfo.getDeviceId();
+  console.log(idD);
 
 
   const signupValidationSchema = yup.object().shape({
     password: yup
       .string()
-      .min(8, ({min}) => `Password must be at least ${min} characters.`)
+      .min(6, ({min}) => `Password must be at least ${min} characters.`)
       .required('Password is required!')
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
+        'Must Contain 6  Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
       ),
     confirmPassword: yup
       .string()
@@ -39,9 +55,22 @@ const SignUp2 = ({navigation}) => {
       initialValues={{
         password: '',
         confirmPassword: '',
+        userType: 1,
+        allowedMarketing: true,
+        deviceId: idD || ''
       }}
       validateOnMount={true}
-      onSubmit={(values => console.log(values))}
+      onSubmit={(values) => {
+        const data = {...formFields, ...values}
+        console.log(data);
+   
+        axios.post(`${BASE_URL}/Security/Register`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
+          navigation.replace('SignIn')
+        }).catch((err) => {
+          console.log(err)
+        })
+
+      } }
       validationSchema={signupValidationSchema}>
       {({
         handleChange,
@@ -166,7 +195,7 @@ const SignUp2 = ({navigation}) => {
                     ? COLORS.transparentPrimary
                     : COLORS.primary,
                 }}
-                onPress={() => navigation.navigate('Otp')}
+                onPress={handleSubmit}
                
               />
             </View>

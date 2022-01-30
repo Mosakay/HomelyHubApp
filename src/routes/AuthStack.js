@@ -8,6 +8,7 @@ import {
   SignUp2,
   ForgotPassword,
   Otp,
+  Home,
 } from '../screens';
 import AppStack from './AppStack';
 import AccountNavigation from '../routes/AppStack'
@@ -28,6 +29,8 @@ const AuthStack = () => {
       <Stack.Screen name="SignIn" component={SignIn} />
 
       <Stack.Screen name="SignUp" component={SignUp} />
+
+      <Stack.Screen name="Dashboard" component={Home} />
 
       <Stack.Screen name="SignUp2" component={SignUp2} />
 

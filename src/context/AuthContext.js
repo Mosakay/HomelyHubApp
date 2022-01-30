@@ -6,10 +6,10 @@ import { REACT_APP_BASEURL } from '@env'
 
 export const AuthContext = createContext();
 
-// export const AuthProvider = ({children}) => {
+export const AuthProvider = ({children}) => {
 
       
-//   return (
-//     <AuthContext.Provider value="test value">{children}</AuthContext.Provider>
-//   );
-// };
+  return (
+    <AuthContext.Provider value="test value">{children}</AuthContext.Provider>
+  );
+};
