@@ -35,18 +35,24 @@ const SignIn = ({navigation}) => {
   const onToggleSwitch = () => setRememberMe(!rememberMe);
 
   const loginUser = async user => {
-    const userRequest = await axios.post(
-      `${BASE_URL}/Security/Authenticate`,
-      JSON.stringify(user),
-      {headers: {'Content-Type': 'application/json'}},
-    );
-
-    if (userRequest?.data.id) {
-      const updateboarded = await AsyncStorage.setItem('onboarded', 'true');
-      navigation.navigate('Dashboard');
-    } else {
-      console.log('Incorrect credentials');
+    try {
+      const userRequest = await axios.post(
+        `${BASE_URL}/Security/Authenticate`,
+        JSON.stringify(user),
+        {headers: {'Content-Type': 'application/json'}},
+      );
+  
+      if (userRequest?.data.id) {
+        const updateboarded = await AsyncStorage.setItem('onboarded', 'true');
+        navigation.navigate('Dashboard');
+      } else {
+        console.log('Incorrect credentials');
+      }
+      
+    } catch (err) {
+      console.log(err.message)
     }
+
   };
 
   const loginValidationSchema = yup.object().shape({

@@ -67,7 +67,7 @@ const SignUp2 = ({navigation}) => {
         axios.post(`${BASE_URL}/Security/Register`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
           navigation.replace('SignIn')
         }).catch((err) => {
-          console.log(err)
+          console.log(err.message)
         })
 
       } }
