@@ -23,6 +23,7 @@ const FormInput = ({
   onChangeText,
   onBlur,
   value,
+  customInputStyle,
 }) => {
   return (
     <View style={{...containerStyle}}>
@@ -44,6 +45,7 @@ const FormInput = ({
           marginTop: SIZES.base,
           borderRadius: SIZES.radius,
           backgroundColor: COLORS.lightGray2,
+          ...customInputStyle
         }}>
 
         {prependComponent}

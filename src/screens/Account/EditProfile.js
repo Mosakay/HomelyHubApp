@@ -69,6 +69,7 @@ const EditProfile = ({navigation}) => {
         label="First Name"
         placeholder="Type your first name here"
         containerStyle={{marginTop: SIZES.radius}}
+        customInputStyle={{backgroundColor: COLORS.white}}
         onChange={value => setFirstName(value)}
         // appendComponent={
         //   <View style={{justifyContent: 'center'}}>
@@ -103,6 +104,7 @@ const EditProfile = ({navigation}) => {
         label="Last name"
         placeholder="Type your last name here"
         containerStyle={{marginTop: SIZES.radius}}
+        customInputStyle={{backgroundColor: COLORS.white}}
         onChange={value => setLastName(value)}
         // appendComponent={
         //   <View style={{justifyContent: 'center'}}>
