@@ -37,26 +37,26 @@ const PaymentMethods = ({navigation}) => {
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
         <TextButton
         // pass in the prams to update the email assoaiated with the payment methed
-            label="Test-Email@email.com"
+            label="Connected to Test-Email@email.com"
             buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
             appendComponent={<FontAwesomeIcon
                name="cc-paypal" 
             size={40} 
             style={{alignSelf: 'flex-start',justifyContent:'flex-start', backgroundColor:COLORS.primary, padding: SIZES.padding - 15, maxWidth: 200,}} />}
-            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary , flex: 1}}
+            labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.primary , flex: 1}}
             // onPress={() => navigation.navigate('')}
           /> 
       </View>
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
         <TextButton
         // pass in the prams to update the email assoaiated with the payment methed
-            label="Test-Email@email.com"
+            label="Click here to connect ApplePay to account"
             buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
             appendComponent={<FontAwesomeIcon 
               name="apple-pay" 
               size={40} 
-              style={{alignSelf: 'flex-start',justifyContent:'flex-start', backgroundColor:COLORS.primary, padding: SIZES.padding - 15, maxWidth: 200,}} />}
-            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary , flex: 1}}
+              style={{alignSelf: 'flex-start',justifyContent:'flex-start', backgroundColor:COLORS.gray, padding: SIZES.padding - 15, maxWidth: 200,}} />}
+            labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.darkGray , flex: 1}}
             // onPress={() => navigation.navigate('')}
           /> 
       </View>
@@ -66,10 +66,36 @@ const PaymentMethods = ({navigation}) => {
             label="Click hear to connect amazon pay"
             buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
             appendComponent={<FontAwesomeIcon 
-              name="amazon-pay" 
+              name="google-pay" 
               size={40} 
               style={{ backgroundColor:COLORS.gray, padding: SIZES.padding - 15 , maxWidth: 200,}} />}
-            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.gray,}}
+            labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.gray,}}
+            // onPress={() => navigation.navigate('')}
+          /> 
+      </View>
+      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+        <TextButton
+        // pass in the prams to update the email assoaiated with the payment methed
+            label="Click hear to connect amazon pay"
+            buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
+            appendComponent={<FontAwesomeIcon 
+              name="file" 
+              size={40} 
+              style={{ backgroundColor:COLORS.gray, padding: SIZES.padding - 15 , maxWidth: 200,}} />}
+            labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.gray,}}
+            // onPress={() => navigation.navigate('')}
+          /> 
+      </View>
+      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+        <TextButton
+        // pass in the prams to update the email assoaiated with the payment methed
+            label="Click hear to connect amazon pay"
+            buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
+            appendComponent={<FontAwesomeIcon 
+              name="file" 
+              size={40} 
+              style={{ backgroundColor:COLORS.gray, padding: SIZES.padding - 15 ,minWidth: 50,}} />}
+            labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.gray,}}
             // onPress={() => navigation.navigate('')}
           /> 
       </View>
