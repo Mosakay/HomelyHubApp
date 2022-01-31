@@ -18,53 +18,46 @@ const PaymentMethods = ({navigation}) => {
           height: SIZES.padding * 3,
           borderBottomWidth: 1,
           borderBottomColor: COLORS.gray3,
+          justifyContent: 'flex-start',
         }}>
-          <Ionicons name="arrow-back" size={30}/>
-          <Text style={{...FONTS.h3, color: COLORS.black}}>Payment Methods</Text>
+          <Ionicons name="arrow-back" size={30} />
+          <View style={{ justifySelf:'flex-end'}}>
+            <Text style={{...FONTS.h3, color: COLORS.black, }}>Payment Methods</Text>
+          </View>
       </View>
     </TouchableOpacity>
     <ScrollView>
     {/* payment metheds  could be more efficet by adding a loop witch checkes what payment methes are avalive and call it from a const so it auto updates*/}
-    <View>
+    <View style={{justifyContent:'center'}}>
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-      <TextButton
-      // pass in the prams to update the email assoaiated with the payment methed
-          label="Test-Email@email.com"
-          buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
-          appendComponent={<FontAwesomeIcon name="apple-pay" size={40} style={{ backgroundColor:COLORS.primary, padding: SIZES.padding - 15}} />}
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary}}
-          // onPress={() => navigation.navigate('')}
-        /> 
+        <TextButton
+        // pass in the prams to update the email assoaiated with the payment methed
+            label="Test-Email@email.com"
+            buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
+            appendComponent={<FontAwesomeIcon name="cc-paypal" size={40} style={{alignSelf: 'flex-start',justifyContent:'flex-start', backgroundColor:COLORS.primary, padding: SIZES.padding - 15}} />}
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary , flex: 1}}
+            // onPress={() => navigation.navigate('')}
+          /> 
       </View>
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-      <TextButton
-      // pass in the prams to update the email assoaiated with the payment methed
-          label="Test-Email@email.com"
-          buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
-          appendComponent={<FontAwesomeIcon name="cc-paypal" size={40} style={{ backgroundColor:COLORS.primary , padding: SIZES.padding - 15}} />}
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary}}
-          // onPress={() => navigation.navigate('')}
-        /> 
+        <TextButton
+        // pass in the prams to update the email assoaiated with the payment methed
+            label="Test-Email@email.com"
+            buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
+            appendComponent={<FontAwesomeIcon name="apple-pay" size={40} style={{alignSelf: 'flex-start',justifyContent:'flex-start', backgroundColor:COLORS.primary, padding: SIZES.padding - 15}} />}
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary , flex: 1}}
+            // onPress={() => navigation.navigate('')}
+          /> 
       </View>
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-      <TextButton
-      // pass in the prams to update the email assoaiated with the payment methed
-          label="Test-Email@email.com"
-          buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
-          appendComponent={<FontAwesomeIcon name="google-pay" size={40} style={{alignSelf: 'flex-start', backgroundColor:COLORS.primary, padding: SIZES.padding - 15}} />}
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary}}
-          // onPress={() => navigation.navigate('')}
-        /> 
-      </View>
-      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-      <TextButton
-      // pass in the prams to update the email assoaiated with the payment methed
-          label="Click hear to connect amazon pay"
-          buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
-          appendComponent={<FontAwesomeIcon name="amazon-pay" size={40} style={{ backgroundColor:COLORS.primary, padding: SIZES.padding - 15}} />}
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary}}
-          // onPress={() => navigation.navigate('')}
-        /> 
+        <TextButton
+        // pass in the prams to update the email assoaiated with the payment methed
+            label="Click hear to connect amazon pay"
+            buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
+            appendComponent={<FontAwesomeIcon name="amazon-pay" size={40} style={{ backgroundColor:COLORS.primary, padding: SIZES.padding - 15}} />}
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.primary}}
+            // onPress={() => navigation.navigate('')}
+          /> 
       </View>
     </View>
 
