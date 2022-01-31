@@ -3,29 +3,34 @@ import {View, Text, TouchableOpacity, Image, ScrollView, navigation}  from 'reac
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const PaymentMethods = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       {/* header */}
-      <TouchableOpacity onPress={() => navigation.goBack()} style={{backgroundColor: COLORS.white,}}>
-        <View
+      <View
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'space-around',
           height: SIZES.padding * 3,
+          backgroundColor: COLORS.white,
           borderBottomWidth: 1,
           borderBottomColor: COLORS.gray3,
-          justifyContent: 'flex-start',
+          paddingRight: 80,
         }}>
-          <Ionicons name="arrow-back" size={30} />
-          <View style={{ justifySelf:'flex-end'}}>
-            <Text style={{...FONTS.h3, color: COLORS.black, }}>Payment Methods</Text>
-          </View>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{}}>
+          <Icon name="arrow-back" size={25} />
+        </TouchableOpacity>
+        <Text
+          style={{...FONTS.h3, color: COLORS.black,}}>
+          Payment Method
+        </Text>
       </View>
-    </TouchableOpacity>
     <ScrollView>
     {/* payment metheds  could be more efficet by adding a loop witch checkes what payment methes are avalive and call it from a const so it auto updates*/}
     <View style={{justifyContent:'center'}}>
