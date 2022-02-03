@@ -63,12 +63,25 @@ const PaymentMethods = ({navigation}) => {
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
         <TextButton
         // pass in the prams to update the email assoaiated with the payment methed
-            label="Click hear to connect amazon pay"
+            label="Click hear to connect GooglePay to account "
             buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
             appendComponent={<FontAwesomeIcon 
               name="google-pay" 
               size={40} 
-              style={{ backgroundColor:COLORS.gray, padding: SIZES.padding - 15 , maxWidth: 200,}} />}
+              style={{ alignSelf: 'flex-start',justifyContent:'flex-start', backgroundColor:COLORS.gray, padding: SIZES.padding - 15 , maxWidth: 200,}} />}
+            labelStyle={{ marginLeft: 5, ...FONTS.body5, color: COLORS.gray,}}
+            // onPress={() => navigation.navigate('')}
+          /> 
+      </View>
+      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+        <TextButton
+        // pass in the prams to update the email assoaiated with the payment methed
+            label="Click hear to connect ExamplePay to account "
+            buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
+            appendComponent={<FontAwesomeIcon 
+              name="file" 
+              size={40} 
+              style={{ alignSelf: 'flex-start',justifyContent:'flex-start', backgroundColor:COLORS.gray, padding: SIZES.padding - 15 , maxWidth: 200,}} />}
             labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.gray,}}
             // onPress={() => navigation.navigate('')}
           /> 
@@ -76,25 +89,12 @@ const PaymentMethods = ({navigation}) => {
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
         <TextButton
         // pass in the prams to update the email assoaiated with the payment methed
-            label="Click hear to connect amazon pay"
+            label="Click hear to connect ExamplePay to account "
             buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
             appendComponent={<FontAwesomeIcon 
               name="file" 
               size={40} 
-              style={{ backgroundColor:COLORS.gray, padding: SIZES.padding - 15 , maxWidth: 200,}} />}
-            labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.gray,}}
-            // onPress={() => navigation.navigate('')}
-          /> 
-      </View>
-      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-        <TextButton
-        // pass in the prams to update the email assoaiated with the payment methed
-            label="Click hear to connect amazon pay"
-            buttonContainerStyle={{margin: 5  , backgroundColor: COLORS.white, width: SIZES.width - 100,}}
-            appendComponent={<FontAwesomeIcon 
-              name="file" 
-              size={40} 
-              style={{ backgroundColor:COLORS.gray, padding: SIZES.padding - 15 ,minWidth: 50,}} />}
+              style={{ alignSelf: 'flex-start',justifyContent:'flex-start',backgroundColor:COLORS.gray, padding: SIZES.padding - 15 ,minWidth: 50,}} />}
             labelStyle={{marginLeft: 5, ...FONTS.body5, color: COLORS.gray,}}
             // onPress={() => navigation.navigate('')}
           /> 
