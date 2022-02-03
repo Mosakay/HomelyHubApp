@@ -31,7 +31,7 @@ const FormInput = ({
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection:'row', alignContent:'center', alignItems:'center'}}>
         <MaterialIcons style={iconStyle} name={iconName} size={iconSize} color={iconColor}  />
-        <Text style={{color: COLORS.black, ...FONTS.body4}}>{label}</Text>
+        <Text style={{color: COLORS.black, ...FONTS.body4, marginLeft: SIZES.base}}>{label}</Text>
         </View>
         <Text style={{color: COLORS.red, ...FONTS.body4}}>{errorMsg}</Text>
       </View>

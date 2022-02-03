@@ -36,6 +36,13 @@ import Favourite from "./Favourite/Favourite";
 
 // Notification
 import Notification from "./Notification/Notification"
+
+// VEMDOR
+
+import Login from './Vendor/Login'
+import Register from './Vendor/Register'
+import VendorProfile from './Vendor/VendorProfile'
+
 export {
     OnBoarding,
     AuthLayout,
@@ -53,4 +60,7 @@ export {
     Account,
     AppStack,
     AuthStack,
+    Login,
+    Register,
+    VendorProfile
 }
