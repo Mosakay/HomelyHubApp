@@ -15,6 +15,9 @@ import PhoneInput from 'react-native-phone-number-input';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
+import { RegisterContext } from '../../context/RegisterContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 
@@ -30,12 +33,20 @@ const SignUp = ({navigation}) => {
   const [lastNameError, setLastNameError] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState('');
 
+    // const {formFields} = useContext(RegisterContext)
+
+
  
   const phoneInput = React.useRef(null);
   // const getPhoneNumber = () => {
   //   Alert.alert(phoneNumber);
   // };
 
+
+  const registerUser = async (values) => {
+    const store = await AsyncStorage.setItem('fields', JSON.stringify(values))
+    navigation.navigate('SignUp2')
+  }
 
   const signUpValidationSchema = yup.object().shape({
     email: yup
@@ -81,12 +92,10 @@ const SignUp = ({navigation}) => {
         lastName: '',
         phoneNumber: '',
         postcode: '',
+        countryId: 0,
       }}
       validateOnMount={true}
-      onSubmit={values => alert(JSON.stringify(values))
-        // call login service here where we can pass these values
-        
-        }
+      onSubmit={values => registerUser(values) }
       validationSchema={signUpValidationSchema}>
       {({
         handleChange,
@@ -397,7 +406,7 @@ const SignUp = ({navigation}) => {
                       ? COLORS.primary
                       : COLORS.transparentPrimary,
                   }}
-                  onPress={() => navigation.navigate('SignUp2')}
+                  onPress={handleSubmit}
                 />
               </View>
 

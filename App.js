@@ -4,22 +4,25 @@ import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { AuthStack, AppStack } from './src/screens';
+import RegisterContext from './src/context/RegisterContext';
+import CheckUser from './src/context/RegisterContext';
+
 
 const App = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState(null);
   const [onboarded, setOnboarded] = React.useState(false);
+  const [userStatus, setUserStatus] = React.useState('true')
 
   const checkOnboarding = async () => {
     try {
-      const value = await AsyncStorage.getItem('@onBoarding');
-      if (value !== null) {
-        setOnboarded(true);
-      }
-    } catch (err) {
-    } finally {
+      let value = await AsyncStorage.getItem('onboarded');
+      return value
+    } catch (error) {
+      console.log(error);
     }
   };
+
   React.useEffect(() => {
     checkOnboarding();
   }, []);
@@ -29,25 +32,12 @@ const App = () => {
   }, []);
 
   React.useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async() => {
       setIsLoading(false);
+      setOnboarded(await checkOnboarding())
     }, 1000);
   }, []);
 
-  const authContext = React.useMemo(() => ({
-    signIn: () => {
-      setUserToken('asda');
-      setIsLoading(false);
-    },
-    signOut: () => {
-      setUserToken(null);
-      setIsLoading(false);
-    },
-    signUp: () => {
-      setUserToken('asda');
-      setIsLoading(false);
-    },
-  }));
 
   if (isLoading) {
     return (
@@ -57,12 +47,26 @@ const App = () => {
     );
   }
 
+  const CheckOnboarded = () => {
+    if (onboarded === 'true') {
+      return (
+        <NavigationContainer>
+          <AppStack />
+        </NavigationContainer>
+      )
+    } else {
+      return (
+        <NavigationContainer>
+          <AuthStack /> 
+        </NavigationContainer>
+      )
+    }
+  }
+
   return (
-    
-      <NavigationContainer>
-        {/* <AppStack /> */}
-        <AuthStack />
-      </NavigationContainer>
+    <RegisterContext>
+      <CheckOnboarded /> 
+    </RegisterContext>
     
   );
 };
