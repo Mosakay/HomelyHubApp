@@ -13,7 +13,7 @@ import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const PaymentMethods = ({navigation}) => {
-  const [paypal, setPaypal] = React.useState(false);
+  const [paypal, setPaypal] = React.useState(true);
   const [applePay, setApplePay] = React.useState(false);
   const [amazonPay, setAmazonPay] = React.useState(false);
 

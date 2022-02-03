@@ -100,14 +100,14 @@ const OnBoarding = ({navigation}) => {
         }}
         >
             <TextButton
-            label="Skip"
+            label="Business"
             buttonContainerStyle={{
                 backgroundColor: null
             }}
             labelStyle={{
                 color: COLORS.darkGray2
             }}
-            onPress={() => navigation.replace("SignIn")}
+            onPress={() => navigation.replace("VendorStack")}
             />
              <TextButton
             label="Next"
