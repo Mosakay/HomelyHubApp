@@ -11,7 +11,8 @@ import {
   Home,
   Login,
   Register,
-  VendorProfile,
+  vMenuCreation,
+  vProfileCreation,
 } from '../screens';
 import AppStack from './AppStack';
 import AccountNavigation from '../routes/AppStack'
@@ -29,7 +30,8 @@ const vendorStack = ({navigation}) => {
         }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="VendorProfile" component={VendorProfile} />
+        <Stack.Screen name="vMenuCreation" component={vMenuCreation} />
+        <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -40,8 +40,8 @@ const VendorLayout = ({
         <TouchableOpacity
           onPress={backButton}
           style={{
-            marginTop: SIZES.base,
-            marginLeft: SIZES.base,
+            marginTop: SIZES.radius,
+            marginLeft: SIZES.radius,
             flexDirection: 'row',
             alignItems: 'center',
           }}>
@@ -53,10 +53,10 @@ const VendorLayout = ({
       {/* Title & Subtitle */}
       <View
         style={{
-          marginTop: SIZES.base,
+          // marginTop: SIZES.base,
           ...titleContainerStyle,
         }}>
-        <Text style={{textAlign: 'center', ...FONTS.h2, color: COLORS.black, paddingTop: SIZES.padding}}>
+        <Text style={{textAlign: 'center', ...FONTS.h2, color: COLORS.black, paddingTop: SIZES.radius}}>
           {title}
         </Text>
         <Text

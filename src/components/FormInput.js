@@ -24,6 +24,8 @@ const FormInput = ({
   onBlur,
   value,
   customInputStyle,
+  multiline,
+  numberOfLines,
 }) => {
   return (
     <View style={{...containerStyle}}>
@@ -56,6 +58,8 @@ const FormInput = ({
           placeholderTextColor={COLORS.gray}
           secureTextEntry={secureTextEntry}
           keyboardType={keyboardType}
+          multiline={multiline}
+          numberOfLines={numberOfLines}
           autoCompleteType={autoCompleteType}
           autoCapitalize={autoCapitalize}
           // onChangeText={(text) => onChange(text)}
