@@ -15,10 +15,19 @@ const VendorLayout = ({
   formInput,
 }) => {
   return (
-    <KeyboardAwareScrollView
-      style={{
+    <View
+    style={{
         flex: 1,
-      }}>
+    }}
+    >
+      <KeyboardAwareScrollView
+      keyboardDismissMode='on-drag'
+      contentContainerStyle={{
+          flex: 1,
+      }}
+      >
+
+
       {/* Header */}
 
       <View
@@ -26,7 +35,7 @@ const VendorLayout = ({
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'center',
-          height: SIZES.padding * 3,
+          height: SIZES.padding * 2.5,
           backgroundColor: COLORS.white,
           borderBottomWidth: 2,
           borderBottomColor: COLORS.gray3,
@@ -78,7 +87,8 @@ const VendorLayout = ({
 
       {/* Content / Children */}
       {children}
-    </KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>  
+        </View>
   );
 };
 
