@@ -55,7 +55,7 @@ const vSetLocation = ({navigation}) => {
         onChange={value => setFirstName(value)}
       />      
       <View>
-        Example = 34 willow way
+      <Text> Example = 34 willow way</Text> 
       </View>
       {/* Town / City*/}
       <FormInput
@@ -66,7 +66,7 @@ const vSetLocation = ({navigation}) => {
         onChange={value => setFirstName(value)}
       />      
       <View>
-        Example = London
+        <Text>Example = London</Text>
       </View>
 
 
@@ -82,7 +82,7 @@ const vSetLocation = ({navigation}) => {
 
       />
       <View>
-          Example = LO4 D0N
+        <Text>Example = LO4 D0N</Text>  
       </View>
 
       </View>
