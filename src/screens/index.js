@@ -43,6 +43,7 @@ import Login from './Vendor/Login'
 import Register from './Vendor/Register'
 import vMenuCreation from './Vendor/vMenuCreation'
 import vProfileCreation from './Vendor/vProfileCreation'
+import vSetLocation from './Vendor/vSetLocation'
 
 export {
     OnBoarding,
@@ -64,5 +65,6 @@ export {
     Login,
     Register,
     vMenuCreation,
-    vProfileCreation
+    vProfileCreation,
+    vSetLocation
 }

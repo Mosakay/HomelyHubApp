@@ -21,6 +21,7 @@ const vProfileCreation = ({navigation}) => {
 
   bs = React.createRef();
 
+  const [response, setResponse] = React.useState('');
   const [image, setImage] = React.useState(
     'https://api.adorable.io/avatars/80/abott@adorable.png',
   );
@@ -216,7 +217,7 @@ const vProfileCreation = ({navigation}) => {
               <TextButton
                 disabled={!isValid}
                 label="Continue"
-                onPress={() => navigation.navigate('vProfileCreation')}
+                onPress={() => navigation.navigate('vSetLocation')}
                 labelStyle={{...FONTS.body3}}
                 buttonContainerStyle={{
                   height: 50,
