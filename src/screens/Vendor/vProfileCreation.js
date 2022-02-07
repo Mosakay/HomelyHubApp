@@ -21,7 +21,7 @@ const vProfileCreation = ({navigation}) => {
 
   bs = React.createRef();
 
-  const [response, setResponse] = React.useState('');
+
   const [image, setImage] = React.useState(
     'https://api.adorable.io/avatars/80/abott@adorable.png',
   );
@@ -48,7 +48,6 @@ const vProfileCreation = ({navigation}) => {
     }).then(image => {
       console.log(image);
       setImage(image.path);
-      setResponse(response);
       this.bs.current.snapTo(1);
     });
   };
