@@ -41,7 +41,8 @@ import Notification from "./Notification/Notification"
 
 import Login from './Vendor/Login'
 import Register from './Vendor/Register'
-import VendorProfile from './Vendor/VendorProfile'
+import vMenuCreation from './Vendor/vMenuCreation'
+import vProfileCreation from './Vendor/vProfileCreation'
 
 export {
     OnBoarding,
@@ -62,5 +63,6 @@ export {
     AuthStack,
     Login,
     Register,
-    VendorProfile
+    vMenuCreation,
+    vProfileCreation
 }
