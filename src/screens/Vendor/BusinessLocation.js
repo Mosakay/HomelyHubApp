@@ -17,27 +17,35 @@ const BusinessLocation = ({navigation}) => {
         style={{
           flexDirection: 'row',
           alignItems: 'center',
-          justifyContent: 'space-around',
+          justifyContent: 'center',
           height: SIZES.padding * 3,
           backgroundColor: COLORS.white,
-          borderBottomWidth: 1,
+          borderBottomWidth: 2,
           borderBottomColor: COLORS.gray3,
-          paddingRight: 105,
         }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{marginTop: SIZES.padding}}>
-          <Icon name="arrow-back" size={25} />
-        </TouchableOpacity>
-        <Text
+       <Text
           style={{...FONTS.h3, color: COLORS.black, marginTop: SIZES.padding}}>
           Edit Profile
         </Text>
+      </View>
+      <View>
+        <TouchableOpacity
+          onPress={backButton}
+          style={{
+            marginTop: SIZES.base,
+            marginLeft: SIZES.base,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <Icon name="arrow-back" size={24} color={COLORS.black} />
+          <Text style={{...FONTS.body5, color: COLORS.black}}>Back</Text>
+        </TouchableOpacity>
       </View>
 
 
       {/* INPUTS */}
       <View style={{marginHorizontal: SIZES.padding}}>
+          
       {/* Building number and streat name */}
       <FormInput
         label="*Building No. & Street Name"
@@ -45,7 +53,10 @@ const BusinessLocation = ({navigation}) => {
         containerStyle={{marginTop: SIZES.radius}}
         customInputStyle={{backgroundColor: COLORS.white}}
         onChange={value => setFirstName(value)}
-      />
+      />      
+      <View>
+        Example = 34 willow way
+      </View>
       {/* Town / City*/}
       <FormInput
         label="*Town/City"
@@ -53,7 +64,10 @@ const BusinessLocation = ({navigation}) => {
         containerStyle={{marginTop: SIZES.radius}}
         customInputStyle={{backgroundColor: COLORS.white}}
         onChange={value => setFirstName(value)}
-      />
+      />      
+      <View>
+        Example = London
+      </View>
 
 
       {/* Postcode */}
