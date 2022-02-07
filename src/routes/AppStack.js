@@ -12,6 +12,7 @@ import {
   Register,
   vMenuCreation,
   vProfileCreation,
+  vSetLocation,
 } from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -38,6 +39,7 @@ const vendorStack = ({navigation}) => {
         <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="vMenuCreation" component={vMenuCreation} />
         <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
+        <Stack.Screen name="vSetLocation" component={vSetLocation} />
       </Stack.Navigator>
     </NavigationContainer>
   );
