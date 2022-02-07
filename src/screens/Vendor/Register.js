@@ -23,7 +23,7 @@ const Register = ({navigation}) => {
         'Your number is not correct!',
       )
       .min(8, ({min}) => `Phone number must contain at least ${min} numbers.`)
-      .required('A phone number is required'),
+      .required('Phone number is required!'),
     password: yup
       .string()
       .min(6, ({min}) => `Password must be at least ${min} characters.`)
@@ -43,6 +43,7 @@ const Register = ({navigation}) => {
       initialValues={{
         email: '',
         password: '',
+        confirmPassword: '',
         phoneNumber: '',
       }}
       validateOnMount={true}
@@ -76,6 +77,20 @@ const Register = ({navigation}) => {
                 label="Email"
                 customInputStyle={{backgroundColor: COLORS.white}}
                 containerStyle={{paddingTop: SIZES.padding + 10}}
+                errorMsg={
+                  errors.email &&
+                  touched.email && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.red,
+                        marginTop: 5,
+                        paddingHorizontal: SIZES.base,
+                      }}>
+                      {errors.email}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -92,18 +107,6 @@ const Register = ({navigation}) => {
                 }
               />
 
-              {errors.email && touched.email && (
-                <Text
-                  style={{
-                    ...FONTS.body5,
-                    color: COLORS.red,
-                    marginTop: 5,
-                    paddingHorizontal: SIZES.base,
-                  }}>
-                  {errors.email}
-                </Text>
-              )}
-
               <FormInput
                 onChangeText={handleChange('phoneNumber')}
                 onBlur={handleBlur('phoneNumber')}
@@ -116,6 +119,20 @@ const Register = ({navigation}) => {
                 containerStyle={{marginTop: SIZES.radius}}
                 customInputStyle={{backgroundColor: COLORS.white}}
                 keyboardType="numeric"
+                errorMsg={
+                  errors.phoneNumber &&
+                  touched.phoneNumber && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.red,
+                        marginTop: 5,
+                        paddingHorizontal: SIZES.base,
+                      }}>
+                      {errors.phoneNumber}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -133,17 +150,7 @@ const Register = ({navigation}) => {
                   </View>
                 }
               />
-              {errors.phoneNumber && touched.phoneNumber && (
-                <Text
-                  style={{
-                    ...FONTS.body5,
-                    color: COLORS.red,
-                    marginTop: 5,
-                    paddingHorizontal: SIZES.base,
-                  }}>
-                  {errors.phoneNumber}
-                </Text>
-              )}
+
               <FormInput
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
@@ -157,6 +164,20 @@ const Register = ({navigation}) => {
                 label="Password"
                 customInputStyle={{backgroundColor: COLORS.white}}
                 containerStyle={{paddingTop: SIZES.base + 10}}
+                errorMsg={
+                  errors.password &&
+                  touched.password && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.red,
+                        marginTop: 5,
+                        paddingHorizontal: SIZES.base,
+                      }}>
+                      {errors.password}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <TouchableOpacity
                     style={{
@@ -173,18 +194,6 @@ const Register = ({navigation}) => {
                 }
               />
 
-              {errors.password && touched.password && (
-                <Text
-                  style={{
-                    ...FONTS.body5,
-                    color: COLORS.red,
-                    marginTop: 5,
-                    paddingHorizontal: SIZES.base,
-                  }}>
-                  {errors.password}
-                </Text>
-              )}
-
               <FormInput
                 onChangeText={handleChange('confirmPassword')}
                 onBlur={handleBlur('confirmPassword')}
@@ -199,6 +208,19 @@ const Register = ({navigation}) => {
                 autoCompleteType="password"
                 containerStyle={{marginTop: SIZES.padding}}
                 onChange={value => setPassword2(value)}
+                errorMsg={
+                  errors.confirmPassword &&
+                  touched.confirmPassword && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.red,
+                        marginTop: 5,
+                      }}>
+                      {errors.confirmPassword}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <TouchableOpacity
                     style={{
@@ -214,17 +236,6 @@ const Register = ({navigation}) => {
                   </TouchableOpacity>
                 }
               />
-
-              {errors.confirmPassword && touched.confirmPassword && (
-                <Text
-                  style={{
-                    ...FONTS.body5,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.confirmPassword}
-                </Text>
-              )}
             </View>
           }
           children={

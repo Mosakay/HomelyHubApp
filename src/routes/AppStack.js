@@ -8,6 +8,10 @@ import {
   Favourite,
   CartTab,
   Account,
+  Login,
+  Register,
+  vMenuCreation,
+  vProfileCreation,
 } from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -21,6 +25,27 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
 
+
+const vendorStack = ({navigation}) => {
+  return (
+    <NavigationContainer independent='true'>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="vMenuCreation" component={vMenuCreation} />
+        <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+
+
+
 const AccountNavigation = ({navigation}) => {
   return (
     <NavigationContainer independent="true">
@@ -33,6 +58,7 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name="SavedAddress" component={SavedAddress} />
         <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
         <Stack.Screen name="ContactPref" component={ContactPref} />
+        <Stack.Screen name="vendorStack" component={vendorStack} />
         <Stack.Screen name="AppStack" component={AppStack} />
       </Stack.Navigator>
     </NavigationContainer>

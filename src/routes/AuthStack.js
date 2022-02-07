@@ -20,22 +20,6 @@ import AccountNavigation from '../routes/AppStack'
 const Stack = createStackNavigator();
 
 
-const vendorStack = ({navigation}) => {
-  return (
-    <NavigationContainer independent='true'>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={{
-          headerShown: false,
-        }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="vMenuCreation" component={vMenuCreation} />
-        <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
 
 
 const AuthStack = () => {
@@ -45,7 +29,6 @@ const AuthStack = () => {
         headerShown: false,
       }}
       initialRouteName={'OnBoarding'}>
-      <Stack.Screen name="VendorStack" component={vendorStack} />
 
       <Stack.Screen name="AppStack" component={AccountNavigation} />
 

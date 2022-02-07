@@ -55,7 +55,10 @@ const Login = ({navigation}) => {
       }) => (
         <VendorLayout
           title="Vendor Login"
-          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2, paddingVertical: SIZES.padding}}
+          titleContainerStyle={{
+            paddingHorizontal: SIZES.padding * 2,
+            paddingVertical: SIZES.padding,
+          }}
           subtitle="Login to your business profile using your email and password"
           header="Vendor Account"
           backButton={() => {}}
@@ -71,6 +74,19 @@ const Login = ({navigation}) => {
                 label="Email"
                 customInputStyle={{backgroundColor: COLORS.white}}
                 containerStyle={{paddingTop: SIZES.padding + 10}}
+                errorMsg={
+                  errors.email &&
+                  touched.email && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.red,
+                        marginTop: 5,
+                      }}>
+                      {errors.email}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
@@ -87,17 +103,6 @@ const Login = ({navigation}) => {
                 }
               />
 
-              {errors.email && touched.email && (
-                <Text
-                  style={{
-                    ...FONTS.body5,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.email}
-                </Text>
-              )}
-
               <FormInput
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
@@ -110,6 +115,19 @@ const Login = ({navigation}) => {
                 containerStyle={{paddingTop: SIZES.base + 10}}
                 secureTextEntry={!showPass}
                 autoCompleteType="password"
+                errorMsg={
+                  errors.password &&
+                  touched.password && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.red,
+                        marginTop: 5,
+                      }}>
+                      {errors.password}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <TouchableOpacity
                     style={{
@@ -125,17 +143,6 @@ const Login = ({navigation}) => {
                   </TouchableOpacity>
                 }
               />
-
-              {errors.password && touched.password && (
-                <Text
-                  style={{
-                    ...FONTS.body5,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.password}
-                </Text>
-              )}
             </View>
           }
           children={

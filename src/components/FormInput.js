@@ -35,14 +35,14 @@ const FormInput = ({
         <MaterialIcons style={iconStyle} name={iconName} size={iconSize} color={iconColor}  />
         <Text style={{color: COLORS.black, ...FONTS.body4, marginLeft: SIZES.base}}>{label}</Text>
         </View>
-        <Text style={{color: COLORS.red, ...FONTS.body4}}>{errorMsg}</Text>
+        <Text style={{color: COLORS.red, ...FONTS.body5}}>{errorMsg}</Text>
       </View>
 
       {/* Text Input */}
       <View
         style={{
           flexDirection: 'row',
-          height: 55,
+          height: 50,
           paddingHorizontal: SIZES.padding,
           marginTop: SIZES.base,
           borderRadius: SIZES.radius,
