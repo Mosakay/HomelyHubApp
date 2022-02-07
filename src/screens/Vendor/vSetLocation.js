@@ -30,7 +30,7 @@ const vSetLocation = ({navigation}) => {
       </View>
       <View>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={() => navigation.goBack()}
           style={{
             marginTop: SIZES.base,
             marginLeft: SIZES.base,
