@@ -10,6 +10,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
 
+  const registerVendor = async (values) => {
+    const store = await AsyncStorage.setItem('fieldsVendor', JSON.stringify(values))
+    navigation.navigate('Register2')
+  }
+
   const signUpValidationSchema = yup.object().shape({
     email: yup
       .string()
@@ -30,10 +35,10 @@ const Register = ({navigation}) => {
     <Formik
       initialValues={{
         email: '',
-        password: '',
+        phoneNumber: '',
       }}
       validateOnMount={true}
-      onSubmit={values => alert(JSON.stringify(values))}
+      onSubmit={values => registerVendor(values) }
       validationSchema={signUpValidationSchema}>
       {({
         handleChange,
@@ -46,7 +51,7 @@ const Register = ({navigation}) => {
       }) => (
         <VendorLayout
           title="Vendor Register"
-          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2}}
+          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2, paddingVertical: SIZES.padding,}}
           subtitle="Before we create the business profile, first you will need a way to Log In with an email or phone number"
           header="Vendor Account"
           backButton={() => navigation.goBack()}
@@ -156,14 +161,17 @@ const Register = ({navigation}) => {
                 }}>
                 <TextButton
                   label="Continue"
-                  onPress={() => navigation.navigate('Register2')}
+                  onPress={handleSubmit}
+                  disabled={!isValid}
+                  labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
                   buttonContainerStyle={{
                     height: 50,
                     width: SIZES.width / 2,
-                    alignItems: 'center',
                     marginTop: SIZES.padding,
-                    borderRadius: SIZES.radius + 5,
-                    backgroundColor: COLORS.primary,
+                    borderRadius: SIZES.base,
+                    borderWidth: 2,
+                    backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
+                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
                   }}
                 />
               </View>

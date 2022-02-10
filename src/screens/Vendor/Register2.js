@@ -12,6 +12,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Register2 = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
   const [showPass2, setShowPass2] = React.useState(false);
+  const [formFields, setFormFields] = React.useState({})
+
+
+  React.useEffect(() => {
+    (async () => {
+      const store = await AsyncStorage.getItem('fieldsVendor')
+      setFormFields(prev => ({...prev, ...JSON.parse(store)}))
+    })()
+  }, [])
+
+  React.useEffect(() => console.log({formFields}), [formFields])
+
+  let idD = DeviceInfo.getDeviceId();
+  console.log(idD);
+
 
   const signUpValidationSchema = yup.object().shape({
     password: yup
@@ -33,9 +48,14 @@ const Register2 = ({navigation}) => {
       initialValues={{
         confirmPassword: '',
         phoneNumber: '',
+        deviceId: idD || '',
+        countryId: 0,
       }}
       validateOnMount={true}
-      onSubmit={values => alert(JSON.stringify(values))}
+      onSubmit={values => {
+        const data = {...formFields, ...values}
+        console.log(data);
+      }}
       validationSchema={signUpValidationSchema}>
       {({
         handleChange,
@@ -48,7 +68,7 @@ const Register2 = ({navigation}) => {
       }) => (
         <VendorLayout
           title="Vendor Register"
-          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2}}
+          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2, paddingVertical: SIZES.padding,}}
           subtitle="Now you need yo secure the business profile by creating a strong password"
           header="Vendor Account"
           backButton={() => navigation.goBack()}
@@ -155,14 +175,17 @@ const Register2 = ({navigation}) => {
                 }}>
                 <TextButton
                   label="Register"
-                  onPress={() => navigation.navigate('vMenuCreation')}
+                  onPress={() => navigation.navigate('vProfileCreation')}
+                  disabled={!isValid}
+                  labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
                   buttonContainerStyle={{
                     height: 50,
                     width: SIZES.width / 2,
-                    alignItems: 'center',
                     marginTop: SIZES.padding,
-                    borderRadius: SIZES.radius + 5,
-                    backgroundColor: COLORS.primary,
+                    borderRadius: SIZES.base,
+                    borderWidth: 2,
+                    backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
+                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
                   }}
                 />
               </View>

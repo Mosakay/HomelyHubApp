@@ -194,6 +194,8 @@ const SignUp2 = ({navigation}) => {
                   backgroundColor: !isValid
                     ? COLORS.transparentPrimary
                     : COLORS.primary,
+                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
+                    borderWidth: 2,
                 }}
                 onPress={handleSubmit}
                

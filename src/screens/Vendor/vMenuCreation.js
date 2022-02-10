@@ -10,13 +10,10 @@ import {Picker} from '@react-native-picker/picker';
 const vMenuCreation = ({navigation}) => {
   const [selectedDish, setSelectedDish] = React.useState('');
   const [businessDescription, setBusinessDescription] = React.useState('');
-  const [screenTab, setScreenTab] = React.useState(1);
   const [yesBtn, setYesBtn] = React.useState(true);
   const [noBtn, setNoBtn] = React.useState(false);
 
-  const onSelectSwitch = value => {
-    setScreenTab(value);
-  };
+
 
   async function requestPermissions() {
     if (Platform.OS === 'ios') {
@@ -180,14 +177,17 @@ const vMenuCreation = ({navigation}) => {
         <View style={{justifyContent: 'center', flexDirection: 'row'}}>
           <TextButton
             label="Continue"
-            onPress={() => navigation.navigate('vProfileCreation')}
-            labelStyle={{...FONTS.body3}}
+            onPress={() => navigation.navigate('vSetLocation')}
+            disabled={!businessDescription}
+            labelStyle={{...FONTS.body3, color: businessDescription ? COLORS.white2 : "#CBB4B4"}}
             buttonContainerStyle={{
               height: 50,
               width: SIZES.width / 2,
-              marginTop: SIZES.radius,
+              marginTop: SIZES.padding,
               borderRadius: SIZES.base,
-              backgroundColor: COLORS.primary,
+              borderWidth: 2,
+              backgroundColor: businessDescription ? COLORS.primary : "#EBEBEB",
+              borderColor: businessDescription ? COLORS.gray3 : "#CBB4B4",
             }}
           />
         </View>

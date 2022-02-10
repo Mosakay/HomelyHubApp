@@ -61,7 +61,7 @@ const Login = ({navigation}) => {
           }}
           subtitle="Login to your business profile using your email and password"
           header="Vendor Account"
-          backButton={() => {}}
+          backButton={() => navigation.replace('Account')}
           formInput={
             <View>
               <FormInput
@@ -197,13 +197,16 @@ const Login = ({navigation}) => {
                 }}>
                 <TextButton
                   label="Login"
+                  disabled={!isValid}
+                  labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
                   buttonContainerStyle={{
                     height: 50,
                     width: SIZES.width / 2,
-                    alignItems: 'center',
                     marginTop: SIZES.padding,
-                    borderRadius: SIZES.radius + 5,
-                    backgroundColor: COLORS.primary,
+                    borderRadius: SIZES.base,
+                    borderWidth: 2,
+                    backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
+                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
                   }}
                 />
               </View>

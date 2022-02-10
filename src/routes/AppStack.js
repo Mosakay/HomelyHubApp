@@ -27,16 +27,16 @@ import SavedAddress from '../screens/Account/SavedAddress';
 import PaymentMethods from '../screens/Account/PaymentMethods';
 import ContactPref from '../screens/Account/ContactPref';
 import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
-
+// const Tab = createBottomTabNavigator();
 
 const vendorStack = ({navigation}) => {
   return (
-    <NavigationContainer independent='true'>
+    
       <Stack.Navigator
-        initialRouteName="Login"
         screenOptions={{
           headerShown: false,
         }}>
@@ -47,21 +47,81 @@ const vendorStack = ({navigation}) => {
         <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
         <Stack.Screen name="vSetLocation" component={vSetLocation} />
       </Stack.Navigator>
-    </NavigationContainer>
+      
   );
 };
 
-
-
+// const AppStack = ({navigation}) => {
+//   return (
+//     <Tab.Navigator
+//       screenOptions={{
+//         headerShown: false,
+//         tabBarActiveTintColor: COLORS.primary,
+//         tabBarInactiveTintColor: COLORS.darkGray,
+//         tabBarLabelStyle: {
+//           fontSize: 12,
+//         },
+//         tabBarStyle: {
+//           backgroundColor: COLORS.white,
+//         },
+//       }}
+//       initialRouteName="Home">
+//       <Tab.Screen
+//         name="Home"
+//         component={Home}
+//         options={{
+//           tabBarStyle: {
+//             borderTopColor: COLORS.primary,
+//             borderTopWidth: 2,
+//           },
+//           tabBarLabel: 'Menu',
+//           tabBarIcon: ({color}) => (
+//             <MaterialIcons name="restaurant-menu" color={color} size={26} />
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="CartTab"
+//         component={CartTab}
+//         options={{
+//           tabBarLabel: 'Orders',
+//           tabBarIcon: ({color}) => (
+//             <MaterialIcons name="reorder" color={color} size={26} />
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Account"
+//         component={Account}
+//         options={{
+//           title: 'My Account',
+//           tabBarLabel: 'Account',
+//           tabBarIcon: ({color}) => (
+//             <MaterialIcons name="person-outline" color={color} size={26} />
+//           ),
+//         }}
+//       />
+//       <Tab.Screen
+//         name="Settings"
+//         component={Settings}
+//         options={{
+//           tabBarLabel: 'Settings',
+//           tabBarIcon: ({color}) => (
+//             <MaterialIcons name="settings" color={color} size={26} />
+//           ),
+//         }}
+//       />
+//     </Tab.Navigator>
+//   );
+// };
 
 const AccountNavigation = ({navigation}) => {
   return (
-    <NavigationContainer independent="true">
       <Stack.Navigator
-        initialRouteName="AppStack"
         screenOptions={{
           headerShown: false,
         }}>
+        <Stack.Screen name="Account" component={Account} />
         <Stack.Screen name="EditProfile" component={EditProfile} />
         <Stack.Screen name="SavedAddress" component={SavedAddress} />
         <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
@@ -72,20 +132,20 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="SignUp2" component={SignUp2} />
-        
       </Stack.Navigator>
-    </NavigationContainer>
   );
 };
 
-export default AccountNavigation;
+// export default AccountNavigation;
 
 const AppStack = ({navigation}) => {
   return (
+    <NavigationContainer>
     <Tab.Navigator
-      initialRouteName="Home"
+      labeled={true}
+      // initialRouteName="Home"
       activeColor={COLORS.primary}
-      inactiveColor={COLORS.transparentPrimary}
+      inactiveColor={COLORS.darkGray}
       labelStyle={{fontSize: 12}}
       barStyle={{backgroundColor: COLORS.white, padding: 5}}>
       <Tab.Screen
@@ -110,7 +170,7 @@ const AppStack = ({navigation}) => {
       />
       <Tab.Screen
         name="Account"
-        component={Account}
+        component={AccountNavigation}
         options={{
           title: 'My Account',
           tabBarLabel: 'Account',
@@ -130,7 +190,8 @@ const AppStack = ({navigation}) => {
         }}
       />
     </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 
-// export default AppStack;
+export default AppStack;

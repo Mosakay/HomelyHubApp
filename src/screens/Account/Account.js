@@ -108,7 +108,7 @@ const Account = ({navigation}) => {
         />
 
         <TextButton
-          label={ ifIsSignedIn ? 'Sign In' : "Sign Out"}
+          label={ ifIsSignedIn ? 'Sign In' : "Sign In"}
           buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
           appendComponent={<Ionicons name="exit-outline" size={22} />}
           prependComponent={

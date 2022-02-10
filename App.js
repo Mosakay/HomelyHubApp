@@ -49,7 +49,7 @@ const App = () => {
 
   return (
     <RegisterContext>
-      {isFirstLaunch ? <AuthStack /> : <AccountNavigation />}
+      {isFirstLaunch ? <AuthStack /> : <AppStack />}
     </RegisterContext>
     
   );

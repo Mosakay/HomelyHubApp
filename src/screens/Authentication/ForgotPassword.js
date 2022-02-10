@@ -101,12 +101,16 @@ const ForgotPassword = ({navigation}) => {
 
       <TextButton
         label="Send Email"
+        disabled={!isValid}
+        labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
         buttonContainerStyle={{
-          height: 55,
-          alignItems: 'center',
+          height: 50,
+          width: SIZES.width / 2,
           marginTop: SIZES.padding,
-          borderRadius: SIZES.radius,
-          backgroundColor: isValid ? COLORS.primary : COLORS.transparentPrimary
+          borderRadius: SIZES.base,
+          borderWidth: 2,
+          backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
+          borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
         }}
         onPress={handleSubmit}
       />
