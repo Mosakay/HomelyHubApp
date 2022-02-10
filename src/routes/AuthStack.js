@@ -24,19 +24,6 @@ const Stack = createStackNavigator();
 
 
 const AuthStack = () => {
-  const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
-
-  React.useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then(value => {
-      if(value == null) {
-        AsyncStorage.setItem('alreadyLaunched', 'true');
-        setIsFirstLaunch(true);
-      } else {
-        setIsFirstLaunch(false);
-      }
-    })
-  }, []);
-
 
   return (
     <NavigationContainer>
