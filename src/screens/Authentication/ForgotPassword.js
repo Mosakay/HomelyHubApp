@@ -99,21 +99,31 @@ const ForgotPassword = ({navigation}) => {
 
       {/* Button */}
 
-      <TextButton
-        label="Send Email"
-        disabled={!isValid}
-        labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
-        buttonContainerStyle={{
-          height: 50,
-          width: SIZES.width / 2,
-          marginTop: SIZES.padding,
-          borderRadius: SIZES.base,
-          borderWidth: 2,
-          backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
-          borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
-        }}
-        onPress={handleSubmit}
-      />
+      <View
+            style={{
+              justifyContent: 'center',
+              flexDirection: 'row',
+              paddingTop: SIZES.padding,
+            }}>
+            <TextButton
+              label="Send Email"
+              disabled={!isValid}
+              labelStyle={{
+                ...FONTS.body3,
+                color: isValid ? COLORS.white2 : '#CBB4B4',
+              }}
+              buttonContainerStyle={{
+                height: 50,
+                width: SIZES.width / 2,
+                marginTop: SIZES.padding,
+                borderRadius: SIZES.base,
+                borderWidth: 2,
+                backgroundColor: isValid ? COLORS.primary : '#EBEBEB',
+                borderColor: isValid ? COLORS.gray3 : '#CBB4B4',
+              }}
+              onPress={handleSubmit}
+            />
+          </View>
     </AuthLayout>
           )}
           </Formik>

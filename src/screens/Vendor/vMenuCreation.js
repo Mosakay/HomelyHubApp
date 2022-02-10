@@ -177,7 +177,7 @@ const vMenuCreation = ({navigation}) => {
         <View style={{justifyContent: 'center', flexDirection: 'row'}}>
           <TextButton
             label="Continue"
-            onPress={() => navigation.navigate('vSetLocation')}
+            onPress={() => navigation.navigate('Account')}
             disabled={!businessDescription}
             labelStyle={{...FONTS.body3, color: businessDescription ? COLORS.white2 : "#CBB4B4"}}
             buttonContainerStyle={{

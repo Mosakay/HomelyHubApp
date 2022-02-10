@@ -18,6 +18,7 @@ import {
   SignUp,
   SignUp2,
   ForgotPassword,
+  vForgotPassword,
   AuthStack
 } from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
@@ -47,6 +48,7 @@ const vendorStack = ({navigation}) => {
         <Stack.Screen name="vMenuCreation" component={vMenuCreation} />
         <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
         <Stack.Screen name="vSetLocation" component={vSetLocation} />
+        <Stack.Screen name="vForgotPassword" component={vForgotPassword} />
       </Stack.Navigator>
       
   );

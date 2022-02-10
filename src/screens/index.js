@@ -43,6 +43,7 @@ import Notification from "./Notification/Notification"
 import Login from './Vendor/Login'
 import Register from './Vendor/Register'
 import Register2 from './Vendor/Register2'
+import vForgotPassword from './Vendor/vForgotPassword'
 import vMenuCreation from './Vendor/vMenuCreation'
 import vProfileCreation from './Vendor/vProfileCreation'
 import vSetLocation from './Vendor/vSetLocation'
@@ -70,5 +71,6 @@ export {
     Register2,
     vMenuCreation,
     vProfileCreation,
-    vSetLocation
+    vSetLocation,
+    vForgotPassword,
 }

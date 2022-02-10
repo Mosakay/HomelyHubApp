@@ -216,7 +216,7 @@ const vProfileCreation = ({navigation}) => {
               <TextButton
                 disabled={!isValid}
                 label="Continue"
-                onPress={() => navigation.navigate('vMenuCreation')}
+                onPress={() => navigation.navigate('vSetLocation')}
                 labelStyle={{...FONTS.body3, color: isValid ? COLORS.white : "#CBB4B4"}}
                 buttonContainerStyle={{
                   height: 50,

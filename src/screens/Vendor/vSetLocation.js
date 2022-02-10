@@ -206,7 +206,7 @@ const vSetLocation = ({navigation}) => {
       <TextButton
         disabled={!isValid}
         label="Continue"
-        onPress={() => navigation.navigate('Account')}
+        onPress={() => navigation.navigate('vMenuCreation')}
         labelStyle={{...FONTS.body3, color: isValid ? COLORS.white : "#CBB4B4"}}
         buttonContainerStyle={{
           height: 50,

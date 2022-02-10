@@ -182,7 +182,7 @@ const Login = ({navigation}) => {
                       color: COLORS.gray,
                       ...FONTS.body4,
                     }}
-                    onPress={() => navigation.navigate('ForgotPassword')}
+                    onPress={() => navigation.navigate('vForgotPassword')}
                   />
                 </View>
               </View>
