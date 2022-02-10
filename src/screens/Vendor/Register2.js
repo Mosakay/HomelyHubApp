@@ -6,7 +6,7 @@ import {FormInput, TextButton} from '../../components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import DeviceInfo from 'react-native-device-info';
 
 
 const Register2 = ({navigation}) => {
