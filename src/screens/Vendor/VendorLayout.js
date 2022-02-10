@@ -3,6 +3,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {images, FONTS, SIZES, COLORS} from '../../constants';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const VendorLayout = ({
   title,
@@ -20,6 +21,7 @@ const VendorLayout = ({
         flex: 1,
     }}
     >
+      <ScrollView>
       <KeyboardAwareScrollView
       keyboardDismissMode='on-drag'
       contentContainerStyle={{
@@ -88,6 +90,7 @@ const VendorLayout = ({
       {/* Content / Children */}
       {children}
       </KeyboardAwareScrollView>  
+      </ScrollView>
         </View>
   );
 };
