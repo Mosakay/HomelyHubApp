@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Alert,
-  ScrollView
-} from 'react-native';
+import {View, Text, Image, Alert, ScrollView} from 'react-native';
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import {FormInput, TextButton} from '../../components';
@@ -13,13 +7,10 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import PhoneInput from 'react-native-phone-number-input';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { AuthContext } from '../../context/AuthContext';
-import { useContext } from 'react';
-import { RegisterContext } from '../../context/RegisterContext';
+import {AuthContext} from '../../context/AuthContext';
+import {useContext} from 'react';
+import {RegisterContext} from '../../context/RegisterContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
-
 
 const SignUp = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -33,29 +24,24 @@ const SignUp = ({navigation}) => {
   const [lastNameError, setLastNameError] = React.useState('');
   const [phoneNumberError, setPhoneNumberError] = React.useState('');
 
-    // const {formFields} = useContext(RegisterContext)
+  // const {formFields} = useContext(RegisterContext)
 
-
- 
   const phoneInput = React.useRef(null);
   // const getPhoneNumber = () => {
   //   Alert.alert(phoneNumber);
   // };
 
-
-  const registerUser = async (values) => {
-    const store = await AsyncStorage.setItem('fields', JSON.stringify(values))
-    navigation.navigate('SignUp2')
-  }
+  const registerUser = async values => {
+    const store = await AsyncStorage.setItem('fields', JSON.stringify(values));
+    navigation.navigate('SignUp2');
+  };
 
   const signUpValidationSchema = yup.object().shape({
     email: yup
       .string()
       .email('Please enter valid email')
       .required('Email address is required!'),
-    userName: yup
-      .string()
-      .required('Username address is required!'),
+    // userName: yup.string().required('Username address is required!'),
     firstName: yup
       .string()
       .min(3, ({min}) => `First name must be at least ${min} characters long.`)
@@ -86,8 +72,6 @@ const SignUp = ({navigation}) => {
     <Formik
       initialValues={{
         email: '',
-        userName: '',
-        password: '',
         firstName: '',
         lastName: '',
         phoneNumber: '',
@@ -95,7 +79,7 @@ const SignUp = ({navigation}) => {
         countryId: 0,
       }}
       validateOnMount={true}
-      onSubmit={values => registerUser(values) }
+      onSubmit={values => registerUser(values)}
       validationSchema={signUpValidationSchema}>
       {({
         handleChange,
@@ -106,53 +90,58 @@ const SignUp = ({navigation}) => {
         errors,
         isValid,
       }) => (
-          <ScrollView>
-          <AuthLayout
-            title="Getting Started"
-            subtitle="First let's get to know you..."
-            titleContainerStyle={{marginTop: SIZES.base - 20}}>
-            {/* Form Input and Sign Up */}
+        <AuthLayout
+          title="Getting Started"
+          subtitle="First let's get to know you..."
+          // titleContainerStyle={{marginTop: SIZES.base + 20}}
+        >
+          {/* Form Input and Sign Up */}
 
-            <View style={{flex: 1, marginTop: SIZES.padding}}>
-              <FormInput
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
-                placeholder="Type your email address here"
-                iconName="email"
-                iconStyle={{paddingRight: SIZES.base}}
-                iconSize={19}
-                label="Email"
-                keyboardType="email-address"
-                autoCompleteType="email"
-                onChange={value => setEmail(value)}
-                appendComponent={
-                  <View style={{justifyContent: 'center'}}>
-                    <Image
-                      source={!errors.email ? icons.correct : icons.cross}
-                      style={{
-                        height: 20,
-                        width: 20,
-                        tintColor: !errors.email ? COLORS.primary : COLORS.red,
-                      }}
-                    />
-                  </View>
-                }
-              />
-              {errors.email && touched.email && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.email}
-                </Text>
-              )}
+          <View style={{flex: 1, marginTop: SIZES.padding}}>
+            <FormInput
+              onChangeText={handleChange('email')}
+              onBlur={handleBlur('email')}
+              value={values.email}
+              placeholder="Type your email address here"
+              iconName="email"
+              iconStyle={{paddingRight: SIZES.base}}
+              iconSize={19}
+              label="Email"
+              keyboardType="email-address"
+              autoCompleteType="email"
+              onChange={value => setEmail(value)}
+              errorMsg={
+                errors.email &&
+                touched.email && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.email}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.email ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.email
+                        ? COLORS.primary
+                        : COLORS.darkGray,
+                    }}
+                  />
+                </View>
+              }
+            />
 
-              {/* UserName */}
+            {/* UserName */}
 
-              <FormInput
+            {/* <FormInput
                 onChangeText={handleChange('userName')}
                 onBlur={handleBlur('userName')}
                 value={values.userName}
@@ -183,266 +172,277 @@ const SignUp = ({navigation}) => {
                   }}>
                   {errors.userName}
                 </Text>
-              )}
-
-              {/* FIRSTNAME */}
-
-              <FormInput
-                onChangeText={handleChange('firstName')}
-                onBlur={handleBlur('firstName')}
-                value={values.firstName}
-                label="First Name"
-                placeholder="Type your first name here"
-                containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => setFirstName(value)}
-                appendComponent={
-                  <View style={{justifyContent: 'center'}}>
-                    <Image
-                      source={!errors.firstName ? icons.correct : icons.cross}
-                      style={{
-                        height: 20,
-                        width: 20,
-                        tintColor: !errors.firstName
-                          ? COLORS.green
-                          : COLORS.red,
-                      }}
-                    />
-                  </View>
-                }
-              />
-              {errors.firstName && touched.firstName && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.firstName}
-                </Text>
-              )}
-
-              {/* SURNAME */}
-
-              <FormInput
-                onChangeText={handleChange('lastName')}
-                onBlur={handleBlur('lastName')}
-                value={values.lastName}
-                label="Last name"
-                placeholder="Type your last name here"
-                containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => setLastName(value)}
-                appendComponent={
-                  <View style={{justifyContent: 'center'}}>
-                    <Image
-                      source={!errors.lastName ? icons.correct : icons.cross}
-                      style={{
-                        height: 20,
-                        width: 20,
-                        tintColor: !errors.lastName
-                          ? COLORS.primary
-                          : COLORS.red,
-                      }}
-                    />
-                  </View>
-                }
-              />
-              {errors.lastName && touched.lastName && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.lastName}
-                </Text>
-              )}
-
-              {/* POSTCODE */}
-
-              <FormInput
-                onChangeText={handleChange('postcode')}
-                onBlur={handleBlur('postcode')}
-                value={values.postcode}
-                label="Postcode"
-                placeholder="Enter your postcode here"
-                containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => setPostcode(value)}
-                appendComponent={
-                  <View style={{justifyContent: 'center'}}>
-                    <Image
-                      source={!errors.postcode ? icons.correct : icons.cross}
-                      style={{
-                        height: 20,
-                        width: 20,
-                        tintColor: !errors.postcode
-                          ? COLORS.primary
-                          : COLORS.red,
-                      }}
-                    />
-                  </View>
-                }
-              />
-              {errors.postcode && touched.postcode && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.postcode}
-                </Text>
-              )}
-
-              {/* phone input*/}
-
-              {/* <FormInput
-                onChangeText={handleChange('phoneNumber')}
-                onBlur={handleBlur('phoneNumber')}
-                value={values.phoneNumber}
-                label="Phone Number"
-                iconName="smartphone"
-                iconStyle={{paddingRight: SIZES.base}}
-                iconSize={19}
-                placeholder="Type your phone number here"
-                containerStyle={{marginTop: SIZES.radius}}
-                onChange={value => setPhoneNumber(value)}
-                keyboardType="numeric"
-                appendComponent={
-                  <View style={{justifyContent: 'center'}}>
-                    <Image
-                      source={!errors.phoneNumber ? icons.correct : icons.cross}
-                      style={{
-                        height: 20,
-                        width: 20,
-                        tintColor: !errors.phoneNumber
-                          ? COLORS.primary
-                          : COLORS.red,
-                      }}
-                    />
-                  </View>
-                }
-              />
-              {errors.phoneNumber && touched.phoneNumber && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.phoneNumber}
-                </Text>
               )} */}
 
-              {/* PHONE NUMBER INPUT */}
+            {/* FIRSTNAME */}
 
-              <View
-                style={{
-                  flexDirection: 'row',
-                  justifyContent: 'space-between',
-                  marginTop: SIZES.radius,
-                }}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <MaterialIcons
-                    style={{paddingRight: SIZES.base}}
-                    name="smartphone"
-                    size={19}
-                  />
-                  <Text style={{color: COLORS.black, ...FONTS.body4}}>
-                    Phone Number
+            <FormInput
+              onChangeText={handleChange('firstName')}
+              onBlur={handleBlur('firstName')}
+              value={values.firstName}
+              label="First Name"
+              placeholder="Type your first name here"
+              containerStyle={{marginTop: SIZES.radius}}
+              onChange={value => setFirstName(value)}
+              errorMsg={
+                errors.firstName &&
+                touched.firstName && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.firstName}
                   </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.firstName ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.firstName
+                        ? COLORS.primary
+                        : COLORS.darkGray,
+                    }}
+                  />
                 </View>
-              </View>
+              }
+            />
 
-              <PhoneInput
-                onChangeText={handleChange('phoneNumber')}
-                onBlur={handleBlur('phoneNumber')}
-                value={values.phoneNumber}
-                ref={phoneInput}
-                defaultValue={phoneNumber}
-                defaultCode="GB"
-                containerStyle={{
-                  width: '100%',
-                  height: 55,
-                  paddingHorizontal: SIZES.padding,
-                  marginTop: SIZES.base,
-                  borderRadius: SIZES.radius,
-                  backgroundColor: COLORS.lightGray2,
-                }}
-                textContainerStyle={{paddingVertical: 0}}
-                onChangeFormattedText={text => {
-                  setPhoneNumber(text);
-                }}
-              />
+            {/* SURNAME */}
 
-              {errors.phoneNumber && touched.phoneNumber && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.phoneNumber}
-                </Text>
-              )}
+            <FormInput
+              onChangeText={handleChange('lastName')}
+              onBlur={handleBlur('lastName')}
+              value={values.lastName}
+              label="Last name"
+              placeholder="Type your last name here"
+              containerStyle={{marginTop: SIZES.radius}}
+              onChange={value => setLastName(value)}
+              errorMsg={
+                errors.lastName &&
+                touched.lastName && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.lastName}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.lastName ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.lastName
+                        ? COLORS.primary
+                        : COLORS.darkGray,
+                    }}
+                  />
+                </View>
+              }
+            />
 
-              {/* Footer */}
+            {/* POSTCODE */}
 
-              <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-                <TextButton
-                  label="Next"
-                  disabled={!isValid}
-                  buttonContainerStyle={{
-                    height: 50,
-                    width: SIZES.width / 2,
-                    alignItems: 'center',
-                    marginTop: SIZES.padding,
-                    borderRadius: SIZES.radius + 5,
-                    backgroundColor: isValid
-                      ? COLORS.primary
-                      : COLORS.transparentPrimary,
-                      borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
-                      borderWidth: 2,
-                  }}
-                  onPress={handleSubmit}
-                />
-              </View>
+            <FormInput
+              onChangeText={handleChange('postcode')}
+              onBlur={handleBlur('postcode')}
+              value={values.postcode}
+              label="Postcode"
+              placeholder="Enter your postcode here"
+              containerStyle={{marginTop: SIZES.radius}}
+              onChange={value => setPostcode(value)}
+              errorMsg={
+                errors.postcode &&
+                touched.postcode && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.postcode}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.postcode ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.postcode
+                        ? COLORS.primary
+                        : COLORS.darkGray,
+                    }}
+                  />
+                </View>
+              }
+            />
 
+            {/* phone input*/}
+
+            <FormInput
+              onChangeText={handleChange('phoneNumber')}
+              onBlur={handleBlur('phoneNumber')}
+              value={values.phoneNumber}
+              label="Phone Number"
+              iconName="smartphone"
+              iconStyle={{paddingRight: SIZES.base}}
+              iconSize={19}
+              placeholder="Type your phone number here"
+              containerStyle={{marginTop: SIZES.radius}}
+              onChange={value => setPhoneNumber(value)}
+              keyboardType="numeric"
+              errorMsg={
+                errors.phoneNumber &&
+                touched.phoneNumber && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.phoneNumber}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.phoneNumber ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.phoneNumber
+                        ? COLORS.primary
+                        : COLORS.darkGray,
+                    }}
+                  />
+                </View>
+              }
+            />
+
+            {/* PHONE NUMBER INPUT */}
+
+            {/* <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                marginTop: SIZES.radius,
+              }}>
               <View
                 style={{
                   flexDirection: 'row',
-                  marginTop: SIZES.radius,
-                  justifyContent: 'center',
+                  alignContent: 'center',
+                  alignItems: 'center',
                 }}>
-                <Text
-                  style={{
-                    color: COLORS.darkGray,
-                    ...FONTS.body3,
-                  }}>
-                  Already registered?
-                </Text>
-
-                <TextButton
-                  label="Sign In"
-                  buttonContainerStyle={{
-                    backgroundColor: null,
-                    marginLeft: 3,
-                  }}
-                  labelStyle={{
-                    ...FONTS.body3,
-                    color: COLORS.green2,
-                    fontWeight: 'bold',
-                  }}
-                  onPress={() => navigation.navigate('SignIn')}
+                <MaterialIcons
+                  style={{paddingRight: SIZES.base}}
+                  name="smartphone"
+                  size={19}
                 />
+                <Text style={{color: COLORS.black, ...FONTS.body4}}>
+                  Phone Number
+                </Text>
               </View>
             </View>
-          </AuthLayout>
-          </ScrollView>
+
+            <PhoneInput
+              onChangeText={handleChange('phoneNumber')}
+              onBlur={handleBlur('phoneNumber')}
+              value={values.phoneNumber}
+              ref={phoneInput}
+              defaultValue={phoneNumber}
+              defaultCode="GB"
+              containerStyle={{
+                width: '100%',
+                height: 55,
+                paddingHorizontal: SIZES.padding,
+                marginTop: SIZES.base,
+                borderRadius: SIZES.radius,
+                backgroundColor: COLORS.lightGray2,
+              }}
+              textContainerStyle={{paddingVertical: 0}}
+              onChangeFormattedText={text => {
+                setPhoneNumber(text);
+              }}
+            />
+
+            {errors.phoneNumber && touched.phoneNumber && (
+              <Text
+                style={{
+                  ...FONTS.body5,
+                  color: COLORS.orange,
+                  marginTop: 5,
+                }}>
+                {errors.phoneNumber}
+              </Text>
+            )} */}
+
+            {/* Footer */}
+
+            <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+              <TextButton
+                label="Next"
+                disabled={!isValid}
+                buttonContainerStyle={{
+                  height: 50,
+                  width: SIZES.width / 2,
+                  alignItems: 'center',
+                  marginTop: SIZES.padding,
+                  borderRadius: SIZES.radius + 5,
+                  backgroundColor: isValid
+                    ? COLORS.primary
+                    : COLORS.transparentPrimary,
+                  borderColor: isValid ? COLORS.gray3 : '#CBB4B4',
+                  borderWidth: 2,
+                }}
+                onPress={handleSubmit}
+              />
+            </View>
+
+            <View
+              style={{
+                flexDirection: 'row',
+                marginTop: SIZES.radius,
+                justifyContent: 'center',
+              }}>
+              <Text
+                style={{
+                  color: COLORS.darkGray,
+                  ...FONTS.body3,
+                }}>
+                Already registered?
+              </Text>
+
+              <TextButton
+                label="Sign In"
+                buttonContainerStyle={{
+                  backgroundColor: null,
+                  marginLeft: 3,
+                }}
+                labelStyle={{
+                  ...FONTS.body3,
+                  color: COLORS.green2,
+                  fontWeight: 'bold',
+                }}
+                onPress={() => navigation.navigate('SignIn')}
+              />
+            </View>
+          </View>
+        </AuthLayout>
       )}
     </Formik>
   );

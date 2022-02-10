@@ -18,6 +18,7 @@ import {
   SignUp,
   SignUp2,
   ForgotPassword,
+  AuthStack
 } from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -54,6 +55,7 @@ const vendorStack = ({navigation}) => {
 const AccountNavigation = ({navigation}) => {
   return (
       <Stack.Navigator
+      initialRouteName='Account'
         screenOptions={{
           headerShown: false,
         }}>
@@ -63,7 +65,6 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
         <Stack.Screen name="ContactPref" component={ContactPref} />
         <Stack.Screen name="vendorStack" component={vendorStack} />
-        <Stack.Screen name="AppStack" component={AppStack} />
         <Stack.Screen name="SignIn" component={SignIn} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
@@ -76,10 +77,9 @@ const AccountNavigation = ({navigation}) => {
 
 const AppStack = ({navigation}) => {
   return (
-    <NavigationContainer>
+    
     <Tab.Navigator
-      labeled={true}
-      // initialRouteName="Home"
+      initialRouteName="Home"
       activeColor={COLORS.primary}
       inactiveColor={COLORS.darkGray}
       labelStyle={{fontSize: 12}}
@@ -105,7 +105,7 @@ const AppStack = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="Account"
+        name="My Account"
         component={AccountNavigation}
         options={{
           title: 'My Account',
@@ -126,7 +126,7 @@ const AppStack = ({navigation}) => {
         }}
       />
     </Tab.Navigator>
-    </NavigationContainer>
+    
   );
 };
 

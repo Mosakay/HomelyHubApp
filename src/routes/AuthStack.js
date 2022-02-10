@@ -13,9 +13,8 @@ import {
   Register,
   vMenuCreation,
   vProfileCreation,
+  AppStack,
 } from '../screens';
-import AppStack from './AppStack';
-import AccountNavigation from '../routes/AppStack'
 
 const Stack = createStackNavigator();
 
@@ -25,30 +24,21 @@ const Stack = createStackNavigator();
 const AuthStack = () => {
 
   return (
-    <NavigationContainer>
+    
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}
       initialRouteName={'OnBoarding'}>
-
-      <Stack.Screen name="AppStack" component={AppStack} />
-
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
-
       <Stack.Screen name="SignIn" component={SignIn} />
-
       <Stack.Screen name="SignUp" component={SignUp} />
-
-      <Stack.Screen name="Dashboard" component={Home} />
-
+      <Stack.Screen name="AppStack" component={AppStack} />
       <Stack.Screen name="SignUp2" component={SignUp2} />
-
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-
       <Stack.Screen name="Otp" component={Otp} />
     </Stack.Navigator>
-    </NavigationContainer>
+    
   );
 };
 

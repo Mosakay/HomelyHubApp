@@ -23,6 +23,23 @@ import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn = ({navigation}) => {
+
+
+  const [guest, setGuest] = React.useState(null);
+
+
+  React.useEffect(() => {
+    AsyncStorage.getItem('guest').then(value => {
+      if(value == null) {
+        AsyncStorage.setItem('guest', 'true');
+        setGuest(true);
+      } else {
+        setGuest(false);
+      }
+    })
+  }, []);
+
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
@@ -41,18 +58,16 @@ const SignIn = ({navigation}) => {
         JSON.stringify(user),
         {headers: {'Content-Type': 'application/json'}},
       );
-  
+
       if (userRequest?.data.id) {
         const updateboarded = await AsyncStorage.setItem('onboarded', 'true');
         navigation.navigate('Dashboard');
       } else {
         console.log('Incorrect credentials');
       }
-      
     } catch (err) {
-      console.log(err.message)
+      console.log(err.message);
     }
-
   };
 
   const loginValidationSchema = yup.object().shape({
@@ -62,12 +77,12 @@ const SignIn = ({navigation}) => {
       .required('Email address is required!'),
     password: yup
       .string()
-      .min(6, ({min}) => `Password must be at least ${min} characters.`)
+      .min(6, ({min}) => `Must be at least ${min} characters.`)
       .required('Password is required!'),
-      // .matches(
-      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      //   'Must contain One Uppercase, One Lowercase, One Number and One Special Case Character',
-      // ),
+    // .matches(
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+    //   'Must contain One Uppercase, One Lowercase, One Number and One Special Case Character',
+    // ),
     devideId: yup.string(),
   });
 
@@ -87,11 +102,10 @@ const SignIn = ({navigation}) => {
           userName: values.email,
           password: values.password,
           devideId: values.devideId,
-          rememberMe
-        }
-        
-        loginUser(data)
-        .catch(err => console.error(err))
+          rememberMe,
+        };
+
+        loginUser(data).catch(err => console.error(err));
       }}
       validationSchema={loginValidationSchema}>
       {({
@@ -174,29 +188,35 @@ const SignIn = ({navigation}) => {
                 label="Email"
                 keyboardType="email-address"
                 onChange={value => setEmail(value)}
+                errorMsg={
+                  errors.email &&
+                  touched.email && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.orange,
+                        marginTop: 5,
+                      }}>
+                      {errors.email}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={!errors.email ? icons.correct : icons.cross}
+                      source={!errors.email ? icons.correct : icons.correct}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor: !errors.email ? COLORS.primary : COLORS.red,
+                        tintColor: !errors.email
+                          ? COLORS.primary
+                          : COLORS.darkGray2,
                       }}
                     />
                   </View>
                 }
               />
-              {errors.email && touched.email && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.email}
-                </Text>
-              )}
+
               <FormInput
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
@@ -209,6 +229,16 @@ const SignIn = ({navigation}) => {
                 autoCompleteType="password"
                 containerStyle={{marginTop: SIZES.radius}}
                 onChange={value => setPassword(value)}
+                errorMsg=              {errors.password && touched.password && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.password}
+                  </Text>
+                )}
                 appendComponent={
                   <TouchableOpacity
                     style={{
@@ -225,16 +255,7 @@ const SignIn = ({navigation}) => {
                 }
               />
 
-              {errors.password && touched.password && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.password}
-                </Text>
-              )}
+
 
               {/* Save me & Frogot pass */}
 
@@ -286,7 +307,7 @@ const SignIn = ({navigation}) => {
                     backgroundColor: isValid
                       ? COLORS.primary
                       : COLORS.transparentPrimary,
-                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
+                    borderColor: isValid ? COLORS.gray3 : '#CBB4B4',
                     borderWidth: 2,
                   }}
                 />
@@ -325,7 +346,11 @@ const SignIn = ({navigation}) => {
 
               {/* Guest */}
 
-              <View
+
+             
+
+
+              {guest && <View
                 style={{
                   flexDirection: 'row',
                   marginTop: SIZES.radius,
@@ -352,7 +377,8 @@ const SignIn = ({navigation}) => {
                   }}
                   onPress={() => navigation.navigate('AppStack')}
                 />
-              </View>
+              </View> }
+              
             </View>
           </AuthLayout>
         </ScrollView>
