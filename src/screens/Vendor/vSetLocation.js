@@ -7,41 +7,18 @@ import TextButton from '../../components/TextButton';
 import FormInput from '../../components/FormInput';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import {Avatar} from 'react-native-paper';
+import VendorLayout from './VendorLayout';
 
 const vSetLocation = ({navigation}) => {
   return (
+    <VendorLayout
+    header="Business Profile"
+    title="Business location"
+    titleContainerStyle={{paddingHorizontal: SIZES.padding * 2}}
+    subtitle="Further build your business profile by completing the dish & cuisine category"
+    backButton={() => navigation.goBack()}> 
     <View style={{flex: 1}}>
       {/* HEADER */}
-
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: SIZES.padding * 3,
-          backgroundColor: COLORS.white,
-          borderBottomWidth: 2,
-          borderBottomColor: COLORS.gray3,
-        }}>
-       <Text
-          style={{...FONTS.h3, color: COLORS.black, marginTop: SIZES.padding}}>
-          Edit Profile
-        </Text>
-      </View>
-      <View>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            marginTop: SIZES.base,
-            marginLeft: SIZES.base,
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <Icon name="arrow-back" size={24} color={COLORS.black} />
-          <Text style={{...FONTS.body5, color: COLORS.black}}>Back</Text>
-        </TouchableOpacity>
-      </View>
-
 
       {/* INPUTS */}
       <View style={{marginHorizontal: SIZES.padding}}>
@@ -54,9 +31,9 @@ const vSetLocation = ({navigation}) => {
         customInputStyle={{backgroundColor: COLORS.white}}
         onChange={value => setFirstName(value)}
       />      
-      <View>
-      <Text> Example = 34 willow way</Text> 
-      </View>
+      <Text>
+        Example = 34 willow way
+      </Text>
       {/* Town / City*/}
       <FormInput
         label="*Town/City"
@@ -65,9 +42,9 @@ const vSetLocation = ({navigation}) => {
         customInputStyle={{backgroundColor: COLORS.white}}
         onChange={value => setFirstName(value)}
       />      
-      <View>
-        <Text>Example = London</Text>
-      </View>
+      <Text>
+        Example = London
+      </Text>
 
 
       {/* Postcode */}
@@ -81,9 +58,9 @@ const vSetLocation = ({navigation}) => {
         onChange={value => postCode(value)}
 
       />
-      <View>
-        <Text>Example = LO4 D0N</Text>  
-      </View>
+      <Text>
+          Example = LO4 D0N
+      </Text>
 
       </View>
 
@@ -104,6 +81,7 @@ const vSetLocation = ({navigation}) => {
         />
       </View>
     </View>
+    </VendorLayout>
   );
 };
 
