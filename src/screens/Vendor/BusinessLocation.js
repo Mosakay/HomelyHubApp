@@ -12,7 +12,7 @@ import VendorLayout from './VendorLayout';
 const BusinessLocation = ({navigation}) => {
   return (    <VendorLayout
     header="Business Profile"
-    title="Menu/Goods Creation"
+    title="Business location"
     titleContainerStyle={{paddingHorizontal: SIZES.padding * 2}}
     subtitle="Further build your business profile by completing the dish & cuisine category"
     backButton={() => navigation.goBack()}> 
