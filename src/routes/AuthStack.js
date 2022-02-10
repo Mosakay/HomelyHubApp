@@ -16,7 +16,6 @@ import {
 } from '../screens';
 import AppStack from './AppStack';
 import AccountNavigation from '../routes/AppStack'
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -33,7 +32,7 @@ const AuthStack = () => {
       }}
       initialRouteName={'OnBoarding'}>
 
-      <Stack.Screen name="AppStack" component={AccountNavigation} />
+      <Stack.Screen name="AppStack" component={AppStack} />
 
       <Stack.Screen name="OnBoarding" component={OnBoarding} />
 
