@@ -3,6 +3,7 @@ import OnBoarding from "./OnBoarding/OnBoarding"
 //Routes
 
 import AppStack from "../routes/AppStack"
+import AccountNavigation from "../routes/AppStack"
 import AuthStack from "../routes/AuthStack"
 
 // Authentication
@@ -41,6 +42,7 @@ import Notification from "./Notification/Notification"
 
 import Login from './Vendor/Login'
 import Register from './Vendor/Register'
+import Register2 from './Vendor/Register2'
 import vMenuCreation from './Vendor/vMenuCreation'
 import vProfileCreation from './Vendor/vProfileCreation'
 import vSetLocation from './Vendor/vSetLocation'
@@ -61,9 +63,11 @@ export {
     Settings,
     Account,
     AppStack,
+    AccountNavigation,
     AuthStack,
     Login,
     Register,
+    Register2,
     vMenuCreation,
     vProfileCreation,
     vSetLocation

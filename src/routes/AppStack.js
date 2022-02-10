@@ -10,9 +10,14 @@ import {
   Account,
   Login,
   Register,
+  Register2,
   vMenuCreation,
   vProfileCreation,
   vSetLocation,
+  SignIn,
+  SignUp,
+  SignUp2,
+  ForgotPassword,
 } from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -37,6 +42,7 @@ const vendorStack = ({navigation}) => {
         }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
+        <Stack.Screen name="Register2" component={Register2} />
         <Stack.Screen name="vMenuCreation" component={vMenuCreation} />
         <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
         <Stack.Screen name="vSetLocation" component={vSetLocation} />
@@ -62,6 +68,11 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name="ContactPref" component={ContactPref} />
         <Stack.Screen name="vendorStack" component={vendorStack} />
         <Stack.Screen name="AppStack" component={AppStack} />
+        <Stack.Screen name="SignIn" component={SignIn} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+        <Stack.Screen name="SignUp2" component={SignUp2} />
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

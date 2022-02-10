@@ -16,6 +16,7 @@ import {
 } from '../screens';
 import AppStack from './AppStack';
 import AccountNavigation from '../routes/AppStack'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -23,7 +24,22 @@ const Stack = createStackNavigator();
 
 
 const AuthStack = () => {
+  const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
+
+  React.useEffect(() => {
+    AsyncStorage.getItem('alreadyLaunched').then(value => {
+      if(value == null) {
+        AsyncStorage.setItem('alreadyLaunched', 'true');
+        setIsFirstLaunch(true);
+      } else {
+        setIsFirstLaunch(false);
+      }
+    })
+  }, []);
+
+
   return (
+    <NavigationContainer>
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
@@ -46,6 +62,7 @@ const AuthStack = () => {
 
       <Stack.Screen name="Otp" component={Otp} />
     </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

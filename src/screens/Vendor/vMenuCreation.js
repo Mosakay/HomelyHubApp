@@ -87,6 +87,8 @@ const vMenuCreation = ({navigation}) => {
             }>
             <Picker.Item label="Dish 1" value="dish1" />
             <Picker.Item label="Dish 2" value="dish2" />
+            <Picker.Item label="Dish 3" value="dish3" />
+            <Picker.Item label="Dish 4" value="dish4" />
           </Picker>
           <Text style={{...FONTS.body5, marginVertical: SIZES.base}}>
             This will be the type of food or goods the business sells
@@ -150,7 +152,7 @@ const vMenuCreation = ({navigation}) => {
                 height: 38,
                 width: SIZES.width / 6,
                 borderRadius: SIZES.base,
-                backgroundColor: yesBtn ? COLORS.white : COLORS.gray3,
+                backgroundColor: yesBtn ? COLORS.white : COLORS.transparentPrimary,
                 borderColor: yesBtn ? COLORS.gray3 : COLORS.darkGray2,
                 borderWidth: 1,
                 marginRight: SIZES.radius,
@@ -164,7 +166,7 @@ const vMenuCreation = ({navigation}) => {
                 height: 38,
                 width: SIZES.width / 6,
                 borderRadius: SIZES.base,
-                backgroundColor: noBtn ? COLORS.white : COLORS.gray3,
+                backgroundColor: noBtn ? COLORS.white : COLORS.transparentPrimary,
                 borderColor: noBtn ? COLORS.gray3 : COLORS.darkGray2,
                 borderWidth: 1,
               }}

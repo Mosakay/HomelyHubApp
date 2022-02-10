@@ -5,6 +5,9 @@ import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
 
 const Account = ({navigation}) => {
+
+  const [ifIsSignedIn, setIfIsSignedIn] = React.useState(false);
+
   return (
     <View style={{flex: 1}}>
       <View
@@ -105,7 +108,7 @@ const Account = ({navigation}) => {
         />
 
         <TextButton
-          label="Sign Out"
+          label={ ifIsSignedIn ? 'Sign In' : "Sign Out"}
           buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
           appendComponent={<Ionicons name="exit-outline" size={22} />}
           prependComponent={
@@ -116,7 +119,7 @@ const Account = ({navigation}) => {
             />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => {}}
+          onPress={() => setIfIsSignedIn(!ifIsSignedIn) & navigation.navigate('SignIn')}
         />
       </View>
 
