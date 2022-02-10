@@ -1,6 +1,6 @@
 import {View, Text, Image} from 'react-native';
 import React, {useState} from 'react';
-import {COLORS, FONTS, SIZES, icons} from '../../constants/theme';
+import {COLORS, FONTS, SIZES, icons} from '../../constants';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import TextButton from '../../components/TextButton';
 import FormInput from '../../components/FormInput';
@@ -9,7 +9,6 @@ import {Avatar} from 'react-native-paper';
 import VendorLayout from './VendorLayout';
 import {Formik} from 'formik';
 import * as yup from 'yup';
-
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const BuildingSchema = yup.object().shape({
@@ -25,6 +24,12 @@ const BuildingSchema = yup.object().shape({
       'Enter a correct postcode!',
     )
     .required('Postcode is required'),
+    townCity: yup
+    .string()
+    .matches(/^[A-Za-z ]*$/, "The Town/City is required")
+    .min(3, "Too Short!")
+    .max(30, "Too Long!")
+    .required("Bussness address is required"),
 });
 
 const vSetLocation = ({navigation}) => {
@@ -32,6 +37,7 @@ const vSetLocation = ({navigation}) => {
     initialValues={{
       businessName: '',
       postcode: '',
+      townCity: '',
     }}
     validateOnMount={true}
     onSubmit={values => values}
@@ -101,12 +107,50 @@ const vSetLocation = ({navigation}) => {
       </Text>
       {/* Town / City*/}
       <FormInput
+              onChangeText={handleChange('townCity')}
+              onBlur={handleBlur('townCity')}
+              value={values.townCity}
+              label="*Town/City"
+              placeholder="Type your town or city here"
+              containerStyle={{marginTop: SIZES.radius}}
+              customInputStyle={{backgroundColor: COLORS.white}}
+              errorMsg={
+                errors.townCity &&
+                touched.townCity && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.primary,
+                      marginTop: 5,
+                    }}>
+                    {errors.townCity}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={
+                      !errors.townCity ? icons.correct : icons.correct
+                    }
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.businessName
+                        ? COLORS.green
+                        : COLORS.gray2,
+                    }}
+                  />
+                </View>
+              }
+            />
+      {/* <FormInput
         label="*Town/City"
         placeholder="Type your town or city here"
         containerStyle={{marginTop: SIZES.radius}}
         customInputStyle={{backgroundColor: COLORS.white}}
         onChange={value => setFirstName(value)}
-      />      
+      />       */}
       <Text>
         Example = London
       </Text>
