@@ -23,22 +23,18 @@ import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn = ({navigation}) => {
-
-
   const [guest, setGuest] = React.useState(null);
-
 
   React.useEffect(() => {
     AsyncStorage.getItem('guest').then(value => {
-      if(value == null) {
+      if (value == null) {
         AsyncStorage.setItem('guest', 'true');
         setGuest(true);
       } else {
         setGuest(false);
       }
-    })
+    });
   }, []);
-
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -47,7 +43,7 @@ const SignIn = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
   const [rememberMe, setRememberMe] = React.useState(false);
 
-  const val = useContext(AuthContext);
+  // const { setAuth } = useContext(AuthContext);
 
   const onToggleSwitch = () => setRememberMe(!rememberMe);
 
@@ -56,17 +52,17 @@ const SignIn = ({navigation}) => {
       const userRequest = await axios.post(
         `${BASE_URL}/Security/Authenticate`,
         JSON.stringify(user),
-        {headers: {'Content-Type': 'application/json'}},
+        {headers: {'Content-Type': 'application/json'}, withCredentials: true},
       );
-
+      console.log(JSON.stringify(response?.data));
+    
       if (userRequest?.data.id) {
-        const updateboarded = await AsyncStorage.setItem('onboarded', 'true');
         navigation.navigate('Dashboard');
       } else {
         console.log('Incorrect credentials');
       }
     } catch (err) {
-      console.log(err.message);
+      console.warn(err.message);
     }
   };
 
@@ -177,7 +173,7 @@ const SignIn = ({navigation}) => {
             </View>
             <View style={{flex: 1, marginTop: SIZES.padding}}>
               {/* Form Inputs */}
-              <Text>{val}</Text>
+              
               <FormInput
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
@@ -229,16 +225,19 @@ const SignIn = ({navigation}) => {
                 autoCompleteType="password"
                 containerStyle={{marginTop: SIZES.radius}}
                 onChange={value => setPassword(value)}
-                errorMsg=              {errors.password && touched.password && (
-                  <Text
-                    style={{
-                      ...FONTS.body5,
-                      color: COLORS.orange,
-                      marginTop: 5,
-                    }}>
-                    {errors.password}
-                  </Text>
-                )}
+                errorMsg={
+                  errors.password &&
+                  touched.password && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.orange,
+                        marginTop: 5,
+                      }}>
+                      {errors.password}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <TouchableOpacity
                     style={{
@@ -254,8 +253,6 @@ const SignIn = ({navigation}) => {
                   </TouchableOpacity>
                 }
               />
-
-
 
               {/* Save me & Frogot pass */}
 
@@ -346,39 +343,36 @@ const SignIn = ({navigation}) => {
 
               {/* Guest */}
 
-
-             
-
-
-              {guest && <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: SIZES.radius,
-                  justifyContent: 'center',
-                }}>
-                <Text
+              {guest && (
+                <View
                   style={{
-                    color: COLORS.darkGray,
-                    ...FONTS.body3,
+                    flexDirection: 'row',
+                    marginTop: SIZES.radius,
+                    justifyContent: 'center',
                   }}>
-                  Continue as
-                </Text>
+                  <Text
+                    style={{
+                      color: COLORS.darkGray,
+                      ...FONTS.body3,
+                    }}>
+                    Continue as
+                  </Text>
 
-                <TextButton
-                  label="@Guest"
-                  buttonContainerStyle={{
-                    backgroundColor: null,
-                    marginLeft: 3,
-                  }}
-                  labelStyle={{
-                    ...FONTS.body3,
-                    color: COLORS.darkGray,
-                    fontWeight: 'bold',
-                  }}
-                  onPress={() => navigation.navigate('AppStack')}
-                />
-              </View> }
-              
+                  <TextButton
+                    label="@Guest"
+                    buttonContainerStyle={{
+                      backgroundColor: null,
+                      marginLeft: 3,
+                    }}
+                    labelStyle={{
+                      ...FONTS.body3,
+                      color: COLORS.darkGray,
+                      fontWeight: 'bold',
+                    }}
+                    onPress={() => navigation.navigate('AppStack')}
+                  />
+                </View>
+              )}
             </View>
           </AuthLayout>
         </ScrollView>

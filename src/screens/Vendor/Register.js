@@ -10,6 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Register = ({navigation}) => {
 
+  
   const registerVendor = async (values) => {
     const store = await AsyncStorage.setItem('fieldsVendor', JSON.stringify(values))
     navigation.navigate('Register2')

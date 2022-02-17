@@ -1,5 +1,8 @@
+import BASE_URL from '../context/config'
+
 import axios from 'axios'
+
 const Http = axios.create({
-    baseUrl:event.process.REACT_APP_BASEURL,
+    baseURL: BASE_URL,
 });
 export default Http;
