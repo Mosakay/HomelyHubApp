@@ -10,15 +10,25 @@ import {Avatar, Checkbox} from 'react-native-paper';
 
 const ContactPref = ({navigation}) => {
   const [checked, setChecked] = React.useState(false);
-  const [ticked, setTicked] = React.useState(false);
+  const [checked2, setChecked2] = React.useState(false);
+  const [checked3, setChecked3] = React.useState(false);
+  const [checked4, setChecked4] = React.useState(false);
+  const [checked5, setChecked5] = React.useState(false);
+  const [checked6, setChecked6] = React.useState(false);
+  const [checked7, setChecked7] = React.useState(false);
+  const [checked8, setChecked8] = React.useState(false);
+
   const [isEnabled, setIsEnabled] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [isEnabled2, setIsEnabled2] = useState(false);
   const PushNotifactions = () => setIsEnabled(previousState => !previousState);
   const EmailSwitch = () => setIsActive(previousState => !previousState);
-  // const TextSwitch = () => setIsEnabled3(previousState => !previousState);
-
-
-
+  const TextSwitch = () => setIsEnabled2(previousState => !previousState);
+  
+  const TextSwitchCon = () => setIsEnabled2(previousState => !previousState);
+  const TextSwitchCon2 = () => setIsEnabled2(previousState => !previousState);
+  const TextSwitchCon3 = () => setIsEnabled2(previousState => !previousState);
+  
   return (
     <View style={{flex: 1}}>
       {/* HEADER */}
@@ -58,9 +68,11 @@ const ContactPref = ({navigation}) => {
           </Text>
           {/* need a switch to alow this next section if enable alow modafcation of check box's else disable them */}
           <View
-          Style={{
-            justifyContent:"Center",
-            alignItems: "Center",
+          style={{
+            flex:1,
+            flexDirection:'row',
+            justifyContent:'space-between',
+            marginTop: SIZES.radius
           }}>
           <Text
           style={{
@@ -74,24 +86,43 @@ const ContactPref = ({navigation}) => {
             onValueChange={PushNotifactions}
             value={isEnabled}
           />
-          
           </View>
 
-        <View>
+        <View          style={{
+            flex:1,
+            flexDirection:'row',
+            justifyContent:'space-between',
+            marginTop: SIZES.radius
+          }}>
           <Text>
             Order status and update notifications
-            <Checkbox
-            status={ticked ? 'checked' : 'unchecked'}
-            onPress={() => {
-              setTicked(!ticked);
-            }}/>
           </Text>
-        </View>
-        <View>
+          <Checkbox
+              status={checked8 ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked8(!checked8);
+              }}
+              disabled={TextSwitchCon ? !isEnabled : isEnabled}
+            />        
+            </View>
+        <View
+        style={{
+          flex:1,
+          flexDirection:'row',
+          justifyContent:'space-between',
+          marginTop: SIZES.radius
+        }}
+        >
           <Text>
             Promotional push notifications
-            <Checkbox/>
           </Text>
+          <Checkbox
+              status={checked2 ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked2(!checked2);
+              }}
+              disabled={TextSwitchCon ? !isEnabled : isEnabled}
+            />
         </View>
       </View>
 
@@ -104,40 +135,95 @@ const ContactPref = ({navigation}) => {
           <Text>
             Control and allow how you are contacted via email.
           </Text>
-          <View>
-            <Text>
+          <View
+          style={{
+            flex:1,
+            flexDirection:'row',
+            justifyContent:'space-between',
+            marginTop: SIZES.radius
+          }}
+          >
+            <View Style={{
+              flex:1,
+            }}>
+            <Text
+            style={{
+              color: COLORS.black,
+            }}
+            >
               Turn on email notifications
             </Text>
-                      <Switch
+            </View>
+            <View>
+            <Switch
           trackColor={{ false:  COLORS.gray, true: COLORS.primary }}
           thumbColor={COLORS.white}
           ios_backgroundColor= {COLORS.gray}
           onValueChange={EmailSwitch}
-          value={isEnabled}
+          value={isActive}
         />
+            </View>
+
           </View>
 
-                <View>
+                <View
+                style={{
+                  flex:1,
+                  flexDirection:'row',
+                  justifyContent:'space-between',
+                  marginTop: SIZES.radius
+                }}
+                >
           <Text>
             Order status and update notifications
-            <Checkbox
-              status={checked ? 'checked' : 'unchecked'}
-            onPress={() => {
-              setChecked(!checked);
-            }}/>
+            
           </Text>
+          <Checkbox  
+              status={checked3 ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked3(!checked3);
+              }}
+              disabled={TextSwitchCon2 ? !isActive : isActive}    
+            />
         </View>
-        <View>
+        <View
+        style={{
+          flex:1,
+          flexDirection:'row',
+          justifyContent:'space-between',
+          marginTop: SIZES.radius
+        }}
+        >
           <Text>
             Promotional push notifications
-            <Checkbox/>
+            
           </Text>
+          <Checkbox
+              status={checked4 ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked4(!checked4);
+              }}
+              disabled={TextSwitchCon2 ? !isActive : isActive}
+            />
         </View>
-        <View>
+        <View
+        style={{
+          flex:1,
+          flexDirection:'row',
+          justifyContent:'space-between',
+          marginTop: SIZES.radius
+        }}>
           <Text>
             Application updates & features 
-            <Checkbox/>
+            
           </Text>
+          <Checkbox
+              status={checked5 ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked5(!checked5);
+              }}
+              disabled={TextSwitchCon2 ? !isActive : isActive}
+            />
         </View>
         </View>
 
@@ -150,33 +236,87 @@ const ContactPref = ({navigation}) => {
           <Text>
             Control and allow how you are contacted via text message.
           </Text>
+          <View
+          style={{
+            flex:1,
+            flexDirection:'row',
+            justifyContent:'space-between',
+            marginTop: SIZES.radius
+          }}>
           <Text style={{
             color: COLORS.black,
           }}>
             Turn on text notifactions
-            <Switch
+            
+          </Text>
+          <Switch
           trackColor={{ false:  COLORS.gray, true: COLORS.primary }}
           thumbColor={COLORS.white}
           ios_backgroundColor= {COLORS.gray}
-          // onValueChange={TextSwitch}
-          value={isEnabled}
+          onValueChange={TextSwitch}
+          value={isEnabled2}
         />
-          </Text>
-        </View>          
+          </View>
+        </View> 
+        <View
+        style={{
+          flex:1,
+          flexDirection:'row',
+          justifyContent:'space-between',
+          marginTop: SIZES.radius
+        }}>         
         <Text>
             Order status and update notifications
-            <Checkbox/>
+            
           </Text>
+          <Checkbox
+              status={checked6 ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked6(!checked6);
+              }}
+              disabled={TextSwitchCon3 ? !isEnabled2 : isEnabled2}
+            />
+          </View>
           <View>
+            <View
+            style={{
+              flex:1,
+              flexDirection:'row',
+              justifyContent:'space-between',
+              marginTop: SIZES.radius
+            }}
+            >
           <Text>
             Promotional push notifications
-            <Checkbox/>
+            
           </Text>
-          <View>
+          <Checkbox            
+              status={checked7 ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked7(!checked7);
+              }}
+              disabled={TextSwitchCon3 ? !isEnabled2 : isEnabled2}
+            />
+          </View>
+          <View
+          style={{
+            flex:1,
+            flexDirection:'row',
+            justifyContent:'space-between',
+            marginTop: SIZES.radius
+          }}
+          >
           <Text>
             Application updates & features 
-            <Checkbox/>
           </Text>
+          <Checkbox
+              status={checked ? 'checked' : 'unchecked'}
+              onPress={() => {
+                setChecked(!checked);
+              }}
+              disabled={TextSwitchCon3 ? !isEnabled2 : isEnabled2}
+              // color={COLORS.lightGray2}
+            />
         </View>
         </View>
         </View>
