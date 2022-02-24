@@ -1,33 +1,28 @@
-import React from 'react'
-import { View, Text, Image } from 'react-native'
-
-import { images, FONTS, SIZES, COLORS } from '../../constants';
+import React from 'react';
+import { View, Text, Image } from 'react-native';
+import appTheme from '../../constants/theme';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
-    return (
-        <KeyboardAwareScrollView style={{backgroundColor: COLORS.white}}>
-        <View
+const AuthLayout = ({ title, subtitle, titleContainerStyle, children }) => {
+  return (
+    <KeyboardAwareScrollView style={{ backgroundColor: appTheme.COLORS.white }}>
+      <View
         style={{
-            flex: 1,
-            backgroundColor: COLORS.white,
-            paddingVertical: SIZES.padding
-        }}
-        >
-          <KeyboardAwareScrollView
-          keyboardDismissMode='on-drag'
+          flex: 1,
+          backgroundColor: appTheme.COLORS.white,
+          paddingVertical: appTheme.SIZES.padding,
+        }}>
+        <KeyboardAwareScrollView
+          keyboardDismissMode="on-drag"
           contentContainerStyle={{
-              flex: 1,
-              paddingHorizontal: SIZES.padding,
-              backgroundColor: COLORS.white
+            flex: 1,
+            paddingHorizontal: appTheme.SIZES.padding,
+            backgroundColor: appTheme.COLORS.white,
+          }}>
+          {/* App Icon */}
 
-          }}
-          >
-
-        {/* App Icon */}
-
-        {/* <View
+          {/* <View
         style={{
             alignItems:'center'
             
@@ -43,26 +38,37 @@ const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
             />
         </View> */}
 
-        {/* Title & Subtitle */}
-            <View
+          {/* Title & Subtitle */}
+          <View
             style={{
-                marginTop: SIZES.base,
-                ...titleContainerStyle
-            }}
-            >
-            <Text style={{textAlign:'center', ...FONTS.h2, color: COLORS.black}}>{title}</Text>
-            <Text style={{textAlign:'center', ...FONTS.body3, marginTop: SIZES.base, color: COLORS.darkGray }}>{subtitle}</Text>
+              marginTop: appTheme.SIZES.base,
+              ...titleContainerStyle,
+            }}>
+            <Text
+              style={{
+                textAlign: 'center',
+                ...appTheme.FONTS.h2,
+                color: appTheme.COLORS.black,
+              }}>
+              {title}
+            </Text>
+            <Text
+              style={{
+                textAlign: 'center',
+                ...appTheme.FONTS.body3,
+                marginTop: appTheme.SIZES.base,
+                color: appTheme.COLORS.darkGray,
+              }}>
+              {subtitle}
+            </Text>
+          </View>
 
-            </View>
-
-
-
-        {/* Content / Children */}
-            {children}
-        </KeyboardAwareScrollView>  
-        </View>
+          {/* Content / Children */}
+          {children}
         </KeyboardAwareScrollView>
-    )
-}
+      </View>
+    </KeyboardAwareScrollView>
+  );
+};
 
 export default AuthLayout;

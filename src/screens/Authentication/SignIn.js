@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useEffect,useState } from 'react';
 import {
   View,
   Text,
@@ -23,44 +23,43 @@ import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignIn = ({navigation}) => {
-  const [guest, setGuest] = React.useState(null);
+  const idD = DeviceInfo.getDeviceId();
+  const [guest, setGuest] = useState(null);
+  const [showPass, setShowPass] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
-  React.useEffect(() => {
-    AsyncStorage.getItem('guest').then(value => {
-      if (value == null) {
-        AsyncStorage.setItem('guest', 'true');
-        setGuest(true);
-      } else {
-        setGuest(false);
-      }
-    });
+useEffect(() => {
+    console.log('Device Id : '+idD);
+    // AsyncStorage.getItem('guest').then(value => {
+    //   if (value == null) {
+    //     AsyncStorage.setItem('guest', 'true');
+    //     setGuest(true);
+    //   } else {
+    //     setGuest(false);
+    //   }
+    // });
   }, []);
 
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [emailError, setEmailError] = React.useState('');
-
-  const [showPass, setShowPass] = React.useState(false);
-  const [rememberMe, setRememberMe] = React.useState(false);
-
+ 
   // const { setAuth } = useContext(AuthContext);
 
   const onToggleSwitch = () => setRememberMe(!rememberMe);
 
-  const loginUser = async user => {
+  const loginUser = async (user) => {
     try {
-      const userRequest = await axios.post(
-        `${BASE_URL}/Security/Authenticate`,
-        JSON.stringify(user),
-        {headers: {'Content-Type': 'application/json'}, withCredentials: true},
-      );
-      console.log(JSON.stringify(response?.data));
+      console.log(user);
+      // const userRequest = await axios.post(
+      //   `${BASE_URL}/Security/Authenticate`,
+      //   JSON.stringify(user),
+      //   {headers: {'Content-Type': 'application/json'}, withCredentials: true},
+      // );
+      // console.log(JSON.stringify(response?.data));
     
-      if (userRequest?.data.id) {
-        navigation.navigate('Dashboard');
-      } else {
-        console.log('Incorrect credentials');
-      }
+      // if (userRequest?.data.id) {
+      //   navigation.navigate('Dashboard');
+      // } else {
+      //   console.log('Incorrect credentials');
+      // }
     } catch (err) {
       console.warn(err.message);
     }
@@ -79,29 +78,20 @@ const SignIn = ({navigation}) => {
     //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
     //   'Must contain One Uppercase, One Lowercase, One Number and One Special Case Character',
     // ),
-    devideId: yup.string(),
   });
 
-  let idD = DeviceInfo.getDeviceId();
-  console.log(idD);
 
   return (
     <Formik
       initialValues={{
         email: '',
         password: '',
+        rememberMe:true,
         deviceId: '',
       }}
       validateOnMount={true}
       onSubmit={values => {
-        const data = {
-          userName: values.email,
-          password: values.password,
-          devideId: values.devideId,
-          rememberMe,
-        };
-
-        loginUser(data).catch(err => console.error(err));
+        loginUser(values);
       }}
       validationSchema={loginValidationSchema}>
       {({

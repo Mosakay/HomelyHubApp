@@ -1,29 +1,31 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import VendorLayout from './VendorLayout';
-import {FONTS, SIZES, COLORS, icons} from '../../constants';
-import {FormInput, TextButton} from '../../components';
-import {Switch} from 'react-native-paper';
-import {Formik} from 'formik';
+import { icons } from '../../constants/icons';
+import { appTheme } from '../../constants/theme';
+import { FormInput, TextButton } from '../../components';
+import { Switch } from 'react-native-paper';
+import { Formik } from 'formik';
 import * as yup from 'yup';
-import {useContext} from 'react';
+import { useContext } from 'react';
 import axios from 'axios';
-import {BASE_URL} from '../../context/config';
+import { BASE_URL } from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-
-const Login = ({navigation}) => {
+import { Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { APP_ROUTES } from '../../routes/router';
+const Login = () => {
+  const navigation = useNavigation();
   const [rememberMe, setRememberMe] = React.useState(false);
   const [showPass, setShowPass] = React.useState(false);
   const onToggleSwitch = () => setRememberMe(!rememberMe);
-
 
   const loginUser = async user => {
     try {
       const userRequest = await axios.post(
         `${BASE_URL}/Security/Authenticate`,
         JSON.stringify(user),
-        {headers: {'Content-Type': 'application/json'}},
+        { headers: { 'Content-Type': 'application/json' } },
       );
 
       if (userRequest?.data.id) {
@@ -43,7 +45,7 @@ const Login = ({navigation}) => {
       .required('Email address is required!'),
     password: yup
       .string()
-      .min(6, ({min}) => `Password must be at least ${min} characters.`)
+      .min(6, ({ min }) => `Password must be at least ${min} characters.`)
       .required('Password is required!'),
     // .matches(
     //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
@@ -80,12 +82,11 @@ const Login = ({navigation}) => {
         <VendorLayout
           title="Vendor Login"
           titleContainerStyle={{
-            paddingHorizontal: SIZES.padding * 2,
-            paddingVertical: SIZES.padding,
+            paddingHorizontal: appTheme?.SIZES?.padding * 2,
+            paddingVertical: appTheme?.SIZES?.padding,
           }}
           subtitle="Login to your business profile using your email and password"
           header="Vendor Account"
-          backButton={() => navigation.replace('Account')}
           formInput={
             <View>
               <FormInput
@@ -93,18 +94,18 @@ const Login = ({navigation}) => {
                 onBlur={handleBlur('email')}
                 value={values.email}
                 iconName="email"
-                iconStyle={{paddingRight: SIZES.base}}
+                iconStyle={{ paddingRight: appTheme?.SIZES.base }}
                 iconSize={19}
                 label="Email"
-                customInputStyle={{backgroundColor: COLORS.white}}
-                containerStyle={{paddingTop: SIZES.padding + 10}}
+                customInputStyle={{ backgroundColor: appTheme?.COLORS.white }}
+                containerStyle={{ paddingTop: appTheme?.SIZES.padding + 10 }}
                 errorMsg={
                   errors.email &&
                   touched.email && (
                     <Text
                       style={{
-                        ...FONTS.body5,
-                        color: COLORS.red,
+                        ...appTheme?.FONTS.body5,
+                        color: appTheme?.COLORS.red,
                         marginTop: 5,
                       }}>
                       {errors.email}
@@ -112,15 +113,15 @@ const Login = ({navigation}) => {
                   )
                 }
                 appendComponent={
-                  <View style={{justifyContent: 'center'}}>
+                  <View style={{ justifyContent: 'center' }}>
                     <Image
-                      source={!errors.email ? icons.correct : icons.correct}
+                      source={!errors.email ? icons?.correct : icons?.correct}
                       style={{
                         height: 20,
                         width: 20,
                         tintColor: !errors.email
-                          ? COLORS.primary
-                          : COLORS.gray2,
+                          ? appTheme?.COLORS.primary
+                          : appTheme?.COLORS.gray2,
                       }}
                     />
                   </View>
@@ -132,11 +133,11 @@ const Login = ({navigation}) => {
                 onBlur={handleBlur('password')}
                 value={values.password}
                 iconName="lock"
-                iconStyle={{paddingRight: SIZES.base}}
+                iconStyle={{ paddingRight: appTheme?.SIZES.base }}
                 iconSize={19}
                 label="Password"
-                customInputStyle={{backgroundColor: COLORS.white}}
-                containerStyle={{paddingTop: SIZES.base + 10}}
+                customInputStyle={{ backgroundColor: appTheme?.COLORS.white }}
+                containerStyle={{ paddingTop: appTheme?.SIZES.base + 10 }}
                 secureTextEntry={!showPass}
                 autoCompleteType="password"
                 errorMsg={
@@ -144,8 +145,8 @@ const Login = ({navigation}) => {
                   touched.password && (
                     <Text
                       style={{
-                        ...FONTS.body5,
-                        color: COLORS.red,
+                        ...appTheme?.FONTS.body5,
+                        color: appTheme?.COLORS.red,
                         marginTop: 5,
                       }}>
                       {errors.password}
@@ -161,8 +162,12 @@ const Login = ({navigation}) => {
                     }}
                     onPress={() => setShowPass(!showPass)}>
                     <Image
-                      source={showPass ? icons.eye_close : icons.eye}
-                      style={{height: 20, width: 20, tintColor: COLORS.gray}}
+                      source={showPass ? icons?.eye_close : icons?.eye}
+                      style={{
+                        height: 20,
+                        width: 20,
+                        tintColor: appTheme?.COLORS.gray,
+                      }}
                     />
                   </TouchableOpacity>
                 }
@@ -175,16 +180,16 @@ const Login = ({navigation}) => {
 
               <View
                 style={{
-                  paddingHorizontal: SIZES.padding + 10,
-                  paddingTop: SIZES.base,
+                  paddingHorizontal: appTheme?.SIZES.padding + 10,
+                  paddingTop: appTheme?.SIZES.base,
                 }}>
                 <View
                   style={{
                     flexDirection: 'row',
-                    marginTop: SIZES.radius,
+                    marginTop: appTheme?.SIZES.radius,
                     justifyContent: 'space-between',
                   }}>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Switch
                       value={rememberMe}
                       onValueChange={onToggleSwitch}
@@ -192,7 +197,7 @@ const Login = ({navigation}) => {
                     />
                     <Text
                       style={{
-                        ...FONTS.body4,
+                        ...appTheme?.FONTS.body4,
                       }}>
                       Remember Me
                     </Text>
@@ -203,10 +208,12 @@ const Login = ({navigation}) => {
                       backgroundColor: null,
                     }}
                     labelStyle={{
-                      color: COLORS.gray,
-                      ...FONTS.body4,
+                      color: appTheme?.COLORS.gray,
+                      ...appTheme?.FONTS.body4,
                     }}
-                    onPress={() => navigation.navigate('vForgotPassword')}
+                    onPress={() =>
+                      navigation.navigate(APP_ROUTES.VendorForgotPassword)
+                    }
                   />
                 </View>
               </View>
@@ -217,21 +224,26 @@ const Login = ({navigation}) => {
                 style={{
                   justifyContent: 'center',
                   flexDirection: 'row',
-                  paddingTop: SIZES.radius,
+                  paddingTop: appTheme?.SIZES.radius,
                 }}>
                 <TextButton
                   label="Login"
                   onPress={handleSubmit}
                   disabled={!isValid}
-                  labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
+                  labelStyle={{
+                    ...appTheme?.FONTS.body3,
+                    color: isValid ? appTheme?.COLORS.white2 : '#CBB4B4',
+                  }}
                   buttonContainerStyle={{
                     height: 50,
-                    width: SIZES.width / 2,
-                    marginTop: SIZES.padding,
-                    borderRadius: SIZES.base,
+                    width: appTheme?.SIZES.width / 2,
+                    marginTop: appTheme?.SIZES.padding,
+                    borderRadius: appTheme?.SIZES.base,
                     borderWidth: 2,
-                    backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
-                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
+                    backgroundColor: isValid
+                      ? appTheme?.COLORS.primary
+                      : '#EBEBEB',
+                    borderColor: isValid ? appTheme?.COLORS.gray3 : '#CBB4B4',
                   }}
                 />
               </View>
@@ -239,13 +251,13 @@ const Login = ({navigation}) => {
               <View
                 style={{
                   flexDirection: 'row',
-                  marginTop: SIZES.radius,
+                  marginTop: appTheme?.SIZES.radius,
                   justifyContent: 'center',
                 }}>
                 <Text
                   style={{
-                    color: COLORS.darkGray,
-                    ...FONTS.body3,
+                    color: appTheme?.COLORS.darkGray,
+                    ...appTheme?.FONTS.body3,
                   }}>
                   Don't have an account?
                 </Text>
@@ -257,11 +269,11 @@ const Login = ({navigation}) => {
                     marginLeft: 3,
                   }}
                   labelStyle={{
-                    ...FONTS.body3,
-                    color: COLORS.green2,
+                    ...appTheme?.FONTS.body3,
+                    color: appTheme?.COLORS.green2,
                     fontWeight: 'bold',
                   }}
-                  onPress={() => navigation.navigate('Register')}
+                  onPress={() => navigation.navigate(APP_ROUTES.VendorRegister)}
                 />
               </View>
             </View>

@@ -1,4 +1,13 @@
 import { Dimensions } from "react-native";
+const BACKGROUND_01 = require('../assets/images/background_01.png');
+const BACKGROUND_02 = require('../assets/images/background_02.png');
+const FAVOURITE = require('../assets/images/favourite_food.png');
+const GREAT_FOOD = require('../assets/images/great_food.png');
+const HOT_DELIVERY = require('../assets/images/hot_delivery.png');
+const LOGO_01 = require('../assets/images/logo_01.png');
+const LOGO_02 = require('../assets/images/logo_02.png');
+const PROFILE = require('../assets/images/profile.png');
+
 const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
@@ -68,7 +77,6 @@ export const FONTS = {
     body5: { fontFamily: "Poppins-Regular", fontSize: SIZES.body5, lineHeight: 22 },
 };
 
-
 export const FONTS2 = {
     largeTitle: { fontFamily: "Roboto-Black", fontSize: SIZES.largeTitle },
     h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, lineHeight: 36 },
@@ -83,6 +91,18 @@ export const FONTS2 = {
     body5: { fontFamily: "Roboto-Regular", fontSize: SIZES.body5, lineHeight: 22 },
 };
 
-const appTheme = { COLORS, SIZES, FONTS };
+const appTheme = {
+  COLORS,
+  SIZES,
+  FONTS,
+  BACKGROUND_01,
+  BACKGROUND_02,
+  FAVOURITE,
+  GREAT_FOOD,
+  HOT_DELIVERY,
+  LOGO_01,
+  LOGO_02,
+  PROFILE,
+};
 
 export default appTheme;

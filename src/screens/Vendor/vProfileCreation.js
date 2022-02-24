@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import * as React from 'react';
 import VendorLayout from './VendorLayout';
-import {FONTS, SIZES, COLORS, icons} from '../../constants';
+import appTheme from '../../constants/theme'
 import {FormInput, TextButton} from '../../components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -111,12 +111,12 @@ const vProfileCreation = ({navigation}) => {
           header="Business Profile"
           title="Business Profile Creation"
           titleContainerStyle={{
-            paddingHorizontal: SIZES.padding * 2,
-            paddingVertical: SIZES.padding,
+            paddingHorizontal: appTheme.SIZES.padding * 2,
+            paddingVertical: appTheme.SIZES.padding,
           }}
           subtitle="Personalise and own your business with this business creation"
           backButton={() => navigation.goBack()}>
-          <View style={{flex: 1, paddingHorizontal: SIZES.padding + 10}}>
+          <View style={{flex: 1, paddingHorizontal: appTheme.SIZES.padding + 10}}>
 
         
             <FormInput
@@ -125,15 +125,15 @@ const vProfileCreation = ({navigation}) => {
               value={values.businessName}
               label="Business Name"
               placeholder="Type your business name here"
-              containerStyle={{marginTop: SIZES.radius}}
-              customInputStyle={{backgroundColor: COLORS.white}}
+              containerStyle={{marginTop: appTheme.SIZES.radius}}
+              customInputStyle={{backgroundColor: appTheme.COLORS.white}}
               errorMsg={
                 errors.businessName &&
                 touched.businessName && (
                   <Text
                     style={{
                       ...FONTS.body5,
-                      color: COLORS.orange,
+                      color: appTheme.COLORS.orange,
                       marginTop: 5,
                     }}>
                     {errors.businessName}
@@ -150,15 +150,15 @@ const vProfileCreation = ({navigation}) => {
                       height: 20,
                       width: 20,
                       tintColor: !errors.businessName
-                        ? COLORS.green
-                        : COLORS.gray2,
+                        ? appTheme.COLORS.green
+                        : appTheme.COLORS.gray2,
                     }}
                   />
                 </View>
               }
             />
 
-            <Text style={{...FONTS.body5, marginVertical: SIZES.base}}>
+            <Text style={{...FONTS.body5, marginVertical: appTheme.SIZES.base}}>
               This is the business name that will be on display to users on the
               app.
             </Text>
@@ -190,7 +190,7 @@ const vProfileCreation = ({navigation}) => {
                       <Icon
                         name="camera"
                         size={35}
-                        color={COLORS.gray}
+                        color={appTheme.COLORS.gray}
                         style={{
                           opacity: 0.7,
                           alignItems: 'center',
@@ -206,7 +206,7 @@ const vProfileCreation = ({navigation}) => {
               </TouchableOpacity>
             </View>
 
-            <Text style={{...FONTS.body5, marginVertical: SIZES.base}}>
+            <Text style={{...FONTS.body5, marginVertical: appTheme.SIZES.base}}>
               Click on the icon above to add an Business Logo, this is the photo
               that will display to customers scrolling trough vendors in their
               area.
@@ -217,15 +217,15 @@ const vProfileCreation = ({navigation}) => {
                 disabled={!isValid}
                 label="Continue"
                 onPress={() => navigation.navigate('vSetLocation')}
-                labelStyle={{...FONTS.body3, color: isValid ? COLORS.white : "#CBB4B4"}}
+                labelStyle={{...FONTS.body3, color: isValid ? appTheme.COLORS.white : "#CBB4B4"}}
                 buttonContainerStyle={{
                   height: 50,
-                  width: SIZES.width / 2,
-                  marginTop: SIZES.padding,
-                  borderRadius: SIZES.base,
+                  width: appTheme.SIZES.width / 2,
+                  marginTop: appTheme.SIZES.padding,
+                  borderRadius: appTheme.SIZES.base,
                   borderWidth: 2,
-                  backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
-                  borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
+                  backgroundColor: isValid ? appTheme.COLORS.primary : "#EBEBEB",
+                  borderColor: isValid ? appTheme.COLORS.gray3 : "#CBB4B4",
                 }}
               />
             </View>
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   commandButton: {
     padding: 15,
     borderRadius: 10,
-    backgroundColor: COLORS.primary,
+    backgroundColor: appTheme.COLORS.primary,
     alignItems: 'center',
     marginTop: 10,
   },
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   panelButton: {
     padding: 13,
     borderRadius: 10,
-    backgroundColor: COLORS.primary,
+    backgroundColor: appTheme.COLORS.primary,
     alignItems: 'center',
     marginVertical: 7,
   },

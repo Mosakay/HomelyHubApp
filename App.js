@@ -44,7 +44,7 @@ const App = () => {
   return (
     <RegisterContext>
       <NavigationContainer>
-        {isFirstLaunch ? <AuthStack /> : <AppStack />}
+        {!isFirstLaunch ? <AuthStack /> : <AppStack />}
       </NavigationContainer>
     </RegisterContext>
   );

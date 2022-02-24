@@ -1,178 +1,202 @@
 import React from 'react';
-import {View, Text, ImageBackground, Image, Animated, StyleSheet} from 'react-native';
-import {constants, images, FONTS, SIZES, COLORS} from '../../constants';
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  Animated,
+  StyleSheet,
+} from 'react-native';
+
 import { TextButton } from '../../components';
+import { useNavigation } from '@react-navigation/native';
+import { APP_ROUTES } from '../../routes/router';
+import { ONBOARDING_SCREENS } from '../../constants';
+import appTheme from '../../constants/theme';
+import useAuthUser from '../../hooks/useAuthUser';
+import useOnboarding from '../../hooks/useOnboarding'
 
-const OnBoarding = ({navigation}) => {
+const OnBoarding = () => {
 
+  const {toggleOnboardingStatus} = useOnboarding();
 
+  const navigation = useNavigation();
+  const authUser = useAuthUser();
 
-    const scrollX = React.useRef(new Animated.Value(0)).current;
-    const flatListRef = React.useRef()
-
-    const [currentIndex, setCurrentIndex] = React.useState(0)
-
-    const onViewChangeRef = React.useRef(({viewableItems, changed}) => {
-        setCurrentIndex(viewableItems[0].index)
-    })
-
-
-    const Dots = () => {
-        const dotPosition = Animated.divide(scrollX, SIZES.width)
-
-        return (
-            <View
-            style={{
-                flexDirection: 'row',
-                alignItems:'center',
-                justifyContent:'center'
-            }}
-            >
-              {constants.onboarding_screens.map((item, index) => {
-                const dotColor = dotPosition.interpolate({
-                    inputRange: [index - 1, index, index +1],
-                    outputRange: [COLORS.lightGreen, COLORS.primary, COLORS.lightGreen],
-                    extrapolate:'clamp'
-                })
+  function handleStart(){
+        toggleOnboardingStatus();
+ navigation.navigate(APP_ROUTES.UserOrVendor);
+  }
+  function handleSkip() {
+    toggleOnboardingStatus();
+    navigation.replace(APP_ROUTES.UserOrVendor);
+  }
 
 
-               const dotWidth = dotPosition.interpolate({
-                inputRange: [index - 1, index, index +1],
-                outputRange: [10, 30, 10],
-                extrapolate:'clamp'
-            })
+  const scrollX = React.useRef(new Animated.Value(0)).current;
+  const flatListRef = React.useRef();
 
-                  return (
-                    <Animated.View
-                    key={`dot-${index}`}
-                    style={{
-                        borderRadius: 5,
-                        marginHorizontal: 6,
-                        width: dotWidth,
-                        height: 10,
-                        backgroundColor: dotColor
-                    }}
-                    />
-                  )
-              })}
-            </View>
-        )
-    }
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  const onViewChangeRef = React.useRef(({ viewableItems, changed }) => {
+    setCurrentIndex(viewableItems[0].index);
+  });
+
+  const Dots = () => {
+    const dotPosition = Animated.divide(scrollX, appTheme.SIZES.width);
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        {ONBOARDING_SCREENS.map((item, index) => {
+          const dotColor = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [
+              appTheme.COLORS.lightGreen,
+              appTheme.COLORS.primary,
+              appTheme.COLORS.lightGreen,
+            ],
+            extrapolate: 'clamp',
+          });
+
+          const dotWidth = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [10, 30, 10],
+            extrapolate: 'clamp',
+          });
+
+          return (
+            <Animated.View
+              key={`dot-${index}`}
+              style={{
+                borderRadius: 5,
+                marginHorizontal: 6,
+                width: dotWidth,
+                height: 10,
+                backgroundColor: dotColor,
+              }}
+            />
+          );
+        })}
+      </View>
+    );
+  };
 
   function renderHeaderLogo() {
     return (
       <View
         style={{
           position: 'absolute',
-          top: SIZES.height > 800 ? 50 : 25,
+          top: appTheme.SIZES.height > 800 ? 50 : 25,
           left: 0,
           right: 0,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
         <Image
-          source={images.logo_02}
+          source={appTheme.LOGO_02}
           resizeMode="contain"
-          style={{width: SIZES.width * 0.5, height: 200}}
+          style={{ width: appTheme.SIZES.width * 0.5, height: 200 }}
         />
       </View>
-      
     );
   }
 
   function renderFooter() {
-    return <View style={{height: 160}}>
-
+    return (
+      <View style={{ height: 160 }}>
         {/* Pagination */}
-        <View
-        style={{flex: 1, justifyContent:'center'}}>
-            <Dots />
+        <View style={{ flex: 1, justifyContent: 'center' }}>
+          <Dots />
         </View>
 
         {/* Buttons */}
-        {currentIndex < constants.onboarding_screens.length - 1 &&
-        <View
-        style={{
-            flexDirection:'row',
-            justifyContent:'space-between',
-            paddingHorizontal: SIZES.padding,
-            marginVertical: SIZES.padding
-        }}
-        >
+        {currentIndex < ONBOARDING_SCREENS.length - 1 && (
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: appTheme.SIZES.padding,
+              marginVertical: appTheme.SIZES.padding,
+            }}>
             <TextButton
-            label="Skip"
-            buttonContainerStyle={{
-                backgroundColor: null
-            }}
-            labelStyle={{
-                color: COLORS.darkGray2
-            }}
-            onPress={() => navigation.replace("SignIn")}
+              label="Skip"
+              buttonContainerStyle={{
+                backgroundColor: null,
+              }}
+              labelStyle={{
+                color: appTheme.COLORS.darkGray2,
+              }}
+              onPress={handleSkip}
             />
-             <TextButton
-            label="Next"
-            buttonContainerStyle={{
+            <TextButton
+              label="Next"
+              buttonContainerStyle={{
                 height: 45,
                 width: 135,
-                borderRadius: SIZES.radius
-            }}
-
-            onPress={() => {
-                    flatListRef?.current?.scrollToIndex({
-                        index: currentIndex + 1,
-                        animated: true
-                    })
-            }}
+                borderRadius: appTheme.SIZES.radius,
+              }}
+              onPress={() => {
+                flatListRef?.current?.scrollToIndex({
+                  index: currentIndex + 1,
+                  animated: true,
+                });
+              }}
             />
-        </View>}
+          </View>
+        )}
 
-            {currentIndex == constants.onboarding_screens.length - 1 &&
-            <View
+        {currentIndex == ONBOARDING_SCREENS.length - 1 && (
+          <View
             style={{
-                paddingHorizontal: SIZES.padding,
-                marginVertical: SIZES.padding
-            }}
-            >
-                <TextButton
-                label="Let's Get Started"
-                buttonContainerStyle={{height: 60, borderRadius: SIZES.radius}}
-                onPress={() => navigation.navigate("SignIn")}
-                />
-            </View>
-            }
-    </View>
+              paddingHorizontal: appTheme.SIZES.padding,
+              marginVertical: appTheme.SIZES.padding,
+            }}>
+            <TextButton
+              label="Let's Get Started"
+              buttonContainerStyle={{
+                height: 60,
+                borderRadius: appTheme.SIZES.radius,
+              }}
+              onPress={handleStart}
+            />
+          </View>
+        )}
+      </View>
+    );
   }
+
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: COLORS.white,
+        backgroundColor: appTheme.COLORS.white,
       }}>
       {renderHeaderLogo()}
       <Animated.FlatList
         ref={flatListRef}
         horizontal
         pagingEnabled
-        data={constants.onboarding_screens}
+        data={ONBOARDING_SCREENS}
         scrollEventThrottle={16}
         snapToAlignment="center"
         showsHorizontalScrollIndicator={false}
         onScroll={Animated.event(
-            [
-                {nativeEvent: {contentOffset: { x: scrollX}}}
-            ],
-            {useNativeDriver: false}
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false },
         )}
         onViewableItemsChanged={onViewChangeRef.current}
         keyExtractor={item => `${item.id}`}
-        renderItem={({item, index}) => {
+        renderItem={({ item, index }) => {
           return (
-            <View style={{width: SIZES.width}}>
+            <View style={{ width: appTheme.SIZES.width }}>
               {/* Header */}
 
-              <View style={{flex: 3}}>
-               
+              <View style={{ flex: 3 }}>
                 <ImageBackground
                   source={item.backgroundImagee}
                   resizeMode="stretch"
@@ -187,15 +211,13 @@ const OnBoarding = ({navigation}) => {
                     source={item.bannerImage}
                     resizeMode="contain"
                     style={{
-                      width: SIZES.width * 0.5,
-                      height: SIZES.height * 0.5,
-                      marginBottom: -SIZES.padding - 90,
+                      width: appTheme.SIZES.width * 0.5,
+                      height: appTheme.SIZES.height * 0.5,
+                      marginBottom: -appTheme.SIZES.padding - 90,
                     }}
                   />
                 </ImageBackground>
-              
               </View>
-              
 
               {/* Detail */}
 
@@ -205,23 +227,23 @@ const OnBoarding = ({navigation}) => {
                   marginTop: 35,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  paddingHorizontal: SIZES.radius,
+                  paddingHorizontal: appTheme.SIZES.radius,
                 }}>
                 <Text
                   style={{
-                    ...FONTS.h1,
+                    ...appTheme.FONTS.h1,
                     fontSize: 25,
-                    color: COLORS.black,
+                    color: appTheme.COLORS.black,
                   }}>
                   {item.title}
                 </Text>
                 <Text
                   style={{
-                    marginTop: SIZES.radius,
+                    marginTop: appTheme.SIZES.radius,
                     textAlign: 'center',
-                    color: COLORS.darkGray,
-                    paddingHorizontal: SIZES.padding,
-                    ...FONTS.body3,
+                    color: appTheme.COLORS.darkGray,
+                    paddingHorizontal: appTheme.SIZES.padding,
+                    ...appTheme.FONTS.body3,
                   }}>
                   {item.description}
                 </Text>
@@ -232,17 +254,8 @@ const OnBoarding = ({navigation}) => {
       />
 
       {renderFooter()}
-
     </View>
-
-
-
   );
 };
-
-
-const styles = StyleSheet.create({
-
-}) 
 
 export default OnBoarding;

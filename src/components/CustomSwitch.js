@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
-import {COLORS, FONTS, SIZES} from '../constants';
-
-const CustomSwitch = ({value, onChange}) => {
+import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native';
+import appTheme from '../constants/theme';
+const CustomSwitch = ({ value, onChange }) => {
   return (
     <TouchableWithoutFeedback onPress={() => onChange(value)}>
       <View
@@ -15,7 +14,9 @@ const CustomSwitch = ({value, onChange}) => {
           <View
             style={{
               ...styles.dot,
-              backgroundColor: value ? COLORS.white : COLORS.gray,
+              backgroundColor: value
+                ? appTheme.COLORS.white
+                : appTheme.COLORS.gray,
             }}
           />
         </View>
@@ -23,9 +24,9 @@ const CustomSwitch = ({value, onChange}) => {
         {/* Text */}
         <Text
           style={{
-            color: value ? COLORS.primary : COLORS.gray,
-            marginLeft: SIZES.base,
-            ...FONTS.body4,
+            color: value ? appTheme.COLORS.primary : appTheme.COLORS.gray,
+            marginLeft: appTheme.SIZES.base,
+            ...appTheme.FONTS.body4,
           }}>
           Save Me
         </Text>
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-end',
     borderRadius: 10,
-    backgroundColor: COLORS.primary,
+    backgroundColor: appTheme.COLORS.primary,
   },
   switchOffContainer: {
     width: 40,
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
     paddingLeft: 2,
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: COLORS.gray,
+    borderColor: appTheme.COLORS.gray,
     borderRadius: 10,
   },
   dot: {
