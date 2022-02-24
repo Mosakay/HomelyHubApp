@@ -1,10 +1,15 @@
 import OnBoarding from "./OnBoarding/OnBoarding"
+import UserOrVendor from "./Authentication/UserOrVendor"
 
 //Routes
 
 import AppStack from "../routes/AppStack"
-import AccountNavigation from "../routes/AppStack"
 import AuthStack from "../routes/AuthStack"
+
+
+import UserStack from "../routes/UserStack"
+import VendorStack from "../routes/VendorStack"
+
 
 // Authentication
 import AuthLayout from "./Authentication/AuthLayout"
@@ -64,7 +69,6 @@ export {
     Settings,
     Account,
     AppStack,
-    AccountNavigation,
     AuthStack,
     Login,
     Register,
@@ -73,4 +77,8 @@ export {
     vProfileCreation,
     vSetLocation,
     vForgotPassword,
+    UserOrVendor,
+    UserStack,
+    VendorStack,
+
 }

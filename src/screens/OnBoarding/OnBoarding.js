@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, ImageBackground, Image, Animated, StyleSheet} from 'react-native';
 import {constants, images, FONTS, SIZES, COLORS} from '../../constants';
 import { TextButton } from '../../components';
+import {APP_ROUTES} from '../../routes/router';
 
 const OnBoarding = ({navigation}) => {
 
@@ -107,7 +108,7 @@ const OnBoarding = ({navigation}) => {
             labelStyle={{
                 color: COLORS.darkGray2
             }}
-            onPress={() => navigation.replace("SignIn")}
+            onPress={() => navigation.replace(APP_ROUTES.UserOrVendor)}
             />
              <TextButton
             label="Next"
@@ -136,7 +137,7 @@ const OnBoarding = ({navigation}) => {
                 <TextButton
                 label="Let's Get Started"
                 buttonContainerStyle={{height: 60, borderRadius: SIZES.radius}}
-                onPress={() => navigation.navigate("SignIn")}
+                onPress={() => navigation.navigate(APP_ROUTES.UserOrVendor)}
                 />
             </View>
             }
