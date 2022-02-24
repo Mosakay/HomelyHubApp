@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import Http from './Http';
 import jwt from 'jwt-decode';
-import { EndPoints, RtkqTagEnum } from '../constants/index';
+import { EndPoints, RtkqTagEnum } from '../constants';
 
 export const homelyHubApiQuery = createApi({
   reducerPath: 'homelyHub',

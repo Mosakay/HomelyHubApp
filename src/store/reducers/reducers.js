@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { homelyHubApiQuery } from "src/apis/QueryApi";
+import { homelyHubApiQuery } from "../../apis/QueryApi";
 import globalSlice from "../StoreSlice";
 
 const rootReducer = combineReducers({

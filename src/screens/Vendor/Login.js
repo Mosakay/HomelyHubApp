@@ -1,4 +1,4 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, Button } from 'react-native';
 import React from 'react';
 import VendorLayout from './VendorLayout';
 import { icons } from '../../constants/icons';
@@ -11,9 +11,10 @@ import { useContext } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { APP_ROUTES } from '../../routes/router';
+
+
 const Login = () => {
   const navigation = useNavigation();
   const [rememberMe, setRememberMe] = React.useState(false);
@@ -82,20 +83,20 @@ const Login = () => {
         <VendorLayout
           title="Vendor Login"
           titleContainerStyle={{
-            paddingHorizontal: appTheme?.SIZES?.padding * 2,
-            paddingVertical: appTheme?.SIZES?.padding,
+            paddingHorizontal: appTheme?.SIZES.padding * 2,
+            paddingVertical: appTheme?.SIZES.padding,
           }}
           subtitle="Login to your business profile using your email and password"
           header="Vendor Account"
           formInput={
-            <View>
+            <View style={{flex:1}}>
               <FormInput
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
                 value={values.email}
                 iconName="email"
-                iconStyle={{ paddingRight: appTheme?.SIZES.base }}
-                iconSize={19}
+                iconstyle={{ paddingRight: appTheme?.SIZES.base }}
+                iconsize={19}
                 label="Email"
                 customInputStyle={{ backgroundColor: appTheme?.COLORS.white }}
                 containerStyle={{ paddingTop: appTheme?.SIZES.padding + 10 }}
@@ -133,8 +134,8 @@ const Login = () => {
                 onBlur={handleBlur('password')}
                 value={values.password}
                 iconName="lock"
-                iconStyle={{ paddingRight: appTheme?.SIZES.base }}
-                iconSize={19}
+                iconstyle={{ paddingRight: appTheme?.SIZES.base }}
+                iconsize={19}
                 label="Password"
                 customInputStyle={{ backgroundColor: appTheme?.COLORS.white }}
                 containerStyle={{ paddingTop: appTheme?.SIZES.base + 10 }}

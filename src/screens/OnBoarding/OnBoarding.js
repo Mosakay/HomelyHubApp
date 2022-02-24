@@ -14,21 +14,18 @@ import { APP_ROUTES } from '../../routes/router';
 import { ONBOARDING_SCREENS } from '../../constants';
 import appTheme from '../../constants/theme';
 import useAuthUser from '../../hooks/useAuthUser';
-import useOnboarding from '../../hooks/useOnboarding'
 
 const OnBoarding = () => {
 
-  const {toggleOnboardingStatus} = useOnboarding();
+
 
   const navigation = useNavigation();
   const authUser = useAuthUser();
 
   function handleStart(){
-        toggleOnboardingStatus();
  navigation.navigate(APP_ROUTES.UserOrVendor);
   }
   function handleSkip() {
-    toggleOnboardingStatus();
     navigation.replace(APP_ROUTES.UserOrVendor);
   }
 
