@@ -18,12 +18,12 @@ const UserOrVendor = () => {
 
   const handleVendorClick = () => {
     // dispatch(userTypeAction(CUSTOMER_OR_VENDOR.Vendor));
-    navigation.navigate(APP_ROUTES.Login);
+    navigation.navigate(APP_ROUTES.VendorStack);
   };
 
   const handleCustomerClick = () => {
     // dispatch(userTypeAction(CUSTOMER_OR_VENDOR.Customer));
-    navigation.navigate(APP_ROUTES.SignIn);
+    navigation.navigate(APP_ROUTES.UserStack);
   };
 
   return (

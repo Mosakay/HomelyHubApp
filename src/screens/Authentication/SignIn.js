@@ -343,7 +343,7 @@ const SignIn = ({navigation}) => {
 
               {/* Guest */}
 
-              {guest && (
+              {!guest && (
                 <View
                   style={{
                     flexDirection: 'row',
@@ -369,7 +369,7 @@ const SignIn = ({navigation}) => {
                       color: COLORS.darkGray,
                       fontWeight: 'bold',
                     }}
-                    onPress={() => navigation.navigate('AppStack')}
+                    onPress={() => navigation.navigate('UserDashboard')}
                   />
                 </View>
               )}

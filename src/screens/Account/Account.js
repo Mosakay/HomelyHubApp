@@ -147,19 +147,6 @@ const Account = ({navigation}) => {
 
         
       </View>
-      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-        <TextButton
-          label="Business"
-          labelStyle={{...FONTS.h3, color: COLORS.black}}
-          onPress={() => navigation.replace("vendorStack")}
-          buttonContainerStyle={{
-            marginTop: SIZES.base,
-            backgroundColor: null,
-          }}
-        />
-
-        
-      </View>
     </View>
   );
 };

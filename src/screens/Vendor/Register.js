@@ -6,6 +6,7 @@ import {FormInput, TextButton} from '../../components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {APP_ROUTES} from '../../routes/router';
 
 
 const Register = ({navigation}) => {
@@ -13,7 +14,7 @@ const Register = ({navigation}) => {
   
   const registerVendor = async (values) => {
     const store = await AsyncStorage.setItem('fieldsVendor', JSON.stringify(values))
-    navigation.navigate('Register2')
+    navigation.navigate(APP_ROUTES.Register2)
   }
 
   const signUpValidationSchema = yup.object().shape({
@@ -206,7 +207,7 @@ const Register = ({navigation}) => {
 
                     
                   }}
-                  onPress={() => navigation.navigate('Login')}
+                  onPress={() => navigation.navigate(APP_ROUTES.Login)}
                 />
               </View>
             </View>

@@ -3,15 +3,11 @@ import UserOrVendor from "./Authentication/UserOrVendor"
 
 //Routes
 
-import AppStack from "../routes/AppStack"
-import AuthStack from "../routes/AuthStack"
-
-
 import UserStack from "../routes/UserStack"
 import VendorStack from "../routes/VendorStack"
 
 
-// Authentication
+// User_Auth
 import AuthLayout from "./Authentication/AuthLayout"
 import SignIn from "./Authentication/SignIn"
 import SignUp from "./Authentication/SignUp"
@@ -68,8 +64,6 @@ export {
     Notification,
     Settings,
     Account,
-    AppStack,
-    AuthStack,
     Login,
     Register,
     Register2,

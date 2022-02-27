@@ -16,6 +16,7 @@ import * as yup from 'yup';
 import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {APP_ROUTES} from '../../routes/router';
 
 const vProfileCreation = ({navigation}) => {
 
@@ -216,7 +217,7 @@ const vProfileCreation = ({navigation}) => {
               <TextButton
                 disabled={!isValid}
                 label="Continue"
-                onPress={() => navigation.navigate('vSetLocation')}
+                onPress={() => navigation.navigate(APP_ROUTES.vSetLocation)}
                 labelStyle={{...FONTS.body3, color: isValid ? COLORS.white : "#CBB4B4"}}
                 buttonContainerStyle={{
                   height: 50,

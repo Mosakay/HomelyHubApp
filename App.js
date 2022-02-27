@@ -58,39 +58,22 @@ const App = () => {
   }
 
   return (
-
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={APP_ROUTES.OnBoarding}>
+        initialRouteName={isFirstLaunch ? APP_ROUTES.OnBoarding : APP_ROUTES.UserOrVendor}>
         <Stack.Screen name={APP_ROUTES.OnBoarding} component={OnBoarding} />
 
         <Stack.Screen name={APP_ROUTES.UserOrVendor} component={UserOrVendor} />
-
-        <Stack.Group>
-          <Stack.Screen name={APP_ROUTES.Login} component={Login} />
-          <Stack.Screen name={APP_ROUTES.Register} component={Register} />
-          <Stack.Screen
-            name={APP_ROUTES.vForgotPassword}
-            component={vForgotPassword}
-          />
-        </Stack.Group>
+        <Stack.Screen name={APP_ROUTES.VendorStack} component={VendorStack} />
+        <Stack.Screen name={APP_ROUTES.UserStack} component={UserStack} />
       </Stack.Navigator>
     </NavigationContainer>
-
-   
-
-    
-    /* <RegisterContext>
-      <NavigationContainer>
-        {!isFirstLaunch ? <AuthStack /> : <AppStack />}
-      </NavigationContainer>
-    </RegisterContext>  */
-
-    
   );
 };
 
 export default App;
+
+

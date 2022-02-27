@@ -10,6 +10,7 @@ import VendorLayout from './VendorLayout';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {APP_ROUTES} from '../../routes/router';
 
 const BuildingSchema = yup.object().shape({
   businessName: yup
@@ -206,7 +207,7 @@ const vSetLocation = ({navigation}) => {
       <TextButton
         disabled={!isValid}
         label="Continue"
-        onPress={() => navigation.navigate('vMenuCreation')}
+        onPress={() => navigation.navigate(APP_ROUTES.vMenuCreation)}
         labelStyle={{...FONTS.body3, color: isValid ? COLORS.white : "#CBB4B4"}}
         buttonContainerStyle={{
           height: 50,

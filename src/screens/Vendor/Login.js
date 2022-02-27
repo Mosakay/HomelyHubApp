@@ -10,6 +10,7 @@ import {useContext} from 'react';
 import axios from 'axios';
 import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {APP_ROUTES} from '../../routes/router';
 
 
 const Login = ({navigation}) => {
@@ -85,7 +86,7 @@ const Login = ({navigation}) => {
           }}
           subtitle="Login to your business profile using your email and password"
           header="Vendor Account"
-          backButton={() => navigation.replace('Account')}
+          backButton={() => navigation.replace(APP_ROUTES.UserOrVendor)}
           formInput={
             <View>
               <FormInput
@@ -206,7 +207,7 @@ const Login = ({navigation}) => {
                       color: COLORS.gray,
                       ...FONTS.body4,
                     }}
-                    onPress={() => navigation.navigate('vForgotPassword')}
+                    onPress={() => navigation.navigate(APP_ROUTES.vForgotPassword)}
                   />
                 </View>
               </View>
@@ -261,7 +262,7 @@ const Login = ({navigation}) => {
                     color: COLORS.green2,
                     fontWeight: 'bold',
                   }}
-                  onPress={() => navigation.navigate('Register')}
+                  onPress={() => navigation.navigate(APP_ROUTES.Register)}
                 />
               </View>
             </View>

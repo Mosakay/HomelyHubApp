@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
 import { BASE_URL } from '../../context/config';
+import {APP_ROUTES} from '../../routes/router';
 
 
 
@@ -60,7 +61,7 @@ const Register2 = ({navigation}) => {
         console.log(data);
 
         axios.post(`${BASE_URL}/Security/VendorRegister`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
-          navigation.replace('vProfileCreation')
+          navigation.replace(APP_ROUTES.vProfileCreation)
         }).catch((err) => {
           console.log(err.message)
         })
@@ -226,7 +227,7 @@ const Register2 = ({navigation}) => {
                     fontWeight: 'bold',
                     textDecorationLine: 'underline'
                   }}
-                  onPress={() => navigation.navigate('Login')}
+                  onPress={() => navigation.navigate(APP_ROUTES.Login)}
                 />
               </View>
             </View>
