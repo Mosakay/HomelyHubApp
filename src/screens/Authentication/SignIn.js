@@ -21,6 +21,7 @@ import {useContext} from 'react';
 import axios from 'axios';
 import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { APP_ROUTES } from '../../routes/router';
 
 const SignIn = ({navigation}) => {
   const [guest, setGuest] = React.useState(null);
@@ -57,7 +58,7 @@ const SignIn = ({navigation}) => {
       console.log(JSON.stringify(response?.data));
     
       if (userRequest?.data.id) {
-        navigation.navigate('Dashboard');
+        navigation.navigate(APP_ROUTES.CustomerDashboard);
       } else {
         console.log('Incorrect credentials');
       }
@@ -284,7 +285,7 @@ const SignIn = ({navigation}) => {
                     color: COLORS.gray,
                     ...FONTS.body4,
                   }}
-                  onPress={() => navigation.navigate('ForgotPassword')}
+                  onPress={() => navigation.navigate(APP_ROUTES.ForgotPassword)}
                 />
               </View>
 
@@ -337,7 +338,7 @@ const SignIn = ({navigation}) => {
                     color: COLORS.green2,
                     fontWeight: 'bold',
                   }}
-                  onPress={() => navigation.navigate('SignUp')}
+                  onPress={() => navigation.navigate(APP_ROUTES.SignUp)}
                 />
               </View>
 
@@ -369,7 +370,7 @@ const SignIn = ({navigation}) => {
                       color: COLORS.darkGray,
                       fontWeight: 'bold',
                     }}
-                    onPress={() => navigation.navigate('UserDashboard')}
+                    onPress={() => navigation.navigate(APP_ROUTES.CustomerDashboard)}
                   />
                 </View>
               )}

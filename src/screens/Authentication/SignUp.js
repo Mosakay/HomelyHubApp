@@ -11,6 +11,7 @@ import {AuthContext} from '../../context/AuthContext';
 import {useContext} from 'react';
 import {RegisterContext} from '../../context/RegisterContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { APP_ROUTES } from '../../routes/router';
 
 const SignUp = ({navigation}) => {
   const [email, setEmail] = React.useState('');
@@ -33,7 +34,7 @@ const SignUp = ({navigation}) => {
 
   const registerUser = async values => {
     const store = await AsyncStorage.setItem('fields', JSON.stringify(values));
-    navigation.navigate('SignUp2');
+    navigation.navigate(APP_ROUTES.SignUp2);
   };
 
   const signUpValidationSchema = yup.object().shape({
@@ -438,7 +439,7 @@ const SignUp = ({navigation}) => {
                   color: COLORS.green2,
                   fontWeight: 'bold',
                 }}
-                onPress={() => navigation.navigate('SignIn')}
+                onPress={() => navigation.navigate(APP_ROUTES.SignIn)}
               />
             </View>
           </View>

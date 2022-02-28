@@ -11,7 +11,7 @@ import axios from 'axios';
 import { BASE_URL } from '../../context/config';
 import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { APP_ROUTES } from '../../routes/router';
 
 const SignUp2 = ({navigation}) => {
   const [password, setPassword] = React.useState('');
@@ -65,7 +65,7 @@ const SignUp2 = ({navigation}) => {
         console.log(data);
    
         axios.post(`${BASE_URL}/Security/Register`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
-          navigation.replace('SignIn')
+          navigation.replace(APP_ROUTES.OTP)
         }).catch((err) => {
           console.log(err.message)
         })
@@ -228,7 +228,7 @@ const SignUp2 = ({navigation}) => {
                   color: COLORS.green2,
                   fontWeight: 'bold',
                 }}
-                onPress={() => navigation.navigate('SignIn')}
+                onPress={() => navigation.navigate(APP_ROUTES.SignIn)}
               />
             </View>
           </View>

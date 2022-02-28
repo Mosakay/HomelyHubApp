@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
+import { APP_ROUTES } from '../../routes/router';
 
 const Account = ({navigation}) => {
 
@@ -59,7 +60,7 @@ const Account = ({navigation}) => {
             />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('EditProfile')}
+          onPress={() => navigation.navigate(APP_ROUTES.EditProfile)}
         />
 
         <TextButton
@@ -74,7 +75,7 @@ const Account = ({navigation}) => {
             />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('SavedAddress')}
+          onPress={() => navigation.navigate(APP_ROUTES.SavedAddress)}
         />
 
         <TextButton
@@ -89,7 +90,7 @@ const Account = ({navigation}) => {
             />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('PaymentMethods')}
+          onPress={() => navigation.navigate(APP_ROUTES.PaymentMethods)}
         />
 
         <TextButton
@@ -104,7 +105,7 @@ const Account = ({navigation}) => {
             />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('ContactPref')}
+          onPress={() => navigation.navigate(APP_ROUTES.ContactPref)}
         />
 
         <TextButton
@@ -119,7 +120,7 @@ const Account = ({navigation}) => {
             />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => setIfIsSignedIn(!ifIsSignedIn) & navigation.navigate('SignIn')}
+          onPress={() => setIfIsSignedIn(!ifIsSignedIn) & navigation.navigate(APP_ROUTES.SignIn)}
         />
       </View>
 

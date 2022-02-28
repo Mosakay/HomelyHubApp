@@ -28,19 +28,20 @@ const Tab = createMaterialBottomTabNavigator();
 const AccountNavigation = ({navigation}) => {
   return (
       <Stack.Navigator
-      initialRouteName='Account'
+      initialRouteName={APP_ROUTES.UserAccount}
         screenOptions={{
           headerShown: false,
         }}>
-        <Stack.Screen name="Account" component={Account} />
-        <Stack.Screen name="EditProfile" component={EditProfile} />
-        <Stack.Screen name="SavedAddress" component={SavedAddress} />
-        <Stack.Screen name="PaymentMethods" component={PaymentMethods} />
-        <Stack.Screen name="ContactPref" component={ContactPref} />
-        <Stack.Screen name={"SignIn"} component={SignIn} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-        <Stack.Screen name="SignUp2" component={SignUp2} />
+        <Stack.Screen name={APP_ROUTES.UserAccount} component={Account} />
+        <Stack.Screen name={APP_ROUTES.EditProfile} component={EditProfile} />
+        <Stack.Screen name={APP_ROUTES.SavedAddress} component={SavedAddress} />
+        <Stack.Screen name={APP_ROUTES.PaymentMethods} component={PaymentMethods} />
+        <Stack.Screen name={APP_ROUTES.ContactPref} component={ContactPref} />
+        <Stack.Screen name={APP_ROUTES.SignIn} component={SignIn} />
+        <Stack.Screen name={APP_ROUTES.SignUp} component={SignUp} />
+        <Stack.Screen name={APP_ROUTES.SignUp2} component={SignUp2} />
+        <Stack.Screen name={APP_ROUTES.ForgotPassword} component={ForgotPassword} />
+        
       </Stack.Navigator>
   );
 };
@@ -50,13 +51,13 @@ const Dashboard = ({navigation}) => {
   return (
     
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName={APP_ROUTES.UserHome}
       activeColor={COLORS.primary}
       inactiveColor={COLORS.darkGray}
       labelStyle={{fontSize: 12}}
       barStyle={{backgroundColor: COLORS.white, padding: 5}}>
       <Tab.Screen
-        name="Home"
+        name={APP_ROUTES.UserHome}
         component={Home}
         options={{
           tabBarLabel: 'Menu',
@@ -66,7 +67,7 @@ const Dashboard = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="CartTab"
+        name={APP_ROUTES.UserOrders}
         component={CartTab}
         options={{
           tabBarLabel: 'Orders',
@@ -76,10 +77,9 @@ const Dashboard = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="My Account"
+        name={APP_ROUTES.NavAccount}
         component={AccountNavigation}
         options={{
-          title: 'My Account',
           tabBarLabel: 'Account',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="person-outline" color={color} size={26} />
@@ -87,7 +87,7 @@ const Dashboard = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="Settings"
+        name={APP_ROUTES.UserSettings}
         component={Settings}
         options={{
           tabBarLabel: 'Settings',
@@ -108,13 +108,13 @@ const AuthStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={'SignIn'}>
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="SignUp2" component={SignUp2} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="Otp" component={Otp} />
-      <Stack.Screen name={"UserDashboard"} component={Dashboard} />
+      initialRouteName={APP_ROUTES.CustomerDashboard}>
+      <Stack.Screen name={APP_ROUTES.SignIn} component={SignIn} />
+      <Stack.Screen name={APP_ROUTES.SignUp} component={SignUp} />
+      <Stack.Screen name={APP_ROUTES.SignUp2} component={SignUp2} />
+      <Stack.Screen name={APP_ROUTES.ForgotPassword} component={ForgotPassword} />
+      <Stack.Screen name={APP_ROUTES.OTP} component={Otp} />
+      <Stack.Screen name={APP_ROUTES.CustomerDashboard} component={Dashboard} />
     </Stack.Navigator>
 
   )

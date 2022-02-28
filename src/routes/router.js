@@ -12,14 +12,30 @@ export const APP_ROUTES={
     CustomerAuthStack:'CUSTOMER_AUTH_STACK',
     CustomerDashboard:'CUSTOMER_DASHBOARD',
 
-    //USER
+    //USER_AUTH
     SignIn:"USER_LOGIN",
     SignUp:"USER_REGISTER",
     SignUp2:"USER_REGISTER2",
     ForgotPassword:"USER_FORGOT_PASSWORD",
+    OTP:'OTP',
+
+    //USER_ACCOUNT
+    NavAccount:'NAV_ACCOUNT',
+    Account: "ACCOUNT",
+    EditProfile:'EDIT_PROFILE',
+    ContactPref:'CONTACT_PREFERENCES',
+    PaymentMethods:'PAYMENT_METHODS',
+    SavedAddress:'SAVED_ADDRESSES',
+
+    //USER_DASHBOARD
+
+    UserHome:'USER_HOME',
+    UserOrders:'USER_ORDERS',
+    UserAccount:'USER_ACCOUNT',
+    UserSettings:'USER_SETTINGS',
 
 
-    //VENDOR
+    //VENDOR_AUTH
     Login:"VENDOR_LOGIN",
     Register:"VENDOR_REGISTER",
     Register2:"VENDOR_REGISTER2",

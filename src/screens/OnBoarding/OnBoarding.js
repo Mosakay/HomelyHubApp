@@ -108,7 +108,7 @@ const OnBoarding = ({navigation}) => {
             labelStyle={{
                 color: COLORS.darkGray2
             }}
-            onPress={() => navigation.replace(APP_ROUTES.UserOrVendor)}
+            onPress={() => navigation.replace(APP_ROUTES.UserStack)}
             />
              <TextButton
             label="Next"
@@ -137,7 +137,7 @@ const OnBoarding = ({navigation}) => {
                 <TextButton
                 label="Let's Get Started"
                 buttonContainerStyle={{height: 60, borderRadius: SIZES.radius}}
-                onPress={() => navigation.navigate(APP_ROUTES.UserOrVendor)}
+                onPress={() => navigation.navigate(APP_ROUTES.UserStack)}
                 />
             </View>
             }

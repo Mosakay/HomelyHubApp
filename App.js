@@ -58,6 +58,7 @@ const App = () => {
   }
 
   return (
+    
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -71,6 +72,7 @@ const App = () => {
         <Stack.Screen name={APP_ROUTES.UserStack} component={UserStack} />
       </Stack.Navigator>
     </NavigationContainer>
+    
   );
 };
 
