@@ -58,13 +58,12 @@ const App = () => {
   }
 
   return (
-    
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={isFirstLaunch ? APP_ROUTES.OnBoarding : APP_ROUTES.UserOrVendor}>
+        initialRouteName={isFirstLaunch ? APP_ROUTES.OnBoarding : APP_ROUTES.UserStack}>
         <Stack.Screen name={APP_ROUTES.OnBoarding} component={OnBoarding} />
 
         <Stack.Screen name={APP_ROUTES.UserOrVendor} component={UserOrVendor} />
@@ -72,7 +71,6 @@ const App = () => {
         <Stack.Screen name={APP_ROUTES.UserStack} component={UserStack} />
       </Stack.Navigator>
     </NavigationContainer>
-    
   );
 };
 

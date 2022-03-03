@@ -57,6 +57,7 @@ const Register2 = ({navigation}) => {
       }}
       validateOnMount={true}
       onSubmit={values => {
+        navigation.replace(APP_ROUTES.vProfileCreation)
         const data = {...formFields, ...values}
         console.log(data);
 

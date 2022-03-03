@@ -11,6 +11,9 @@ import {
   Settings,
   CartTab,
   Account,
+  VendorProfile,
+  CustomerSupport,
+  UserOrVendor
 } from '../screens';
 import EditProfile from '../screens/Account/EditProfile';
 import SavedAddress from '../screens/Account/SavedAddress';
@@ -41,6 +44,7 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name={APP_ROUTES.SignUp} component={SignUp} />
         <Stack.Screen name={APP_ROUTES.SignUp2} component={SignUp2} />
         <Stack.Screen name={APP_ROUTES.ForgotPassword} component={ForgotPassword} />
+        <Stack.Screen name={APP_ROUTES.CustomerSupport} component={CustomerSupport} />
         
       </Stack.Navigator>
   );
@@ -58,7 +62,7 @@ const Dashboard = ({navigation}) => {
       barStyle={{backgroundColor: COLORS.white, padding: 5}}>
       <Tab.Screen
         name={APP_ROUTES.UserHome}
-        component={Home}
+        component={UserOrVendor}
         options={{
           tabBarLabel: 'Menu',
           tabBarIcon: ({color}) => (
@@ -68,7 +72,7 @@ const Dashboard = ({navigation}) => {
       />
       <Tab.Screen
         name={APP_ROUTES.UserOrders}
-        component={CartTab}
+        component={VendorProfile}
         options={{
           tabBarLabel: 'Orders',
           tabBarIcon: ({color}) => (
@@ -108,7 +112,7 @@ const AuthStack = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName={APP_ROUTES.CustomerDashboard}>
+      initialRouteName={APP_ROUTES.SignIn}>
       <Stack.Screen name={APP_ROUTES.SignIn} component={SignIn} />
       <Stack.Screen name={APP_ROUTES.SignUp} component={SignUp} />
       <Stack.Screen name={APP_ROUTES.SignUp2} component={SignUp2} />
@@ -130,6 +134,7 @@ const UserStack = () => {
       screenOptions={{
         headerShown: false,
       }}
+      initialRouteName={APP_ROUTES.CustomerDashboard}
       >
       <Stack.Screen name={APP_ROUTES.CustomerAuthStack} component={AuthStack} />
       <Stack.Screen name={APP_ROUTES.CustomerDashboard} component={Dashboard} />

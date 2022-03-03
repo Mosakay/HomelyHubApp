@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
+import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {
   Home,
   Settings,
@@ -10,14 +11,18 @@ import {
   Login,
   Register,
   Register2,
-  vMenuCreation,
+  vStoreCreation,
   vProfileCreation,
   vSetLocation,
   vForgotPassword,
+  VendorProfile
 } from '../screens';
 import {APP_ROUTES} from '../routes/router';
+import {COLORS} from '../constants';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createStackNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const AuthStack = ({ navigation }) => {
   return (
@@ -28,7 +33,7 @@ const AuthStack = ({ navigation }) => {
       <Stack.Screen name={APP_ROUTES.Login} component={Login} />
       <Stack.Screen name={APP_ROUTES.Register} component={Register} />
       <Stack.Screen name={APP_ROUTES.Register2} component={Register2} />
-      <Stack.Screen name={APP_ROUTES.vMenuCreation} component={vMenuCreation} />
+      <Stack.Screen name={APP_ROUTES.vStoreCreation} component={vStoreCreation} />
       <Stack.Screen name={APP_ROUTES.vProfileCreation} component={vProfileCreation} />
       <Stack.Screen name={APP_ROUTES.vSetLocation} component={vSetLocation} />
       <Stack.Screen name={APP_ROUTES.vForgotPassword} component={vForgotPassword} />
@@ -68,10 +73,9 @@ const Dashboard = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="My Account"
-        component={AccountNavigation}
+        name={APP_ROUTES.VendorProfile}
+        component={VendorProfile}
         options={{
-          title: 'My Account',
           tabBarLabel: 'Account',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="person-outline" color={color} size={26} />

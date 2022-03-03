@@ -26,6 +26,7 @@ export const APP_ROUTES={
     ContactPref:'CONTACT_PREFERENCES',
     PaymentMethods:'PAYMENT_METHODS',
     SavedAddress:'SAVED_ADDRESSES',
+    CustomerSupport:'CUSTOMER_SUPPORT',
 
     //USER_DASHBOARD
 
@@ -40,9 +41,13 @@ export const APP_ROUTES={
     Register:"VENDOR_REGISTER",
     Register2:"VENDOR_REGISTER2",
     vForgotPassword:"VENDOR_FORGOT_PASSWORD",
-    vMenuCreation:'VENDOR_MENU_CREATION',
+    vStoreCreation:'VENDOR_STORE_CREATION',
     vProfileCreation:'VENDOR_PROFILE_CREATION',
     vSetLocation:'VENDOR_SET_LOCATION',
+
+    //VENDOR
+
+    VendorProfile:'VENDOR_PROFILE',
   
   }
   
