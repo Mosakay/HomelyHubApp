@@ -48,6 +48,10 @@ import vMenuCreation from './Vendor/vMenuCreation'
 import vProfileCreation from './Vendor/vProfileCreation'
 import vSetLocation from './Vendor/vSetLocation'
 
+//Customer support
+
+import CustomerSupport from "./Account/CustomerSupport"
+
 export {
     OnBoarding,
     AuthLayout,
@@ -73,4 +77,5 @@ export {
     vProfileCreation,
     vSetLocation,
     vForgotPassword,
+    CustomerSupport,
 }

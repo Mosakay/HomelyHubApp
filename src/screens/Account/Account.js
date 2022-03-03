@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Account = ({navigation}) => {
 
@@ -21,6 +22,9 @@ const Account = ({navigation}) => {
         }}>
         <Text style={{...FONTS.h3, color: COLORS.black}}>My Account</Text>
       </View>
+      <ScrollView>
+
+      
       <View
         style={{
           flexDirection: 'row',
@@ -143,6 +147,7 @@ const Account = ({navigation}) => {
             borderRadius: SIZES.base,
             backgroundColor: COLORS.primary,
           }}
+          onPress={() => navigation.navigate("CustomerSupport")}
         />
 
         
@@ -160,6 +165,7 @@ const Account = ({navigation}) => {
 
         
       </View>
+      </ScrollView>
     </View>
   );
 };
