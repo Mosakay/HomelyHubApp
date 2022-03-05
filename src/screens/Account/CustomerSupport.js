@@ -82,9 +82,8 @@ const CustomerSupport = ({navigation}) => {
         padding:SIZES.padding -1,
         alignSelf:'center',
         marginTop: 50,
+        marginBottom: 30,
         borderRadius:10,
-
-
       }}
       >
         <Text
@@ -107,62 +106,130 @@ const CustomerSupport = ({navigation}) => {
 
       {/* buttons for diffrent sections */}
       <View>
-      <TextButton
-          label="Getting started"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 8}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          // onPress={() => navigation.navigate('EditProfile')}
-        />
-        <TextButton
-          label="Contact us"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 8}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          // onPress={() => navigation.navigate('EditProfile')}
-        />
-        <TextButton
-          label="Feedback"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 8}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          // onPress={() => navigation.navigate('EditProfile')}
-        />
-        <TextButton
-          label="Legal"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 8}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          // onPress={() => navigation.navigate('EditProfile')}
-        />
+        {/* text button 1 and 2 */}
+        <View
+        style={{
+          justifyContent:'center',
+          alignItems:'center',
+          flexDirection:'row',
+
+        }}
+        ><TouchableOpacity
+        style={{
+          padding:SIZES.padding,
+        }}
+        // onPress={onPress}
+        >
+          <View style={{
+            padding:SIZES.padding,
+            flexDirection:'column', 
+            alignItems: 'center',
+            justifyContent:'center',
+            flexDirection:'column',
+            backgroundColor:COLORS.white,
+            borderRadius:SIZES.radius,
+            maxHeight: SIZES.height- 200,
+            maxWidth: SIZES.width - 200,
+
+            }}>
+            <FAIcon name="lightbulb" size={22} />
+            <Text
+            style={{
+              flexWrap:'wrap',
+            }}
+            >
+              Getting
+            </Text>
+            <Text>
+            started
+            </Text>
+          </View>  
+        </TouchableOpacity>
+        <TouchableOpacity
+        style={{
+          padding:SIZES.padding,
+        }}
+        // onPress={onPress}
+        >
+          <View style={{
+            padding:SIZES.padding,
+            flexDirection:'column', 
+            alignItems: 'center',
+            justifyContent:'center',
+            flexDirection:'column',
+            backgroundColor:COLORS.white,
+            borderRadius:SIZES.radius,
+            maxHeight: SIZES.height- 200,
+            maxWidth: SIZES.width - 200,
+            }}>
+            <Icon name="contact-phone" size={22} />
+            <Text
+            style={{
+            }}
+            >
+             Contact us
+            </Text>
+          </View>  
+        </TouchableOpacity>
+        </View>
+        {/* text button 3 and 4 */}
+        <View
+        style={{
+          justifyContent:'center',
+          alignItems:'center',
+          flexDirection:'row',
+        }}>
+        <TouchableOpacity
+        style={{
+          padding:SIZES.padding,
+        }}
+        // onPress={onPress}
+        >
+          <View style={{
+            padding:SIZES.padding,
+            flexDirection:'column', 
+            alignItems: 'center',
+            justifyContent:'center',
+            flexDirection:'column',
+            backgroundColor:COLORS.white,
+            borderRadius:SIZES.radius
+            }}>
+            <Icon name="feedback" size={22} />
+            <Text
+            style={{
+            }}
+            >
+             Feedback
+            </Text>
+          </View>  
+        </TouchableOpacity>
+        <TouchableOpacity
+        style={{
+          padding:SIZES.padding,
+        }}
+        // onPress={onPress}
+        >
+          <View style={{
+            padding:SIZES.padding,
+            flexDirection:'column', 
+            alignItems: 'center',
+            justifyContent:'center',
+            flexDirection:'column',
+            backgroundColor:COLORS.white,
+            borderRadius:SIZES.radius
+            }}>
+            <Ionicons name="documents" size={22} />
+            <Text
+            style={{
+            }}
+            >
+             Legal
+            </Text>
+          </View>  
+        </TouchableOpacity>
+        </View>
+      
+        
       </View>
 
       {/* faq  drop downs */}
@@ -170,6 +237,7 @@ const CustomerSupport = ({navigation}) => {
       style={{
         justifyContent:'center',
         alignItems:'center',
+        padding:SIZES.padding,
       }}
       >
         <Text
@@ -181,7 +249,9 @@ const CustomerSupport = ({navigation}) => {
 
         {/* dropdown card */}
         <View>
-  <ScrollView style={{ alignSelf: 'stretch' }}>
+  <ScrollView style={{ 
+    alignSelf: 'stretch',
+  }}>
     {
       this.state.contents
         ? this.state.contents.map((param, i) => {
@@ -191,23 +261,28 @@ const CustomerSupport = ({navigation}) => {
             useNativeDriver={true}
               key={i}
               contentVisible={false}
-              style={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
+              style={{
+                marginLeft: 5, 
+                ...FONTS.body4, 
+                color: COLORS.darkGray,
+              }}
               visibleElement={
-                <FAIcon 
-                  name="arrow-up" 
+                <Icon 
+                  name="keyboard-arrow-down" 
                   style={{paddingLeft: SIZES.padding * 8}}
                   size={22}
                 />
               }
               invisibleElement={
-                <FAIcon 
-                  name="arrow-down"
+                <Icon 
+                  name="keyboard-arrow-right"
                   style={{paddingLeft: SIZES.padding * 8}}
                   size={22}
                 />
               }
               header={
-                <View>
+                <View
+                >
                   <Text style={{
                     fontSize: 16,
                     color: 'blue',
@@ -229,7 +304,7 @@ const CustomerSupport = ({navigation}) => {
     }
     <View style={{ height: 96 }}/>
   </ScrollView>
-</View>
+        </View>
             
 
       </View>
