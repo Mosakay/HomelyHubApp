@@ -24,23 +24,39 @@ const CustomerSupport = ({navigation}) => {
     contents: [
       {
         title: 'About Homely Hub',
-        body: 'Hi. I love this component. What do you think?',
+        Subtitle1: 'What is Homely Hub?',
+        body:"Homely Hub delivers food from your local African restaurants straight to yourdoorstep. The Home Hub mission seeks to bridge the gap betweenrestaurants, Chefs and other stakeholders involved in cooking African mealswith their customers.Read more here(link to about page)."
       },
       {
         title: 'Useing homely hub',
-        body: 'Yes. You can have more items.',
+        Subtitle1: 'How does it work?',
+        body:'Homely Hub is available for ordering via the website or by downloading theapp; iOS or Android.All you need to do is:1. Sign up and create an account1.1.1. Continue as guest2. Browse and choose from the food on the menu3. Select a payment method4. Order and enjoy your African meal',
       },
       {
         title: 'What Time is Homely Hub Available',
-        body: 'What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text?',
+        body: 'We deliver every day from morning until late at night but restaurants will havedifferent opening and closing times.',
       },
       {
         title: 'Account and payment options',
-        body: 'What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text?',
+        Subtitle1: "I forgot my password:",
+        body:" To change your password, click the link below. You'll get an email with aone-of-a-kind link to establish a new password. Make sure you don't shareyour password with anybody else.Link to forgot password page.",
+        Subtitle2:"How do I update my account details?",
+        body2:" In your Homely Hub app, you may change your name, email, phone number and address: ",
+        List:"1. From the right-hand side of the app, tap the profile symbol in the menubar.",
+        List2:"2. Select 'Settings,'' then 'Edit account.",
+        List3:"'3. Edit the information in the detail you wish to change by tapping it andtyping it in.",
+        List4:"4. To validate your update, you'll be asked to provide a verificationnumber or your current password.",Subtitle3:"How do I update or delete a payment method?",
+        body3:"To amend or delete an existing payment method, follow the procedures below:",
+        List5:"1.From the right-hand side of the app, tap the profile symbol in the menubar.",
+        List6:"2. Select the card you want to erase from the 'wallet' menu.",
+        List7:"3. In the confirmation pop-up, tap 'edit' or 'delete', then save.'"
       },
       {
         title: 'Fees on Homely Hub',
-        body: 'What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text? What about very long text?',
+        Subtitle1: "Delivery fees:",
+        body:" The cost of delivery is depending on your location. Some restaurants provide their Fee. You'll spend less on local restaurants, and you'll always know how much it will cost before you choose one.",
+        Subtitle2:"Service fee: ",
+        body2:"This fee varies on the amount of your order and will be calculated before any promotions or discounts are applied; you will always see the exact amount at checkout. Small order fee Most restaurants charge a fee for orders under a specific value. Although restaurants are free to determine their prices, the amount ranges. By addingadditional items, you can eliminate the cost."
       },
     ],
   };
@@ -114,7 +130,8 @@ const CustomerSupport = ({navigation}) => {
           flexDirection:'row',
 
         }}
-        ><TouchableOpacity
+        >
+        <TouchableOpacity
         style={{
           padding:SIZES.padding,
         }}
@@ -128,8 +145,8 @@ const CustomerSupport = ({navigation}) => {
             flexDirection:'column',
             backgroundColor:COLORS.white,
             borderRadius:SIZES.radius,
-            maxHeight: SIZES.height- 200,
-            maxWidth: SIZES.width - 200,
+            minHeight: SIZES.height- 570,
+            minWidth: SIZES.width - 300,
 
             }}>
             <FAIcon name="lightbulb" size={22} />
@@ -159,8 +176,8 @@ const CustomerSupport = ({navigation}) => {
             flexDirection:'column',
             backgroundColor:COLORS.white,
             borderRadius:SIZES.radius,
-            maxHeight: SIZES.height- 200,
-            maxWidth: SIZES.width - 200,
+            minHeight: SIZES.height- 570,
+            minWidth: SIZES.width - 300,
             }}>
             <Icon name="contact-phone" size={22} />
             <Text
@@ -192,7 +209,9 @@ const CustomerSupport = ({navigation}) => {
             justifyContent:'center',
             flexDirection:'column',
             backgroundColor:COLORS.white,
-            borderRadius:SIZES.radius
+            borderRadius:SIZES.radius,
+            minHeight: SIZES.height- 570,
+            minWidth: SIZES.width - 300,
             }}>
             <Icon name="feedback" size={22} />
             <Text
@@ -216,7 +235,9 @@ const CustomerSupport = ({navigation}) => {
             justifyContent:'center',
             flexDirection:'column',
             backgroundColor:COLORS.white,
-            borderRadius:SIZES.radius
+            borderRadius:SIZES.radius,
+            minHeight: SIZES.height- 570,
+            minWidth: SIZES.width - 300,
             }}>
             <Ionicons name="documents" size={22} />
             <Text
@@ -281,7 +302,8 @@ const CustomerSupport = ({navigation}) => {
                 />
               }
               header={
-                <View
+                <View style={{
+                }}
                 >
                   <Text style={{
                     fontSize: 16,
@@ -292,11 +314,34 @@ const CustomerSupport = ({navigation}) => {
             >
               <Text style={[
                 {
-                  fontSize: 20,
+                  fontSize: 16,
+                  fontWeight:'bold',
                 }
               ]}>
-                {param.body}
+                {param.Subtitle1}
               </Text>
+              <Text>{param.body}</Text>
+              <Text style={[
+                {
+                  fontSize: 16,
+                  fontWeight:'bold',
+                }
+              ]}>{param.Subtitle2}</Text>
+              <Text>{param.body2}</Text>
+              <Text>{param.List}</Text>
+              <Text>{param.List2}</Text>
+              <Text>{param.List3}</Text>
+              <Text>{param.List4}</Text>
+              <Text style={[
+                {
+                  fontSize: 16,
+                  fontWeight:'bold',
+                }
+              ]}>{param.Subtitle3}</Text>
+              <Text>{param.body3}</Text>
+              <Text>{param.List5}</Text>
+              <Text>{param.List6}</Text>
+              <Text>{param.List7}</Text>
             </Accordion>
           );
         })
