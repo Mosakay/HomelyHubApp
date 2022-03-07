@@ -344,7 +344,7 @@ const SignIn = ({navigation}) => {
 
               {/* Guest */}
 
-              {!guest && (
+              {guest && (
                 <View
                   style={{
                     flexDirection: 'row',

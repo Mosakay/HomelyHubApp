@@ -127,7 +127,7 @@ const Account = ({navigation}) => {
             labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
             onPress={() =>
               setIfIsSignedIn(!ifIsSignedIn) &
-              navigation.replace(APP_ROUTES.SignIn)
+              navigation.navigate(APP_ROUTES.CustomerAuthStack)
             }
           />
         </View>

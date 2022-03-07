@@ -45,9 +45,16 @@ export const APP_ROUTES={
     vProfileCreation:'VENDOR_PROFILE_CREATION',
     vSetLocation:'VENDOR_SET_LOCATION',
 
-    //VENDOR
+    //VENDOR_ACCOUNT
 
+    VendorNavigation:'VENDOR_NAVIGATION',
     VendorProfile:'VENDOR_PROFILE',
+    BusinessEditor:'BUSINESS_EDITOR',
+    MenuBuilder:'MENU_BUILDER',
+    ReviewManagement:'REVIEW_MANAGEMENT',
+    Orders:'ORDERS',
+    BusinessAnalytics:'BUSINESS_ANALYTICS',
+
   
   }
   

@@ -22,6 +22,7 @@ import ContactPref from '../screens/Account/ContactPref';
 import {APP_ROUTES} from './router';
 import {COLORS} from '../constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Stack = createStackNavigator();
@@ -29,6 +30,7 @@ const Tab = createMaterialBottomTabNavigator();
 
 
 const AccountNavigation = ({navigation}) => {
+
   return (
       <Stack.Navigator
       initialRouteName={APP_ROUTES.UserAccount}
@@ -40,18 +42,16 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name={APP_ROUTES.SavedAddress} component={SavedAddress} />
         <Stack.Screen name={APP_ROUTES.PaymentMethods} component={PaymentMethods} />
         <Stack.Screen name={APP_ROUTES.ContactPref} component={ContactPref} />
-        <Stack.Screen name={APP_ROUTES.SignIn} component={SignIn} />
-        <Stack.Screen name={APP_ROUTES.SignUp} component={SignUp} />
-        <Stack.Screen name={APP_ROUTES.SignUp2} component={SignUp2} />
-        <Stack.Screen name={APP_ROUTES.ForgotPassword} component={ForgotPassword} />
         <Stack.Screen name={APP_ROUTES.CustomerSupport} component={CustomerSupport} />
+        <Stack.Screen name={APP_ROUTES.CustomerAuthStack} component={CustomerAuthStack} />
+        
         
       </Stack.Navigator>
   );
 };
 
 
-const Dashboard = ({navigation}) => {
+const CustomerDashboard = ({navigation}) => {
   return (
     
     <Tab.Navigator
@@ -71,8 +71,8 @@ const Dashboard = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name={APP_ROUTES.UserOrders}
-        component={VendorProfile}
+        name={APP_ROUTES.Orders}
+        component={CartTab}
         options={{
           tabBarLabel: 'Orders',
           tabBarIcon: ({color}) => (
@@ -105,7 +105,7 @@ const Dashboard = ({navigation}) => {
   );
 };
 
-const AuthStack = () => {
+const CustomerAuthStack = () => {
   return (
 
     <Stack.Navigator
@@ -118,7 +118,7 @@ const AuthStack = () => {
       <Stack.Screen name={APP_ROUTES.SignUp2} component={SignUp2} />
       <Stack.Screen name={APP_ROUTES.ForgotPassword} component={ForgotPassword} />
       <Stack.Screen name={APP_ROUTES.OTP} component={Otp} />
-      <Stack.Screen name={APP_ROUTES.CustomerDashboard} component={Dashboard} />
+      <Stack.Screen name={APP_ROUTES.CustomerDashboard} component={CustomerDashboard} />
     </Stack.Navigator>
 
   )
@@ -126,6 +126,20 @@ const AuthStack = () => {
 
 
 const UserStack = () => {
+
+  const [skipLoginPage, setSkipLoginPage] = React.useState(null);
+
+  React.useEffect(() => {
+    AsyncStorage.getItem('skipLogin').then(value => {
+      if (value == null) {
+        AsyncStorage.setItem('skipLogin', 'true');
+        setSkipLoginPage(true);
+      } else {
+        setSkipLoginPage(false);
+      }
+    });
+  }, []);
+
 
 
   return (
@@ -136,8 +150,8 @@ const UserStack = () => {
       }}
       initialRouteName={APP_ROUTES.CustomerDashboard}
       >
-      <Stack.Screen name={APP_ROUTES.CustomerAuthStack} component={AuthStack} />
-      <Stack.Screen name={APP_ROUTES.CustomerDashboard} component={Dashboard} />
+      <Stack.Screen name={APP_ROUTES.CustomerAuthStack} component={CustomerAuthStack} />
+      <Stack.Screen name={APP_ROUTES.CustomerDashboard} component={CustomerDashboard} />
     </Stack.Navigator>
 
 
@@ -145,4 +159,4 @@ const UserStack = () => {
   )
 }
 
-export default UserStack
+export default UserStack;

@@ -1,13 +1,15 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {COLORS, FONTS, SIZES} from '../../constants/theme';
+import {COLORS, FONTS, SIZES, icons} from '../../constants';
 import {TextButton} from '../../components';
 import {APP_ROUTES} from '../../routes/router';
 import {Avatar, Title, Caption, TouchableRipple} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import VendorProfileModal from '../../components/VendorProfileModal';
 
 const VendorProfile = ({navigation}) => {
+
   return (
     <View style={{flex: 1}}>
       <View
@@ -26,10 +28,20 @@ const VendorProfile = ({navigation}) => {
           flexDirection: 'column',
           alignItems: 'center',
           borderWidth: 1,
-          borderColor: COLORS.gray3,
-          margin: SIZES.padding,
+          borderColor: COLORS.white,
+          marginHorizontal: SIZES.padding,
+          marginTop: SIZES.padding,
           padding: SIZES.radius,
           backgroundColor: COLORS.white,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.2,
+          shadowRadius: 1.41,
+
+          elevation: 2,
         }}>
         <Image
           source={require('../../assets/images/user-profile.jpg')}
@@ -78,10 +90,19 @@ const VendorProfile = ({navigation}) => {
         style={{
           padding: 20,
           borderWidth: 1,
-          borderColor: '#ccc',
+          borderColor: '#fff',
           margin: SIZES.padding,
           padding: SIZES.padding,
           backgroundColor: COLORS.white,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 6,
+          },
+          shadowOpacity: 0.37,
+          shadowRadius: 7.49,
+
+          elevation: 12,
         }}>
         <TextButton
           label="Business Editor"
@@ -90,12 +111,12 @@ const VendorProfile = ({navigation}) => {
             alignItems: null,
             marginBottom: SIZES.radius,
           }}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
+          appendComponent={<Image source={icons.businesseditor} />}
           prependComponent={
             <Ionicons name="chevron-forward-outline" size={22} />
           }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate(APP_ROUTES.EditProfile)}
+          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.black}}
+          onPress={() => navigation.navigate(APP_ROUTES.BusinessEditor)}
         />
 
         <TextButton
@@ -105,12 +126,12 @@ const VendorProfile = ({navigation}) => {
             alignItems: null,
             marginBottom: SIZES.radius,
           }}
-          appendComponent={<Ionicons name="navigate-outline" size={22} />}
+          appendComponent={<Image source={icons.menubuilder} />}
           prependComponent={
             <Ionicons name="chevron-forward-outline" size={22} />
           }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate(APP_ROUTES.SavedAddress)}
+          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.black}}
+          onPress={() => navigation.navigate(APP_ROUTES.MenuBuilder)}
         />
 
         <TextButton
@@ -120,12 +141,12 @@ const VendorProfile = ({navigation}) => {
             alignItems: null,
             marginBottom: SIZES.radius,
           }}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
+          appendComponent={<Image source={icons.review} />}
           prependComponent={
             <Ionicons name="chevron-forward-outline" size={22} />
           }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate(APP_ROUTES.PaymentMethods)}
+          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.black}}
+          onPress={() => navigation.navigate(APP_ROUTES.ReviewManagement)}
         />
 
         <TextButton
@@ -135,24 +156,25 @@ const VendorProfile = ({navigation}) => {
             alignItems: null,
             marginBottom: SIZES.radius,
           }}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
+          appendComponent={<Image source={icons.orders} />}
           prependComponent={
             <Ionicons name="chevron-forward-outline" size={22} />
           }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate(APP_ROUTES.ContactPref)}
+          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.black}}
+          onPress={() => navigation.navigate(APP_ROUTES.Orders)}
         />
         <TextButton
           label="Business Analytics"
           buttonContainerStyle={{backgroundColor: null, alignItems: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
+          appendComponent={<Image source={icons.businessanalytics} />}
           prependComponent={
             <Ionicons name="chevron-forward-outline" size={22} />
           }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate(APP_ROUTES.ContactPref)}
+          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.black}}
+          onPress={() => navigation.navigate(APP_ROUTES.BusinessAnalytics)}
         />
       </View>
+      <VendorProfileModal />
     </View>
   );
 };

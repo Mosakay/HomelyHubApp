@@ -24,7 +24,26 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-const AuthStack = ({ navigation }) => {
+
+const VendorNavigation = ({ navigation }) => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+      initialRouteName={APP_ROUTES.VendorProfile}
+      >
+      <Stack.Screen name={APP_ROUTES.VendorProfile} component={VendorProfile} />
+      <Stack.Screen name={APP_ROUTES.BusinessEditor} component={vProfileCreation} />
+      <Stack.Screen name={APP_ROUTES.MenuBuilder} component={vSetLocation} />
+      <Stack.Screen name={APP_ROUTES.ReviewManagement} component={vStoreCreation} />
+      <Stack.Screen name={APP_ROUTES.Orders} component={vStoreCreation} />
+      <Stack.Screen name={APP_ROUTES.BusinessAnalytics} component={vProfileCreation} />
+    </Stack.Navigator>
+  );
+};
+
+const VendorAuthStack = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -43,7 +62,7 @@ const AuthStack = ({ navigation }) => {
 
 
 
-const Dashboard = ({navigation}) => {
+const VendorDashboard = ({navigation}) => {
   return (
     
     <Tab.Navigator
@@ -73,10 +92,10 @@ const Dashboard = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name={APP_ROUTES.VendorProfile}
-        component={VendorProfile}
+        name={APP_ROUTES.VendorNavigation}
+        component={VendorNavigation}
         options={{
-          tabBarLabel: 'Account',
+          tabBarLabel: 'Vendor',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="person-outline" color={color} size={26} />
           ),
@@ -106,8 +125,8 @@ const VendorStack = ({ navigation }) => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={APP_ROUTES.VendorAuthStack} component={AuthStack} />
-      <Stack.Screen name={APP_ROUTES.VendorDashboard} component={Dashboard} />
+      <Stack.Screen name={APP_ROUTES.VendorAuthStack} component={VendorAuthStack} />
+      <Stack.Screen name={APP_ROUTES.VendorDashboard} component={VendorDashboard} />
     </Stack.Navigator>
   );
 };

@@ -86,7 +86,7 @@ const Login = ({navigation}) => {
           }}
           subtitle="Login to your business profile using your email and password"
           header="Vendor Account"
-          backButton={() => navigation.replace(APP_ROUTES.UserOrVendor)}
+          backButton={() => navigation.goBack()}
           formInput={
             <View>
               <FormInput
@@ -265,6 +265,38 @@ const Login = ({navigation}) => {
                   onPress={() => navigation.navigate(APP_ROUTES.Register)}
                 />
               </View>
+
+
+              <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: SIZES.radius,
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      color: COLORS.darkGray,
+                      ...FONTS.body3,
+                    }}>
+                    Continue as
+                  </Text>
+
+                  <TextButton
+                    label="@Guest"
+                    buttonContainerStyle={{
+                      backgroundColor: null,
+                      marginLeft: 3,
+                    }}
+                    labelStyle={{
+                      ...FONTS.body3,
+                      color: COLORS.darkGray,
+                      fontWeight: 'bold',
+                    }}
+                    onPress={() => navigation.navigate(APP_ROUTES.VendorDashboard)}
+                  />
+                </View>
+
+
             </View>
           }></VendorLayout>
       )}
