@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import TextButton from '../../components/TextButton';
 import FormInput from '../../components/FormInput';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
+import { APP_ROUTES } from '../../routes/router';
 
 const Settings = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
@@ -224,6 +225,7 @@ const Settings = ({navigation}) => {
             </Text>
           </View>
         </TouchableOpacity>
+
       </View>
     </View>
   );

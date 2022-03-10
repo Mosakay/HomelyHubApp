@@ -12,6 +12,8 @@ import { BASE_URL } from '../../context/config';
 import DeviceInfo from 'react-native-device-info';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { APP_ROUTES } from '../../routes/router';
+import {homelyHubApiQuery} from '../../apis/QueryApi';
+import Snackbar from 'react-native-snackbar';
 
 const SignUp2 = ({navigation}) => {
   const [password, setPassword] = React.useState('');
@@ -20,6 +22,9 @@ const SignUp2 = ({navigation}) => {
   const [showPass2, setShowPass2] = React.useState(false);
   const [passwordError, setPasswordError] = React.useState('');
   const [formFields, setFormFields] = React.useState({})
+
+  const [registrationMutation, registrationMutationResult] =
+    homelyHubApiQuery.useUserRegisterMutation();
 
 
   React.useEffect(() => {
@@ -60,17 +65,27 @@ const SignUp2 = ({navigation}) => {
         deviceId: idD || ''
       }}
       validateOnMount={true}
-      onSubmit={(values) => {
-        const data = {...formFields, ...values}
+      onSubmit={async values => {
+        const data = {...formFields, ...values};
         console.log(data);
-   
-        axios.post(`${BASE_URL}/Security/Register`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
-          navigation.replace(APP_ROUTES.OTP)
-        }).catch((err) => {
-          console.log(err.message)
-        })
 
-      } }
+        try {
+          await registrationMutation(data).unwrap();
+          Snackbar.show({
+            text: 'Registered Succesful',
+            duration: Snackbar.LENGTH_SHORT,
+            backgroundColor: '#00ad00',
+          });
+          navigation.navigate(APP_ROUTES.SignIn);
+          console.log(registrationMutationResult);
+        } catch (error) {
+          console.log(error);
+          Snackbar.show({
+            text: error.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+          });
+        }
+      }}
       validationSchema={signupValidationSchema}>
       {({
         handleChange,

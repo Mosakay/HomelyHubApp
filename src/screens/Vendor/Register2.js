@@ -2,7 +2,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import VendorLayout from './VendorLayout';
 import {FONTS, SIZES, COLORS, icons} from '../../constants';
-import {FormInput, TextButton} from '../../components';
+import {FormInput, TextButton, CustomSnackbar} from '../../components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -10,24 +10,29 @@ import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
 import { BASE_URL } from '../../context/config';
 import {APP_ROUTES} from '../../routes/router';
+import {homelyHubApiQuery} from '../../apis/QueryApi';
+import Snackbar from 'react-native-snackbar';
+import {useNavigation} from '@react-navigation/native';
 
+const Register2 = () => {
 
-
-const Register2 = ({navigation}) => {
+  const navigation = useNavigation();
   const [showPass, setShowPass] = React.useState(false);
   const [showPass2, setShowPass2] = React.useState(false);
   const [formFields, setFormFields] = React.useState({})
 
+  const [registrationMutation, registrationMutationResult] =
+    homelyHubApiQuery.useVendorRegisterMutation();
 
-  React.useEffect(() => {
-    (async () => {
-      const store = await AsyncStorage.getItem('fieldsVendor')
-      setFormFields(prev => ({...prev, ...JSON.parse(store)}))
-    })()
-  }, [])
-
-  React.useEffect(() => console.log({formFields}), [formFields])
-
+    React.useEffect(() => {
+      (async () => {
+        const store = await AsyncStorage.getItem('fieldsVendor');
+        setFormFields(prev => ({...prev, ...JSON.parse(store)}));
+      })();
+    }, []);
+  
+    React.useEffect(() => console.log({formFields}), [formFields]);
+  
   let idD = DeviceInfo.getDeviceId();
   console.log(idD);
 
@@ -53,19 +58,31 @@ const Register2 = ({navigation}) => {
         confirmPassword: '',
         password: '',
         deviceId: idD || '',
-        countryId: 0,
+        countryId: 1,
+        userType: 1,
+        state: 'U.K',
       }}
       validateOnMount={true}
-      onSubmit={values => {
-        navigation.replace(APP_ROUTES.vProfileCreation)
-        const data = {...formFields, ...values}
+      onSubmit={async values => {
+        const data = {...formFields, ...values};
         console.log(data);
 
-        axios.post(`${BASE_URL}/Security/VendorRegister`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
-          navigation.replace(APP_ROUTES.vProfileCreation)
-        }).catch((err) => {
-          console.log(err.message)
-        })
+        try {
+          await registrationMutation(data).unwrap();
+          Snackbar.show({
+            text: 'Registered Succesful',
+            duration: Snackbar.LENGTH_SHORT,
+            backgroundColor: '#00ad00',
+          });
+          navigation.navigate(APP_ROUTES.Login);
+          console.log(registrationMutationResult);
+        } catch (error) {
+          console.log(error);
+          Snackbar.show({
+            text: error.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+          });
+        }
       }}
       validationSchema={signUpValidationSchema}>
       {({

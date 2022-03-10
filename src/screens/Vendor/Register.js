@@ -31,6 +31,14 @@ const Register = ({navigation}) => {
       )
       .min(8, ({min}) => `Phone number must contain at least ${min} numbers.`)
       .required('Phone number is required!'),
+      firstName: yup
+      .string()
+      .min(3, ({min}) => `First name must be at least ${min} characters long.`)
+      .required('First name is required!'),
+      lastName: yup
+      .string()
+      .min(3, ({min}) => `Last name must be at least ${min} characters long.`)
+      .required('Last name name is required!'),
   });
 
   return (
@@ -38,6 +46,9 @@ const Register = ({navigation}) => {
       initialValues={{
         email: '',
         phoneNumber: '',
+        firstName: '',
+        lastName: '',
+        username: 'Test'
       }}
       validateOnMount={true}
       onSubmit={values => registerVendor(values) }
@@ -53,8 +64,8 @@ const Register = ({navigation}) => {
       }) => (
         <VendorLayout
           title="Vendor Register"
-          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2, paddingVertical: SIZES.padding,}}
-          subtitle="Before we create the business profile, first you will need a way to Log In with an email or phone number"
+          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2, paddingVertical: SIZES.base,}}
+          // subtitle="Before we create the business profile, first you will need a way to Log In with an email or phone number"
           header="Vendor Account"
           backButton={() => navigation.goBack()}
           formInput={
@@ -69,7 +80,6 @@ const Register = ({navigation}) => {
                 iconSize={19}
                 label="Email"
                 customInputStyle={{backgroundColor: COLORS.white}}
-                containerStyle={{paddingTop: SIZES.padding + 10}}
                 errorMsg={
                   errors.email &&
                   touched.email && (
@@ -99,6 +109,87 @@ const Register = ({navigation}) => {
                   </View>
                 }
               />
+
+            {/* FIRSTNAME */}
+
+            <FormInput
+              onChangeText={handleChange('firstName')}
+              onBlur={handleBlur('firstName')}
+              value={values.firstName}
+              label="First Name"
+              placeholder="Type your first name here"
+              containerStyle={{marginTop: SIZES.radius}}
+              customInputStyle={{backgroundColor: COLORS.white}}
+              onChange={value => setFirstName(value)}
+              errorMsg={
+                errors.firstName &&
+                touched.firstName && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.firstName}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.firstName ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.firstName
+                        ? COLORS.primary
+                        : COLORS.gray2,
+                    }}
+                  />
+                </View>
+              }
+            />
+
+            {/* SURNAME */}
+
+            <FormInput
+              onChangeText={handleChange('lastName')}
+              onBlur={handleBlur('lastName')}
+              value={values.lastName}
+              label="Last name"
+              placeholder="Type your last name here"
+              containerStyle={{marginTop: SIZES.radius}}
+              customInputStyle={{backgroundColor: COLORS.white}}
+              onChange={value => setLastName(value)}
+              errorMsg={
+                errors.lastName &&
+                touched.lastName && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.lastName}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.lastName ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.lastName
+                        ? COLORS.primary
+                        : COLORS.gray2,
+                    }}
+                  />
+                </View>
+              }
+            />
+
 
               <FormInput
                 onChangeText={handleChange('phoneNumber')}

@@ -2,7 +2,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import VendorLayout from './VendorLayout';
 import {FONTS, SIZES, COLORS, icons} from '../../constants';
-import {FormInput, TextButton} from '../../components';
+import {FormInput, TextButton, CustomSnackbar} from '../../components';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
@@ -11,7 +11,9 @@ import axios from 'axios';
 import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {APP_ROUTES} from '../../routes/router';
-
+import {homelyHubApiQuery} from '../../apis/QueryApi';
+import Snackbar from 'react-native-snackbar';
+import {useNavigation} from '@react-navigation/native';
 
 const Login = ({navigation}) => {
   const [rememberMe, setRememberMe] = React.useState(false);
@@ -19,21 +21,26 @@ const Login = ({navigation}) => {
   const onToggleSwitch = () => setRememberMe(!rememberMe);
 
 
+  const [vendorLoginMutation, vendorLoginMutationResult] =
+    homelyHubApiQuery.useVendorLoginMutation();
+
   const loginUser = async user => {
     try {
-      const userRequest = await axios.post(
-        `${BASE_URL}/Security/Authenticate`,
-        JSON.stringify(user),
-        {headers: {'Content-Type': 'application/json'}},
-      );
-
-      if (userRequest?.data.id) {
-        navigation.navigate('Dashboard');
-      } else {
-        console.log('Incorrect credentials');
-      }
+      await vendorLoginMutation(user).unwrap();
+      console.log('Login Success ');
+      console.log(vendorLoginMutationResult);
+      Snackbar.show({
+        text: 'Login Succesful',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: '#00ad00',
+      });
+     navigation.navigate(APP_ROUTES.VendorDashboard);
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
+      Snackbar.show({
+        text: err?.data?.message,
+        duration: Snackbar.LENGTH_SHORT,
+      });
     }
   };
 
@@ -63,7 +70,7 @@ const Login = ({navigation}) => {
         const data = {
           userName: values.email,
           password: values.password,
-          devideId: values.devideId,
+          devideId: values.devideId || 'JustRandomDeviceId',
           rememberMe,
         };
         loginUser(data).catch(err => console.error(err));
@@ -234,6 +241,14 @@ const Login = ({navigation}) => {
                     backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
                     borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
                   }}
+                  prependComponent={
+                    vendorLoginMutationResult.isLoading && (
+                      <ActivityIndicator
+                        size="small"
+                        color="#fff"
+                      />
+                    )
+                  }
                 />
               </View>
 

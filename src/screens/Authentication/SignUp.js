@@ -42,7 +42,7 @@ const SignUp = ({navigation}) => {
       .string()
       .email('Please enter valid email')
       .required('Email address is required!'),
-    // userName: yup.string().required('Username address is required!'),
+    userName: yup.string().required('Username address is required!'),
     firstName: yup
       .string()
       .min(3, ({min}) => `First name must be at least ${min} characters long.`)
@@ -78,6 +78,7 @@ const SignUp = ({navigation}) => {
         phoneNumber: '',
         postcode: '',
         countryId: 0,
+        userName: '',
       }}
       validateOnMount={true}
       onSubmit={values => registerUser(values)}
@@ -133,7 +134,7 @@ const SignUp = ({navigation}) => {
                       width: 20,
                       tintColor: !errors.email
                         ? COLORS.primary
-                        : COLORS.darkGray,
+                        : COLORS.gray2,
                     }}
                   />
                 </View>
@@ -142,38 +143,39 @@ const SignUp = ({navigation}) => {
 
             {/* UserName */}
 
-            {/* <FormInput
+            <FormInput
                 onChangeText={handleChange('userName')}
                 onBlur={handleBlur('userName')}
                 value={values.userName}
                 label="Username"
                 placeholder="Type your username here!"
                 containerStyle={{marginTop: SIZES.radius}}
+                errorMsg={errors.userName && touched.userName && (
+                  <Text
+                  style={{
+                    ...FONTS.body5,
+                    color: COLORS.orange,
+                    marginTop: 5,
+                  }}>
+                    {errors.userName}
+                  </Text>
+                )}
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={!errors.userName ? icons.correct : icons.cross}
+                      source={!errors.userName ? icons.correct : icons.correct}
                       style={{
                         height: 20,
                         width: 20,
                         tintColor: !errors.userName
                           ? COLORS.green
-                          : COLORS.red,
+                          : COLORS.gray2,
                       }}
                     />
                   </View>
                 }
               />
-              {errors.userName && touched.userName && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.userName}
-                </Text>
-              )} */}
+              
 
             {/* FIRSTNAME */}
 
@@ -207,7 +209,7 @@ const SignUp = ({navigation}) => {
                       width: 20,
                       tintColor: !errors.firstName
                         ? COLORS.primary
-                        : COLORS.darkGray,
+                        : COLORS.gray2,
                     }}
                   />
                 </View>
@@ -246,7 +248,7 @@ const SignUp = ({navigation}) => {
                       width: 20,
                       tintColor: !errors.lastName
                         ? COLORS.primary
-                        : COLORS.darkGray,
+                        : COLORS.gray2,
                     }}
                   />
                 </View>
@@ -285,7 +287,7 @@ const SignUp = ({navigation}) => {
                       width: 20,
                       tintColor: !errors.postcode
                         ? COLORS.primary
-                        : COLORS.darkGray,
+                        : COLORS.gray2,
                     }}
                   />
                 </View>
@@ -328,7 +330,7 @@ const SignUp = ({navigation}) => {
                       width: 20,
                       tintColor: !errors.phoneNumber
                         ? COLORS.primary
-                        : COLORS.darkGray,
+                        : COLORS.gray2,
                     }}
                   />
                 </View>

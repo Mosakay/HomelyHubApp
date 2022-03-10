@@ -11,20 +11,24 @@ import {
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {FormInput, TextButton} from '../../components';
+import {FormInput, TextButton, CustomSnackbar} from '../../components';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import DeviceInfo from 'react-native-device-info';
-import {AuthContext} from '../../context/AuthContext';
-import {useContext} from 'react';
-import axios from 'axios';
 import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { APP_ROUTES } from '../../routes/router';
+import {homelyHubApiQuery} from '../../apis/QueryApi';
+import Snackbar from 'react-native-snackbar';
+import {useNavigation} from '@react-navigation/native';
 
-const SignIn = ({navigation}) => {
+const SignIn = () => {
+  const navigation = useNavigation();
   const [guest, setGuest] = React.useState(null);
+
+  const [userLoginMutuation, userLoginMutuationResult] =
+  homelyHubApiQuery.useUserLoginMutation();
 
   React.useEffect(() => {
     AsyncStorage.getItem('guest').then(value => {
@@ -44,26 +48,26 @@ const SignIn = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
   const [rememberMe, setRememberMe] = React.useState(false);
 
-  // const { setAuth } = useContext(AuthContext);
 
   const onToggleSwitch = () => setRememberMe(!rememberMe);
 
   const loginUser = async user => {
     try {
-      const userRequest = await axios.post(
-        `${BASE_URL}/Security/Authenticate`,
-        JSON.stringify(user),
-        {headers: {'Content-Type': 'application/json'}, withCredentials: true},
-      );
-      console.log(JSON.stringify(response?.data));
-    
-      if (userRequest?.data.id) {
-        navigation.navigate(APP_ROUTES.CustomerDashboard);
-      } else {
-        console.log('Incorrect credentials');
-      }
+      await userLoginMutuation(user).unwrap();
+      console.log('Login Success ');
+      console.log(userLoginMutuationResult);
+      Snackbar.show({
+        text: 'Login Succesful',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: '#00ad00',
+      });
+     navigation.navigate(APP_ROUTES.CustomerDashboard);
     } catch (err) {
-      console.warn(err.message);
+      console.log(err);
+      Snackbar.show({
+        text: err?.data?.message,
+        duration: Snackbar.LENGTH_SHORT,
+      });
     }
   };
 
@@ -344,7 +348,7 @@ const SignIn = ({navigation}) => {
 
               {/* Guest */}
 
-              {guest && (
+              {/* {guest && (
                 <View
                   style={{
                     flexDirection: 'row',
@@ -373,7 +377,7 @@ const SignIn = ({navigation}) => {
                     onPress={() => navigation.navigate(APP_ROUTES.CustomerDashboard)}
                   />
                 </View>
-              )}
+              )} */}
             </View>
           </AuthLayout>
         </ScrollView>

@@ -1,61 +1,43 @@
 import React from 'react';
-import {ActivityIndicator, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  AuthStack,
-  AppStack,
-  UserOrVendor,
-  UserStack,
-  VendorStack,
-  OnBoarding,
-  Login,
-  Register,
-  vForgotPassword,
-} from './src/screens';
-import RegisterContext from './src/context/RegisterContext';
-import CheckUser from './src/context/RegisterContext';
+import OnBoarding from './src/screens/OnBoarding/OnBoarding';
+import UserStack from './src/routes/UserStack';
+import VendorStack from './src/routes/VendorStack';
 import {createStackNavigator} from '@react-navigation/stack';
-import store from './src/store';
-import {Provider} from 'react-redux';
+import UserOrVendor from './src/screens/Authentication/UserOrVendor';
 import {APP_ROUTES} from './src/routes/router';
+import {useSelector, Provider} from 'react-redux';
+import store from './src/store/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const App = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [userStatus, setUserStatus] = React.useState('true');
-  const [isFirstLaunch, setIsFirstLaunch] = React.useState(null);
+const Stack = createStackNavigator();
 
-  const Stack = createStackNavigator();
+const AppNavigation = () => {
+  const [isFirstLaunch, setIsFirstLaunch] = React.useState(false);
+  const isLoading = useSelector(state => state.homelyHub.isLoading);
+  const authUser = useSelector(state => state.homelyHub.authUser);
 
-  React.useEffect(() => {
-    AsyncStorage.getItem('alreadyLaunched').then(value => {
-      if (value == null) {
-        AsyncStorage.setItem('alreadyLaunched', 'true');
-        setIsFirstLaunch(true);
-      } else {
-        setIsFirstLaunch(false);
-      }
-    });
-  }, []);
-
-  React.useEffect(() => {
-    SplashScreen.hide();
-  }, []);
-
-  React.useEffect(() => {
-    setTimeout(async () => {
-      setIsLoading(false);
-    }, 1000);
-  }, []);
+  console.log(authUser);
+  console.log(isLoading);
 
   if (isLoading) {
-    return (
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
+    return <Splash />;
   }
+
+
+
+  // React.useEffect(() => {
+  //   AsyncStorage.getItem('alreadyLaunched').then(value => {
+  //     if (value == null) {
+  //       AsyncStorage.setItem('alreadyLaunched', 'true');
+  //       setIsFirstLaunch(true);
+  //     } else {
+  //       setIsFirstLaunch(false);
+  //     }
+  //   });
+  // }, []);
+
 
   return (
     <NavigationContainer>
@@ -63,7 +45,9 @@ const App = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={isFirstLaunch ? APP_ROUTES.OnBoarding : APP_ROUTES.UserStack}>
+        initialRouteName={
+          isFirstLaunch ? APP_ROUTES.OnBoarding : APP_ROUTES.UserStack
+        }>
         <Stack.Screen name={APP_ROUTES.OnBoarding} component={OnBoarding} />
 
         <Stack.Screen name={APP_ROUTES.UserOrVendor} component={UserOrVendor} />
@@ -74,6 +58,28 @@ const App = () => {
   );
 };
 
+function Splash(props) {
+  React.useEffect(() => {
+    return () => {
+      SplashScreen.hide();
+    };
+  }, []);
+
+  return null;
+
+  // return (
+  //   <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+  //     <ActivityIndicator size="large" />
+  //   </View>
+  // );
+}
+
+function App(params) {
+  return (
+    <Provider store={store}>
+      <AppNavigation />
+    </Provider>
+  );
+}
+
 export default App;
-
-
