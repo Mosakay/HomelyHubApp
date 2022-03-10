@@ -1,6 +1,8 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import {
   Home,
   Settings,
@@ -11,60 +13,42 @@ import {
   Login,
   Register,
   Register2,
-  vStoreCreation,
+  vMenuCreation,
   vProfileCreation,
   vSetLocation,
   vForgotPassword,
-  VendorProfile
 } from '../screens';
 import {APP_ROUTES} from '../routes/router';
 import {COLORS} from '../constants';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
-
-const VendorNavigation = ({ navigation }) => {
-  return (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-      }}
-      initialRouteName={APP_ROUTES.VendorProfile}
-      >
-      <Stack.Screen name={APP_ROUTES.VendorProfile} component={VendorProfile} />
-      <Stack.Screen name={APP_ROUTES.BusinessEditor} component={vProfileCreation} />
-      <Stack.Screen name={APP_ROUTES.MenuBuilder} component={vSetLocation} />
-      <Stack.Screen name={APP_ROUTES.ReviewManagement} component={vStoreCreation} />
-      <Stack.Screen name={APP_ROUTES.Orders} component={vStoreCreation} />
-      <Stack.Screen name={APP_ROUTES.BusinessAnalytics} component={vProfileCreation} />
-    </Stack.Navigator>
-  );
-};
-
-const VendorAuthStack = ({ navigation }) => {
+const AuthStack = ({navigation}) => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={APP_ROUTES.Login} component={Login} />
+      <Stack.Screen name={APP_ROUTES.Vendor_Login} component={Login} />
       <Stack.Screen name={APP_ROUTES.Register} component={Register} />
       <Stack.Screen name={APP_ROUTES.Register2} component={Register2} />
-      <Stack.Screen name={APP_ROUTES.vStoreCreation} component={vStoreCreation} />
-      <Stack.Screen name={APP_ROUTES.vProfileCreation} component={vProfileCreation} />
+      <Stack.Screen name={APP_ROUTES.vMenuCreation} component={vMenuCreation} />
+      <Stack.Screen
+        name={APP_ROUTES.vProfileCreation}
+        component={vProfileCreation}
+      />
       <Stack.Screen name={APP_ROUTES.vSetLocation} component={vSetLocation} />
-      <Stack.Screen name={APP_ROUTES.vForgotPassword} component={vForgotPassword} />
+      <Stack.Screen
+        name={APP_ROUTES.vForgotPassword}
+        component={vForgotPassword}
+      />
     </Stack.Navigator>
   );
 };
 
-
-
-const VendorDashboard = ({navigation}) => {
+const Dashboard = ({navigation}) => {
   return (
-    
     <Tab.Navigator
       initialRouteName="Home"
       activeColor={COLORS.primary}
@@ -91,16 +75,17 @@ const VendorDashboard = ({navigation}) => {
           ),
         }}
       />
-      <Tab.Screen
-        name={APP_ROUTES.VendorNavigation}
-        component={VendorNavigation}
+      {/* <Tab.Screen
+        name="My Account"
+        component={AccountNavigation}
         options={{
-          tabBarLabel: 'Vendor',
+          title: 'My Account',
+          tabBarLabel: 'Account',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="person-outline" color={color} size={26} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Settings"
         component={Settings}
@@ -112,21 +97,17 @@ const VendorDashboard = ({navigation}) => {
         }}
       />
     </Tab.Navigator>
-    
   );
 };
 
-
-
-
-const VendorStack = ({ navigation }) => {
+const VendorStack = ({navigation}) => {
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name={APP_ROUTES.VendorAuthStack} component={VendorAuthStack} />
-      <Stack.Screen name={APP_ROUTES.VendorDashboard} component={VendorDashboard} />
+      <Stack.Screen name={APP_ROUTES.VendorAuthStack} component={AuthStack} />
+      <Stack.Screen name={APP_ROUTES.VendorDashboard} component={Dashboard} />
     </Stack.Navigator>
   );
 };

@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
 function useAuthUser() {
-  return useSelector(state => state.global.authUser);
+  return useSelector(state => state.homelyHub.authUser);
 }
 export default useAuthUser;

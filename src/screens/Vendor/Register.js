@@ -7,6 +7,7 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {APP_ROUTES} from '../../routes/router';
+import CustomSnackbar from '../../components/CustomSnackbar';
 
 
 const Register = ({navigation}) => {

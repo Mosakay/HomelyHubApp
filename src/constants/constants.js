@@ -22,22 +22,6 @@ const onboarding_screens = [
     }
 ]
 
-
-const vendorProfile_ModalDialouge = [
-    {
-        id: 0,
-        description: "When you oder HomelyHub, we’ll hook you up with exclusive coupon, specials and rewards"
-    },
-    {
-        id: 1,
-        description: "We make food ordering fasr, simple and free-no matter if you order online or cash"
-    },
-    {
-        id: 2,
-        description: "You’ll receive the great food within a hour. And get free delivery credits for every order."
-    },
-]
-
 const screens = {
     main_layout: "MainLayout",
     home: "Home",
@@ -77,5 +61,4 @@ export default {
     onboarding_screens,
     screens,
     bottom_tabs,
-    vendorProfile_ModalDialouge,
 }

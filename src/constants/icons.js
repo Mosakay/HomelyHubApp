@@ -25,12 +25,6 @@ const setting = require("../assets/icons/setting.png")
 const star = require("../assets/icons/star.png")
 const wallet = require("../assets/icons/wallet.png")
 const help = require("../assets/icons/help.png")
-const businesseditor = require("../assets/icons/1.png")
-const menubuilder = require("../assets/icons/2.png")
-const review = require("../assets/icons/3.png")
-const orders = require("../assets/icons/4.png")
-const businessanalytics = require("../assets/icons/5.png")
-
 
 export default {
     coupon,
@@ -60,9 +54,4 @@ export default {
     star,
     wallet,
     help,
-    businesseditor,
-    menubuilder,
-    review,
-    orders,
-    businessanalytics,
 }

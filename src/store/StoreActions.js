@@ -1,3 +1,3 @@
-import { createAction } from "@reduxjs/toolkit";
+import {createAction} from '@reduxjs/toolkit';
 
-export const logoutAction = createAction("common/logout");
+export const logoutAction = createAction('common/logout');

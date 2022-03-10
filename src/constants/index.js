@@ -18,6 +18,7 @@ export const EndPoints = {
     VENDOR_REGISTER: '/Security/VendorRegister',
     USER_LOGIN: '/Security/Authenticate',
     VENDOR_LOGIN: '/Security/Authenticate',
+    ADD_CATEGORY:"/Category/createCategory"
   };
   
   export const RtkqTagEnum = {

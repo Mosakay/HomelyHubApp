@@ -8,29 +8,34 @@ import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
 import axios from 'axios';
-import { BASE_URL } from '../../context/config';
+import {BASE_URL} from '../../context/config';
 import {APP_ROUTES} from '../../routes/router';
+import {homelyHubApiQuery} from '../../apis/QueryApi';
+import Snackbar from 'react-native-snackbar';
+import {useNavigation} from '@react-navigation/native';
 
 
-
-const Register2 = ({navigation}) => {
+const Register2 = () => {
+    const navigation = useNavigation();
+ 
   const [showPass, setShowPass] = React.useState(false);
   const [showPass2, setShowPass2] = React.useState(false);
-  const [formFields, setFormFields] = React.useState({})
+  const [formFields, setFormFields] = React.useState({});
 
+  const [registrationMutation, registrationMutationResult] =
+    homelyHubApiQuery.useVendorRegisterMutation();
 
   React.useEffect(() => {
     (async () => {
-      const store = await AsyncStorage.getItem('fieldsVendor')
-      setFormFields(prev => ({...prev, ...JSON.parse(store)}))
-    })()
-  }, [])
+      const store = await AsyncStorage.getItem('fieldsVendor');
+      setFormFields(prev => ({...prev, ...JSON.parse(store)}));
+    })();
+  }, []);
 
-  React.useEffect(() => console.log({formFields}), [formFields])
+  React.useEffect(() => console.log({formFields}), [formFields]);
 
   let idD = DeviceInfo.getDeviceId();
   console.log(idD);
-
 
   const signUpValidationSchema = yup.object().shape({
     password: yup
@@ -53,19 +58,34 @@ const Register2 = ({navigation}) => {
         confirmPassword: '',
         password: '',
         deviceId: idD || '',
-        countryId: 0,
+        countryId: 1,
+        userType: 1,
+        state: 'U.K',
+        userName: 'Testing01',
+        firstName: 'Akin',
+        lastName: 'Homelyhub',
       }}
       validateOnMount={true}
-      onSubmit={values => {
-        navigation.replace(APP_ROUTES.vProfileCreation)
-        const data = {...formFields, ...values}
+      onSubmit={async values => {
+        const data = {...formFields, ...values};
         console.log(data);
 
-        axios.post(`${BASE_URL}/Security/VendorRegister`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
-          navigation.replace(APP_ROUTES.vProfileCreation)
-        }).catch((err) => {
-          console.log(err.message)
-        })
+        try {
+          await registrationMutation(data).unwrap();
+          Snackbar.show({
+            text: 'Registered Succesful',
+            duration: Snackbar.LENGTH_SHORT,
+            backgroundColor: '#00ad00',
+          });
+          navigation.navigate(APP_ROUTES.Vendor_Login);
+          console.log(registrationMutationResult);
+        } catch (error) {
+          console.log(error);
+          Snackbar.show({
+            text: error.data.message,
+            duration: Snackbar.LENGTH_SHORT,
+          });
+        }
       }}
       validationSchema={signUpValidationSchema}>
       {({
@@ -79,13 +99,15 @@ const Register2 = ({navigation}) => {
       }) => (
         <VendorLayout
           title="Vendor Register"
-          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2, paddingVertical: SIZES.padding,}}
+          titleContainerStyle={{
+            paddingHorizontal: SIZES.padding * 2,
+            paddingVertical: SIZES.padding,
+          }}
           subtitle="Now you need yo secure the business profile by creating a strong password"
           header="Vendor Account"
           backButton={() => navigation.goBack()}
           formInput={
             <View>
-
               <FormInput
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
@@ -114,20 +136,17 @@ const Register2 = ({navigation}) => {
                   </TouchableOpacity>
                 }
               />
-{
-                  errors.password &&
-                  touched.password && (
-                    <Text
-                      style={{
-                        ...FONTS.body5,
-                        color: COLORS.red,
-                        marginTop: 5,
-                        paddingHorizontal: SIZES.base,
-                      }}>
-                      {errors.password}
-                    </Text>
-                  )
-                }
+              {errors.password && touched.password && (
+                <Text
+                  style={{
+                    ...FONTS.body5,
+                    color: COLORS.red,
+                    marginTop: 5,
+                    paddingHorizontal: SIZES.base,
+                  }}>
+                  {errors.password}
+                </Text>
+              )}
               <FormInput
                 onChangeText={handleChange('confirmPassword')}
                 onBlur={handleBlur('confirmPassword')}
@@ -188,15 +207,18 @@ const Register2 = ({navigation}) => {
                   label="Register"
                   onPress={handleSubmit}
                   disabled={!isValid}
-                  labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
+                  labelStyle={{
+                    ...FONTS.body3,
+                    color: isValid ? COLORS.white2 : '#CBB4B4',
+                  }}
                   buttonContainerStyle={{
                     height: 50,
                     width: SIZES.width / 2,
                     marginTop: SIZES.padding,
                     borderRadius: SIZES.base,
                     borderWidth: 2,
-                    backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
-                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
+                    backgroundColor: isValid ? COLORS.primary : '#EBEBEB',
+                    borderColor: isValid ? COLORS.gray3 : '#CBB4B4',
                   }}
                 />
               </View>
@@ -226,9 +248,9 @@ const Register2 = ({navigation}) => {
                     ...FONTS.body3,
                     color: COLORS.green2,
                     fontWeight: 'bold',
-                    textDecorationLine: 'underline'
+                    textDecorationLine: 'underline',
                   }}
-                  onPress={() => navigation.navigate(APP_ROUTES.Login)}
+                  onPress={() => navigation.navigate(APP_ROUTES.Vendor_Login)}
                 />
               </View>
             </View>

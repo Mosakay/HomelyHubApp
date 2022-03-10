@@ -8,7 +8,7 @@ import {Platform, PermissionsAndroid} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import {APP_ROUTES} from '../../routes/router';
 
-const vStoreCreation = ({navigation}) => {
+const vMenuCreation = ({navigation}) => {
   const [selectedDish, setSelectedDish] = React.useState('');
   const [businessDescription, setBusinessDescription] = React.useState('');
   const [yesBtn, setYesBtn] = React.useState(true);
@@ -53,7 +53,7 @@ const vStoreCreation = ({navigation}) => {
   return (
     <VendorLayout
       header="Business Profile"
-      title="Store Creation"
+      title="Menu/Goods Creation"
       titleContainerStyle={{paddingHorizontal: SIZES.padding * 2}}
       subtitle="Further build your business profile by completing the dish & cuisine category"
       backButton={() => navigation.goBack()}>
@@ -178,7 +178,7 @@ const vStoreCreation = ({navigation}) => {
         <View style={{justifyContent: 'center', flexDirection: 'row'}}>
           <TextButton
             label="Continue"
-            onPress={() => navigation.navigate(APP_ROUTES.VendorDashboard)}
+            onPress={() => navigation.navigate('Account')}
             disabled={!businessDescription}
             labelStyle={{...FONTS.body3, color: businessDescription ? COLORS.white2 : "#CBB4B4"}}
             buttonContainerStyle={{
@@ -197,4 +197,4 @@ const vStoreCreation = ({navigation}) => {
   );
 };
 
-export default vStoreCreation;
+export default vMenuCreation;

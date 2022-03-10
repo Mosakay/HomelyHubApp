@@ -1,6 +1,7 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import React, {useState} from 'react';
 import {COLORS, FONTS, SIZES, icons} from '../../constants';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import TextButton from '../../components/TextButton';
 import FormInput from '../../components/FormInput';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
@@ -206,7 +207,7 @@ const vSetLocation = ({navigation}) => {
       <TextButton
         disabled={!isValid}
         label="Continue"
-        onPress={() => navigation.navigate(APP_ROUTES.vStoreCreation)}
+        onPress={() => navigation.navigate(APP_ROUTES.vMenuCreation)}
         labelStyle={{...FONTS.body3, color: isValid ? COLORS.white : "#CBB4B4"}}
         buttonContainerStyle={{
           height: 50,

@@ -1,64 +1,65 @@
 import React from 'react';
-import {View, Text, ImageBackground, Image, Animated, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  Image,
+  Animated,
+  StyleSheet,
+} from 'react-native';
 import {constants, images, FONTS, SIZES, COLORS} from '../../constants';
-import { TextButton } from '../../components';
+import {TextButton} from '../../components';
 import {APP_ROUTES} from '../../routes/router';
 
 const OnBoarding = ({navigation}) => {
+  const scrollX = React.useRef(new Animated.Value(0)).current;
+  const flatListRef = React.useRef();
 
+  const [currentIndex, setCurrentIndex] = React.useState(0);
 
+  const onViewChangeRef = React.useRef(({viewableItems, changed}) => {
+    setCurrentIndex(viewableItems[0].index);
+  });
 
-    const scrollX = React.useRef(new Animated.Value(0)).current;
-    const flatListRef = React.useRef()
+  const Dots = () => {
+    const dotPosition = Animated.divide(scrollX, SIZES.width);
 
-    const [currentIndex, setCurrentIndex] = React.useState(0)
+    return (
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        {constants.onboarding_screens.map((item, index) => {
+          const dotColor = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [COLORS.lightGreen, COLORS.primary, COLORS.lightGreen],
+            extrapolate: 'clamp',
+          });
 
-    const onViewChangeRef = React.useRef(({viewableItems, changed}) => {
-        setCurrentIndex(viewableItems[0].index)
-    })
+          const dotWidth = dotPosition.interpolate({
+            inputRange: [index - 1, index, index + 1],
+            outputRange: [10, 30, 10],
+            extrapolate: 'clamp',
+          });
 
-
-    const Dots = () => {
-        const dotPosition = Animated.divide(scrollX, SIZES.width)
-
-        return (
-            <View
-            style={{
-                flexDirection: 'row',
-                alignItems:'center',
-                justifyContent:'center'
-            }}
-            >
-              {constants.onboarding_screens.map((item, index) => {
-                const dotColor = dotPosition.interpolate({
-                    inputRange: [index - 1, index, index +1],
-                    outputRange: [COLORS.lightGreen, COLORS.primary, COLORS.lightGreen],
-                    extrapolate:'clamp'
-                })
-
-
-               const dotWidth = dotPosition.interpolate({
-                inputRange: [index - 1, index, index +1],
-                outputRange: [10, 30, 10],
-                extrapolate:'clamp'
-            })
-
-                  return (
-                    <Animated.View
-                    key={`dot-${index}`}
-                    style={{
-                        borderRadius: 5,
-                        marginHorizontal: 6,
-                        width: dotWidth,
-                        height: 10,
-                        backgroundColor: dotColor
-                    }}
-                    />
-                  )
-              })}
-            </View>
-        )
-    }
+          return (
+            <Animated.View
+              key={`dot-${index}`}
+              style={{
+                borderRadius: 5,
+                marginHorizontal: 6,
+                width: dotWidth,
+                height: 10,
+                backgroundColor: dotColor,
+              }}
+            />
+          );
+        })}
+      </View>
+    );
+  };
 
   function renderHeaderLogo() {
     return (
@@ -77,71 +78,68 @@ const OnBoarding = ({navigation}) => {
           style={{width: SIZES.width * 0.5, height: 200}}
         />
       </View>
-      
     );
   }
 
   function renderFooter() {
-    return <View style={{height: 160}}>
-
+    return (
+      <View style={{height: 160}}>
         {/* Pagination */}
-        <View
-        style={{flex: 1, justifyContent:'center'}}>
-            <Dots />
+        <View style={{flex: 1, justifyContent: 'center'}}>
+          <Dots />
         </View>
 
         {/* Buttons */}
-        {currentIndex < constants.onboarding_screens.length - 1 &&
-        <View
-        style={{
-            flexDirection:'row',
-            justifyContent:'space-between',
-            paddingHorizontal: SIZES.padding,
-            marginVertical: SIZES.padding
-        }}
-        >
+        {currentIndex < constants.onboarding_screens.length - 1 && (
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: SIZES.padding,
+              marginVertical: SIZES.padding,
+            }}>
             <TextButton
-            label="Skip"
-            buttonContainerStyle={{
-                backgroundColor: null
-            }}
-            labelStyle={{
-                color: COLORS.darkGray2
-            }}
-            onPress={() => navigation.replace(APP_ROUTES.UserStack)}
+              label="Skip"
+              buttonContainerStyle={{
+                backgroundColor: null,
+              }}
+              labelStyle={{
+                color: COLORS.darkGray2,
+              }}
+              onPress={() => navigation.replace(APP_ROUTES.UserOrVendor)}
             />
-             <TextButton
-            label="Next"
-            buttonContainerStyle={{
+            <TextButton
+              label="Next"
+              buttonContainerStyle={{
                 height: 45,
                 width: 135,
-                borderRadius: SIZES.radius
-            }}
-
-            onPress={() => {
-                    flatListRef?.current?.scrollToIndex({
-                        index: currentIndex + 1,
-                        animated: true
-                    })
-            }}
+                borderRadius: SIZES.radius,
+              }}
+              onPress={() => {
+                flatListRef?.current?.scrollToIndex({
+                  index: currentIndex + 1,
+                  animated: true,
+                });
+              }}
             />
-        </View>}
+          </View>
+        )}
 
-            {currentIndex == constants.onboarding_screens.length - 1 &&
-            <View
+        {currentIndex == constants.onboarding_screens.length - 1 && (
+          <View
             style={{
-                paddingHorizontal: SIZES.padding,
-                marginVertical: SIZES.padding
-            }}
-            >
-                <TextButton
-                label="Let's Get Started"
-                buttonContainerStyle={{height: 60, borderRadius: SIZES.radius}}
-                onPress={() => navigation.navigate(APP_ROUTES.UserStack)}
-                />
-            </View>
-            }
-    </View>
+              paddingHorizontal: SIZES.padding,
+              marginVertical: SIZES.padding,
+            }}>
+            <TextButton
+              label="Let's Get Started"
+              buttonContainerStyle={{height: 60, borderRadius: SIZES.radius}}
+              onPress={() => navigation.navigate(APP_ROUTES.UserOrVendor)}
+            />
+          </View>
+        )}
+      </View>
+    );
   }
 
   return (
@@ -160,10 +158,8 @@ const OnBoarding = ({navigation}) => {
         snapToAlignment="center"
         showsHorizontalScrollIndicator={false}
         onScroll={Animated.event(
-            [
-                {nativeEvent: {contentOffset: { x: scrollX}}}
-            ],
-            {useNativeDriver: false}
+          [{nativeEvent: {contentOffset: {x: scrollX}}}],
+          {useNativeDriver: false},
         )}
         onViewableItemsChanged={onViewChangeRef.current}
         keyExtractor={item => `${item.id}`}
@@ -173,7 +169,6 @@ const OnBoarding = ({navigation}) => {
               {/* Header */}
 
               <View style={{flex: 3}}>
-               
                 <ImageBackground
                   source={item.backgroundImagee}
                   resizeMode="stretch"
@@ -194,9 +189,7 @@ const OnBoarding = ({navigation}) => {
                     }}
                   />
                 </ImageBackground>
-              
               </View>
-              
 
               {/* Detail */}
 
@@ -233,17 +226,10 @@ const OnBoarding = ({navigation}) => {
       />
 
       {renderFooter()}
-
     </View>
-
-
-
   );
 };
 
-
-const styles = StyleSheet.create({
-
-}) 
+const styles = StyleSheet.create({});
 
 export default OnBoarding;

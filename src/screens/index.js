@@ -21,7 +21,6 @@ import Home from "./Home/Home"
 //Account
 
 import Account from "./Account/Account"
-import CustomerSupport from "./Account/CustomerSupport"
 
 //Settings
 
@@ -46,10 +45,9 @@ import Login from './Vendor/Login'
 import Register from './Vendor/Register'
 import Register2 from './Vendor/Register2'
 import vForgotPassword from './Vendor/vForgotPassword'
-import vStoreCreation from './Vendor/vStoreCreation'
+import vMenuCreation from './Vendor/vMenuCreation'
 import vProfileCreation from './Vendor/vProfileCreation'
 import vSetLocation from './Vendor/vSetLocation'
-import VendorProfile from "./Vendor/VendorProfile"
 
 export {
     OnBoarding,
@@ -69,14 +67,12 @@ export {
     Login,
     Register,
     Register2,
-    vStoreCreation,
+    vMenuCreation,
     vProfileCreation,
     vSetLocation,
     vForgotPassword,
     UserOrVendor,
     UserStack,
     VendorStack,
-    VendorProfile,
-    CustomerSupport,
 
 }
