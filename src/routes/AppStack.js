@@ -22,6 +22,7 @@ import {
   vForgotPassword,
   AuthStack,
 
+
 } from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -32,6 +33,7 @@ import PaymentMethods from '../screens/Account/PaymentMethods';
 import ContactPref from '../screens/Account/ContactPref';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import ContactUs from '../screens/CustomerSupport/ContactUs'
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -51,6 +53,8 @@ const vendorStack = ({navigation}) => {
         <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
         <Stack.Screen name="vSetLocation" component={vSetLocation} />
         <Stack.Screen name="vForgotPassword" component={vForgotPassword} />
+        
+        
       </Stack.Navigator>
       
   );
@@ -74,6 +78,7 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="SignUp2" component={SignUp2} />
         <Stack.Screen name="CustomerSupport" component={CustomerSupport} />
+        <Stack.Screen name="ContactUs" component={ContactUs} />
         
       </Stack.Navigator>
   );

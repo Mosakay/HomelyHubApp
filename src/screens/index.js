@@ -51,6 +51,7 @@ import vSetLocation from './Vendor/vSetLocation'
 //Customer support
 
 import CustomerSupport from "./Account/CustomerSupport"
+import ContactUs from './CustomerSupport/ContactUs'
 
 export {
     OnBoarding,
@@ -78,4 +79,5 @@ export {
     vSetLocation,
     vForgotPassword,
     CustomerSupport,
+    ContactUs
 }

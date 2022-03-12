@@ -98,7 +98,7 @@ const Dropdown = ({ label, Title,Title2,Title3,body,body2,body3,list,list2,list3
           flex: 1,
           textAlign: 'center',
         }}>{label}</Text>
-        {Icon()}
+        {/* {Icon()} */}
       </TouchableOpacity>
       <View>
         {renderDropdown()}
