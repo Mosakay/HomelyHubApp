@@ -34,6 +34,9 @@ import ContactPref from '../screens/Account/ContactPref';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import ContactUs from '../screens/CustomerSupport/ContactUs'
+import Legal from '../screens/CustomerSupport/Legal'
+import Feedback from '../screens/CustomerSupport/Feedback'
+import GettingStarted from '../screens/CustomerSupport/GettingStarted'
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -79,6 +82,10 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name="SignUp2" component={SignUp2} />
         <Stack.Screen name="CustomerSupport" component={CustomerSupport} />
         <Stack.Screen name="ContactUs" component={ContactUs} />
+        <Stack.Screen name="Legal" component={Legal} />
+        <Stack.Screen name="Feedback" component={Feedback} />
+        <Stack.Screen name="GettingStarted" component={GettingStarted} />
+        
         
       </Stack.Navigator>
   );

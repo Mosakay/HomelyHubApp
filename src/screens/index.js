@@ -52,6 +52,7 @@ import vSetLocation from './Vendor/vSetLocation'
 
 import CustomerSupport from "./Account/CustomerSupport"
 import ContactUs from './CustomerSupport/ContactUs'
+import Legal from './CustomerSupport/Legal'
 
 export {
     OnBoarding,

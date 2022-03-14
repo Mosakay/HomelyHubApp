@@ -186,7 +186,7 @@ const CustomerSupport = ({navigation}) => {
         style={{
           padding:SIZES.padding,
         }}
-        // onPress={onPress}
+        onPress={() => navigation.navigate('Legal')}
         >
           <View style={{
             padding:SIZES.padding,
