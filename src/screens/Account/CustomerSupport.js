@@ -6,10 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import TextButton from '../../components/TextButton';
 import FormInput from '../../components/FormInput';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
-import {Avatar, Checkbox, Searchbar} from 'react-native-paper';
-import { Accordion } from '@dooboo-ui/native';
+import {Avatar, Checkbox, Searchbar, List} from 'react-native-paper';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Dropdown from './Dropdown';
+
 
 
 const CustomerSupport = ({navigation}) => {  
@@ -17,51 +16,11 @@ const CustomerSupport = ({navigation}) => {
   const [search, setSearch] = React.useState("");
 
   const updateSearch = query => setSearch(query);
-  useNativeDriver: true;
-  //keeps erroring out saying this (useNativeDriver has to be true or false) is required but not crashing or breaking 
-  //the app
-  
-  state = {
-    // contents: [
-    //   {
-    //     title: 'About Homely Hub',
-    //     Subtitle1: 'What is Homely Hub?',
-    //     body:"Homely Hub delivers food from your local African restaurants straight to yourdoorstep. The Home Hub mission seeks to bridge the gap betweenrestaurants, Chefs and other stakeholders involved in cooking African mealswith their customers.Read more here(link to about page)."
-    //   },
-    //   {
-    //     title: 'Useing homely hub',
-    //     Subtitle1: 'How does it work?',
-    //     body:'Homely Hub is available for ordering via the website or by downloading theapp; iOS or Android.All you need to do is:1. Sign up and create an account1.1.1. Continue as guest2. Browse and choose from the food on the menu3. Select a payment method4. Order and enjoy your African meal',
-    //   },
-    //   {
-    //     title: 'What Time is Homely Hub Available',
-    //     body: 'We deliver every day from morning until late at night but restaurants will havedifferent opening and closing times.',
-    //   },
-    //   {
-    //     title: 'Account and payment options',
-    //     Subtitle1: "I forgot my password:",
-    //     body:" To change your password, click the link below. You'll get an email with aone-of-a-kind link to establish a new password. Make sure you don't shareyour password with anybody else.Link to forgot password page.",
-    //     Subtitle2:"How do I update my account details?",
-    //     body2:" In your Homely Hub app, you may change your name, email, phone number and address: ",
-    //     List:"1. From the right-hand side of the app, tap the profile symbol in the menubar.",
-    //     List2:"2. Select 'Settings,'' then 'Edit account.",
-    //     List3:"'3. Edit the information in the detail you wish to change by tapping it andtyping it in.",
-    //     List4:"4. To validate your update, you'll be asked to provide a verificationnumber or your current password.",Subtitle3:"How do I update or delete a payment method?",
-    //     body3:"To amend or delete an existing payment method, follow the procedures below:",
-    //     List5:"1.From the right-hand side of the app, tap the profile symbol in the menubar.",
-    //     List6:"2. Select the card you want to erase from the 'wallet' menu.",
-    //     List7:"3. In the confirmation pop-up, tap 'edit' or 'delete', then save.'"
-    //   },
-    //   {
-    //     title: 'Fees on Homely Hub',
-    //     Subtitle1: "Delivery fees:",
-    //     body:" The cost of delivery is depending on your location. Some restaurants provide their Fee. You'll spend less on local restaurants, and you'll always know how much it will cost before you choose one.",
-    //     Subtitle2:"Service fee: ",
-    //     body2:"This fee varies on the amount of your order and will be calculated before any promotions or discounts are applied; you will always see the exact amount at checkout. Small order fee Most restaurants charge a fee for orders under a specific value. Although restaurants are free to determine their prices, the amount ranges. By addingadditional items, you can eliminate the cost."
-    //   },
-    // ],
-  };
 
+  const [expanded, setExpanded] = React.useState(true);
+
+  const handlePress = () => setExpanded(!expanded);
+  
   return (
     <View style={{flex: 1}}>
       {/* HEADER */}
@@ -269,137 +228,211 @@ const CustomerSupport = ({navigation}) => {
         }}
         > Frequently Asked Questions </Text>
 
-        {/* dropdown card */}
+        {/* Accordion card */}
         <View>
-          <Dropdown 
-            label={'About Homely Hub'}
-            Title={"Yo hows it going"}
-            // Title2={''}
-            Title3={'f you'} 
-          />
-        </View>
-        <View>
-          <Dropdown 
-            label={'About Homely Hub'}
-            Title={"Yo hows it going"}
-            Title2={'f you'} 
-          />
-        </View>
-        <View>
-          <Dropdown 
-            label={'About Homely Hub'}
-            Title={"Yo hows it going"}
-            Title2={'f you'} 
-          />
-        </View>
-        <View>
-          <Dropdown 
-            label={'About Homely Hub'}
-            Title={"Yo hows it going"}
-            Title2={'f you'} 
-          />
-        </View>
-        <View>
-          <Dropdown 
-            label={'About Homely Hub'}
-            Title={"Yo hows it going"}
-            Title2={'f you'} 
-          />
-        </View>
-        <View>
-          {/* <ScrollView style={{ 
-            alignSelf: 'stretch',
+          <List.Section style={{
+            width:SIZES.width - 50,
           }}>
-            {
-              this.state.contents
-                ? this.state.contents.map((param, i) => {
-                  useNativeDriver: true
-                  return (
-                    <View style={{
-                      paddingBottom:SIZES.padding,
-                      alignItems:'flex-start'
-                    }}>
-                    <Accordion
-                      useNativeDriver={true}
-                      key={i}
-                      contentVisible={false}
-                      style={{
-                        marginLeft: 5, 
-                        ...FONTS.body4, 
-                        color: COLORS.darkGray,
-                        justifyContent:'flex-start',
-                        alignItems:'center',
-                        width:SIZES.width - 20,
-                        backgroundColor:COLORS.white,
-                        borderRadius: SIZES.radius,
-                        
-                      }}
-                      visibleElement={
-                        <Icon 
-                          name="keyboard-arrow-down" 
-                          style={{paddingLeft: SIZES.padding * 8}}
-                          size={22}
-                        />
-                      }
-                      invisibleElement={
-                        <Icon 
-                          name="keyboard-arrow-right"
-                          style={{paddingLeft: SIZES.padding * 8}}
-                          size={22}
-                        />
-                      }
-                      header={
-                        <View style={{
+          <List.Accordion
+              title="About Homely Hub"
+              style={{
+                backgroundColor:COLORS.white,
+                borderRadius:SIZES.radius,
+              }}
+            >
+              <List.Item title="What is Homely Hub?"
+              description="Homely Hub delivers food from your local African restaurants straight to yourdoorstep. The Home Hub mission seeks to bridge the gap betweenrestaurants, Chefs and other stakeholders involved in cooking African mealswith their customers.Read more here(link to about page)."
+              descriptionNumberOfLines={0}
+              />
+            </List.Accordion>
+            <List.Accordion
+              title="Useing homely hub"
+              style={{
+                backgroundColor:COLORS.white,
+                borderRadius:SIZES.radius,
+                marginTop:SIZES.padding
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor:COLORS.white,
+                  borderRadius:SIZES.radius,
+                  marginTop:10
+                }}
+              >
+                <List.Item title="How does it work?"
+              description="Homely Hub is available for ordering via the website or by downloading theapp; iOS or Android.All you need to do is:"
+              descriptionNumberOfLines={0}
+              style={{
+                marginTop:-10
+              }}
+              />
+              <List.Item 
+                description="1. Sign up and create an account or Continue as guest"
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="2. Browse and choose from the food on the menu"
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="3. Select a payment method"
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="4. Order and enjoy your African meal"
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              </View>
+            </List.Accordion>
+            <List.Accordion
+              title="What Time is Homely Hub Available"
+              style={{
+                backgroundColor:COLORS.white,
+                borderRadius:SIZES.radius,
+                marginTop:SIZES.padding
+              }}
+            >
 
-                        }}
-                        >
-                          <Text style={{
-                            fontSize: 16,
-                            color: 'blue',
-                          }}>{param.title}</Text>
+              <View
+                style={{
+                  backgroundColor:COLORS.white,
+                  borderRadius:SIZES.radius,
+                  marginTop:10
+                }}
+              >
+                <List.Item 
+                  description="We deliver every day from morning until late at night but restaurants will have different opening and closing times."
+                  style={{
+                    marginTop: -20
+                  }}
+                  descriptionNumberOfLines={0}
+                />
+              </View>
+              
+            </List.Accordion>
+            <List.Accordion
+              title="Account and payment options"
+              style={{
+                backgroundColor:COLORS.white,
+                borderRadius:SIZES.radius,
+                marginTop:SIZES.padding
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor:COLORS.white,
+                  borderRadius:SIZES.radius,
+                  marginTop:10
+                }}
+              >
+              <List.Item
+                title="I forgot my password:"
+                description=" To change your password, click the link below. You'll get an email with aone-of-a-kind link to establish a new password. Make sure you don't shareyour password with anybody else.Link to forgot password page."
+                descriptionNumberOfLines={0}
+              />
+              
+              <List.Item 
+                title="How do I update my account details?"
+                description="In your Homely Hub app, you may change your name, email, phone number and address: "
+                style={{
+                  marginTop:-15
+                }}
+              />
+              <List.Item 
+                description="1. From the right-hand side of the app, tap the profile symbol in the menubar."
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="2. Select 'Settings,'' then 'Edit account."
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="3. Edit the information in the detail you wish to change by tapping it andtyping it in."
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="4. To validate your update, you'll be asked to provide a verificationnumber or your current password."
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                title="How do I update or delete a payment method?"
+                description="To amend or delete an existing payment method, follow the procedures below:"
+                style={{
+                  marginTop:-15
+                }}
+              />
+              <List.Item 
+                description="1.From the right-hand side of the app, tap the profile symbol in the menubar."
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="2. Select the card you want to erase from the 'wallet' menu."
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              <List.Item 
+                description="3. In the confirmation pop-up, tap 'edit' or 'delete', then save."
+                style={{
+                  marginTop:-40,
+                }}
+              />
+              </View>
+              
+            </List.Accordion>
+            <List.Accordion
+              title="Fees on Homely Hub"
+              style={{
+                backgroundColor:COLORS.white,
+                borderRadius:SIZES.radius,
+                marginTop:SIZES.padding
+              }}
+            >
+              <View
+                style={{
+                  backgroundColor:COLORS.white,
+                  borderRadius:SIZES.radius,
+                  marginTop:10
+                }}
+              >
+              <List.Item 
+                title="Delivery fees:" 
+                description="The cost of delivery is depending on your location. Some restaurants provide their Fee. You'll spend less on local restaurants, and you'll always know how much it will cost before you choose one."
+              />
+              <List.Item 
+                title="Service fee:"
+                description="This fee varies on the amount of your order and will be calculated before any promotions or discounts are applied; you will always see the exact amount at checkout. Small order fee Most restaurants charge a fee for orders under a specific value. Although restaurants are free to determine their prices, the amount ranges. By addingadditional items, you can eliminate the cost."
+                style={{
+                  marginTop:-15,
+                }}
+                descriptionNumberOfLines={0}
+              />
+              </View>
+              
+            </List.Accordion>
 
-                        </View>
-                      }
-                    >
-                      <Text style={[
-                        {
-                          fontSize: 16,
-                          fontWeight:'bold',
-                        }
-                      ]}>
-                        {param.Subtitle1}
-                      </Text>
-                      <Text>{param.body}</Text>
-                      <Text style={[
-                        {
-                          fontSize: 16,
-                          fontWeight:'bold',
-                        }
-                      ]}>{param.Subtitle2}</Text>
-                      <Text>{param.body2}</Text>
-                      <Text>{param.List}</Text>
-                      <Text>{param.List2}</Text>
-                      <Text>{param.List3}</Text>
-                      <Text>{param.List4}</Text>
-                      <Text style={[
-                        {
-                          fontSize: 16,
-                          fontWeight:'bold',
-                        }
-                      ]}>{param.Subtitle3}</Text>
-                      <Text>{param.body3}</Text>
-                      <Text>{param.List5}</Text>
-                      <Text>{param.List6}</Text>
-                      <Text>{param.List7}</Text>
-                    </Accordion>
-                    </View>
-                  );
-                })
-                : null
-            }
-            <View style={{ height: 96 }}/>
-          </ScrollView> */}
+              </List.Section>    
         </View>
+    
             
       </View>
       
