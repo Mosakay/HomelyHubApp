@@ -95,7 +95,7 @@ const CustomerSupport = ({navigation}) => {
         style={{
           padding:SIZES.padding,
         }}
-        // onPress={onPress}
+        onPress={() => navigation.navigate('GettingStarted')}
         >
           <View style={{
             padding:SIZES.padding,
@@ -160,7 +160,7 @@ const CustomerSupport = ({navigation}) => {
         style={{
           padding:SIZES.padding,
         }}
-        // onPress={onPress}
+          onPress={() => navigation.navigate('Feedback')}
         >
           <View style={{
             padding:SIZES.padding,
