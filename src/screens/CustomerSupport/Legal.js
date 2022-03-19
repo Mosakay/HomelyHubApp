@@ -375,7 +375,7 @@ const Legal = ({navigation, props}) => {
                         </Text>
                         <Text
                             style={{
-                                paddingBottom:SIZES.base
+                                marginBottom:SIZES.base
                             }}                        
                         >
                         <Text
