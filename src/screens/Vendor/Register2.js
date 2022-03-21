@@ -7,6 +7,9 @@ import {Formik} from 'formik';
 import * as yup from 'yup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import DeviceInfo from 'react-native-device-info';
+import axios from 'axios';
+import { BASE_URL } from '../../context/config';
+
 
 
 const Register2 = ({navigation}) => {
@@ -47,7 +50,7 @@ const Register2 = ({navigation}) => {
     <Formik
       initialValues={{
         confirmPassword: '',
-        phoneNumber: '',
+        password: '',
         deviceId: idD || '',
         countryId: 0,
       }}
@@ -55,6 +58,12 @@ const Register2 = ({navigation}) => {
       onSubmit={values => {
         const data = {...formFields, ...values}
         console.log(data);
+
+        axios.post(`${BASE_URL}/Security/VendorRegister`, JSON.stringify(data), {headers: {'Content-Type': 'application/json'}}).then((e) => {
+          navigation.replace('vProfileCreation')
+        }).catch((err) => {
+          console.log(err.message)
+        })
       }}
       validationSchema={signUpValidationSchema}>
       {({
@@ -175,7 +184,7 @@ const Register2 = ({navigation}) => {
                 }}>
                 <TextButton
                   label="Register"
-                  onPress={() => navigation.navigate('vProfileCreation')}
+                  onPress={handleSubmit}
                   disabled={!isValid}
                   labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
                   buttonContainerStyle={{

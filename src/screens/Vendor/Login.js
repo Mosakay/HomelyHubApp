@@ -6,11 +6,35 @@ import {FormInput, TextButton} from '../../components';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import {useContext} from 'react';
+import axios from 'axios';
+import {BASE_URL} from '../../context/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const Login = ({navigation}) => {
   const [rememberMe, setRememberMe] = React.useState(false);
   const [showPass, setShowPass] = React.useState(false);
   const onToggleSwitch = () => setRememberMe(!rememberMe);
+
+
+  const loginUser = async user => {
+    try {
+      const userRequest = await axios.post(
+        `${BASE_URL}/Security/Authenticate`,
+        JSON.stringify(user),
+        {headers: {'Content-Type': 'application/json'}},
+      );
+
+      if (userRequest?.data.id) {
+        navigation.navigate('Dashboard');
+      } else {
+        console.log('Incorrect credentials');
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
 
   const loginValidationSchema = yup.object().shape({
     email: yup
@@ -41,7 +65,7 @@ const Login = ({navigation}) => {
           devideId: values.devideId,
           rememberMe,
         };
-        alert(JSON.stringify(values));
+        loginUser(data).catch(err => console.error(err));
       }}
       validationSchema={loginValidationSchema}>
       {({
@@ -197,6 +221,7 @@ const Login = ({navigation}) => {
                 }}>
                 <TextButton
                   label="Login"
+                  onPress={handleSubmit}
                   disabled={!isValid}
                   labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
                   buttonContainerStyle={{

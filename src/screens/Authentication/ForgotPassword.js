@@ -61,24 +61,11 @@ const ForgotPassword = ({navigation}) => {
               appendComponent={
                 <View style={{justifyContent: 'center'}}>
                   <Image
-                    source={ !errors.email ? icons.correct : icons.cross }
+                    source={ !errors.email ? icons.correct : icons.correct }
                     style={{
                       height: 20,
                       width: 20,
-                      tintColor: !errors.email ? COLORS.primary : COLORS.red
-                    }}
-                  />
-                </View>
-              }
-              prependComponent={
-                
-                <View style={{justifyContent: 'center'}}>
-                  <Image
-                    source={ !errors.email ? icons.correct : icons.cross }
-                    style={{
-                      height: 20,
-                      width: 20,
-                      tintColor: !errors.email ? COLORS.primary : COLORS.red
+                      tintColor: !errors.email ? COLORS.primary : COLORS.gray2
                     }}
                   />
                 </View>
