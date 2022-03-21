@@ -161,9 +161,18 @@ const Account = ({navigation}) => {
             marginTop: SIZES.base,
             backgroundColor: null,
           }}
+        />        
+      </View>
+      <View>
+      <TextButton
+          label="BusinessLogedin"
+          labelStyle={{...FONTS.h3, color: COLORS.black}}
+          onPress={() => navigation.navigate("BussnessLogedin")}
+          buttonContainerStyle={{
+            marginTop: SIZES.base,
+            backgroundColor: null,
+          }}
         />
-
-        
       </View>
       </ScrollView>
     </View>

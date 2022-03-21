@@ -21,8 +21,6 @@ import {
   ForgotPassword,
   vForgotPassword,
   AuthStack,
-
-
 } from '../screens';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -33,10 +31,12 @@ import PaymentMethods from '../screens/Account/PaymentMethods';
 import ContactPref from '../screens/Account/ContactPref';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ContactUs from '../screens/CustomerSupport/ContactUs'
-import Legal from '../screens/CustomerSupport/Legal'
-import Feedback from '../screens/CustomerSupport/Feedback'
-import GettingStarted from '../screens/CustomerSupport/GettingStarted'
+import ContactUs from '../screens/CustomerSupport/ContactUs';
+import Legal from '../screens/CustomerSupport/Legal';
+import Feedback from '../screens/CustomerSupport/Feedback';
+import GettingStarted from '../screens/CustomerSupport/GettingStarted';
+import BussnessLogedin from '../screens/Bussness/BussnessLogedin';
+import BussnessProfile from '../screens/Bussness/BussnessProfile';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -55,8 +55,8 @@ const vendorStack = ({navigation}) => {
         <Stack.Screen name="vMenuCreation" component={vMenuCreation} />
         <Stack.Screen name="vProfileCreation" component={vProfileCreation} />
         <Stack.Screen name="vSetLocation" component={vSetLocation} />
-        <Stack.Screen name="vForgotPassword" component={vForgotPassword} />
-        
+        <Stack.Screen name="vForgotPassword" component={vForgotPassword} />  
+        <Stack.Screen name="BussnessProfile" component={BussnessProfile} />      
         
       </Stack.Navigator>
       
@@ -85,6 +85,9 @@ const AccountNavigation = ({navigation}) => {
         <Stack.Screen name="Legal" component={Legal} />
         <Stack.Screen name="Feedback" component={Feedback} />
         <Stack.Screen name="GettingStarted" component={GettingStarted} />
+        <Stack.Screen name="BussnessLogedin" component={BussnessLogedin} />
+        <Stack.Screen name="BussnessProfile" component={BussnessProfile} />    
+
         
         
       </Stack.Navigator>

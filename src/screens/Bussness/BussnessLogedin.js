@@ -52,7 +52,7 @@ const BussnessLogedin = ({navigation}) => {
       {/* TEXT INPUT */}
       <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>
         <TextButton
-          label="Edit Profile"
+          label="Business Profile"
           buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
           appendComponent={<Ionicons name="person-outline" size={22} />}
           prependComponent={
@@ -63,7 +63,7 @@ const BussnessLogedin = ({navigation}) => {
             />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-        //   onPress={() => navigation.navigate('EditProfile')}
+          onPress={() => navigation.navigate('BussnessProfile')}
         />
 
         <TextButton
