@@ -23,9 +23,17 @@ import Home from "./Home/Home"
 import Account from "./Account/Account"
 import CustomerSupport from "./Account/CustomerSupport"
 
+//Customer Support
+
+import ConstactUs from "./CustomerSupport/ContactUs"
+import Feedback from "./CustomerSupport/Feedback"
+import GettingStarted from "./CustomerSupport/GettingStarted"
+import Legal from "./CustomerSupport/Legal"
+
 //Settings
 
-import Settings from "./Settings/Settings"
+import UserSettings from "./Settings/UserSettings"
+import VendorSettings from "./Settings/VendorSettings"
 
 
 // Search
@@ -64,7 +72,8 @@ export {
     CartTab,
     Favourite,
     Notification,
-    Settings,
+    UserSettings,
+    VendorSettings,
     Account,
     Login,
     Register,
@@ -78,5 +87,8 @@ export {
     VendorStack,
     VendorProfile,
     CustomerSupport,
-
+    ConstactUs,
+    Feedback,
+    GettingStarted,
+    Legal,
 }

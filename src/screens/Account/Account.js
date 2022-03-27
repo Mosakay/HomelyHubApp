@@ -5,8 +5,10 @@ import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
 import {APP_ROUTES} from '../../routes/router';
 
+
 const Account = ({navigation}) => {
   const [ifIsSignedIn, setIfIsSignedIn] = React.useState(false);
+
 
   return (
     <View style={{flex: 1}}>
@@ -40,7 +42,7 @@ const Account = ({navigation}) => {
         <View style={{paddingLeft: SIZES.base}}>
           <Text style={{...FONTS.body5}}>Welcome</Text>
           <Text style={{...FONTS.body3, color: COLORS.black}}>
-            Your name here
+            Donald Trump
           </Text>
         </View>
       </View>

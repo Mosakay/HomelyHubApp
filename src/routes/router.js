@@ -1,59 +1,73 @@
 
 
 export const APP_ROUTES={
-    OnBoarding:"ONBOARDING",
-    UserOrVendor:'USERORVENDOR',
+    OnBoarding:"OnBoarding",
+    UserOrVendor:'UserOrVendor',
 
-    VendorStack:'VENDOR_STACK',
-    VendorAuthStack:'VENDOR_AUTH_STACK',
-    VendorDashboard:'VENDOR_DASHBOARD',
+    VendorStack:'Vendor_Stack',
+    VendorAuthStack:'Vendor_Auth_Stack',
+    VendorDashboard:'Vendor_Dashboard',
 
-    UserStack:'CUSTOMER_STACK',
-    CustomerAuthStack:'CUSTOMER_AUTH_STACK',
-    CustomerDashboard:'CUSTOMER_DASHBOARD',
+    UserStack:'Customer_Stack',
+    CustomerAuthStack:'Customer_Auth_Stack',
+    CustomerDashboard:'Customer_Dashboard',
 
     //USER_AUTH
-    SignIn:"USER_LOGIN",
-    SignUp:"USER_REGISTER",
-    SignUp2:"USER_REGISTER2",
-    ForgotPassword:"USER_FORGOT_PASSWORD",
+    SignIn:"User_Login",
+    SignUp:"User_Register",
+    SignUp2:"User_Register2",
+    ForgotPassword:"User_Forgot_Password",
     OTP:'OTP',
 
     //USER_ACCOUNT
-    NavAccount:'NAV_ACCOUNT',
-    Account: "ACCOUNT",
-    EditProfile:'EDIT_PROFILE',
-    ContactPref:'CONTACT_PREFERENCES',
-    PaymentMethods:'PAYMENT_METHODS',
-    SavedAddress:'SAVED_ADDRESSES',
-    CustomerSupport:'CUSTOMER_SUPPORT',
+    NavAccount:'Account_Navigation',
+    Account: "User_Account",
+    EditProfile:'Edit_Profile',
+    ContactPref:'Contact_Preferences',
+    PaymentMethods:'Payment_Methods',
+    SavedAddress:'Saved_Addresses',
+    CustomerSupport:'Customer_Support',
+
+    //CUSTOMER_SUPPORT
+    ContactUs: "Contact_Us",
+    Feedback: "Feedback",
+    GettingStarted: "Getting_Started",
+    Legal: "Legal",
 
     //USER_DASHBOARD
 
-    UserHome:'USER_HOME',
-    UserOrders:'USER_ORDERS',
-    UserAccount:'USER_ACCOUNT',
-    UserSettings:'USER_SETTINGS',
+    UserHome:'User_Home',
+    UserOrders:'User_Orders',
+    UserAccount:'User_Account',
+    UserSettings:'User_Settings',
+    
+
+    //Vendor_Dashboard
+
+    VendorHome:'Vendor_Home',
+    VendorOrders:'Vendor_Orders',
+    VendorAccount:'Vendor_Account',
+    VendorSettings:'Vendor_Settings',
 
 
     //VENDOR_AUTH
-    Login:"VENDOR_LOGIN",
-    Register:"VENDOR_REGISTER",
-    Register2:"VENDOR_REGISTER2",
-    vForgotPassword:"VENDOR_FORGOT_PASSWORD",
-    vStoreCreation:'VENDOR_STORE_CREATION',
-    vProfileCreation:'VENDOR_PROFILE_CREATION',
-    vSetLocation:'VENDOR_SET_LOCATION',
+    Login:"Vendor_Login",
+    Register:"Vendor_Register",
+    Register2:"Vendor_Register2",
+    vForgotPassword:"Vendor_Forgot_Password",
+    vStoreCreation:'Vendor_Store_Creation',
+    vProfileCreation:'Vendor_Profile_Creation',
+    vSetLocation:'Vendor_Set_Location',
 
     //VENDOR_ACCOUNT
 
-    VendorNavigation:'VENDOR_NAVIGATION',
-    VendorProfile:'VENDOR_PROFILE',
-    BusinessEditor:'BUSINESS_EDITOR',
-    MenuBuilder:'MENU_BUILDER',
-    ReviewManagement:'REVIEW_MANAGEMENT',
-    Orders:'ORDERS',
-    BusinessAnalytics:'BUSINESS_ANALYTICS',
+    VendorNavigation:'Vendor_Navigation',
+    VendorProfile:'Vendor_Profile',
+    BusinessEditor:'Business_Editor',
+    MenuBuilder:'Menu_Builder',
+    ReviewManagement:'Review_Management',
+    Orders:'Orders',
+    BusinessAnalytics:'Business_Analytics',
 
   
   }

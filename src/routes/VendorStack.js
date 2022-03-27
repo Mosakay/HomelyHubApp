@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {
   Home,
-  Settings,
+  VendorSettings,
   Notification,
   Favourite,
   CartTab,
@@ -15,7 +15,7 @@ import {
   vProfileCreation,
   vSetLocation,
   vForgotPassword,
-  VendorProfile
+  VendorProfile,
 } from '../screens';
 import {APP_ROUTES} from '../routes/router';
 import {COLORS} from '../constants';
@@ -102,8 +102,8 @@ const VendorDashboard = ({navigation}) => {
         }}
       />
       <Tab.Screen
-        name="Settings"
-        component={Settings}
+        name={APP_ROUTES.VendorSettings}
+        component={VendorSettings}
         options={{
           tabBarLabel: 'Settings',
           tabBarIcon: ({color}) => (

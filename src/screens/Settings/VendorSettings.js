@@ -1,11 +1,12 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import {COLORS, FONTS, SIZES, icons} from '../../constants/';
+import {COLORS, FONTS, SIZES, icons} from '../../constants';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import TextButton from '../../components/TextButton';
 import FormInput from '../../components/FormInput';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
-import { APP_ROUTES } from '../../routes/router';
+import {APP_ROUTES} from '../../routes/router';
+import { useNavigation } from '@react-navigation/native';
 
 const Settings = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
@@ -57,7 +58,6 @@ const Settings = ({navigation}) => {
             </Text>
           </View>
         </TouchableOpacity>
-
         <FormInput
           // onChangeText={handleChange('firstName')}
           // onBlur={handleBlur('firstName')}
@@ -92,13 +92,13 @@ const Settings = ({navigation}) => {
           {errors.firstName}
         </Text>
       )} */}
-      <TouchableOpacity
+        <TouchableOpacity
           style={{
             marginTop: SIZES.base,
-            marginBottom: -SIZES.radius
+            marginBottom: -SIZES.radius,
           }}
           onPress={() => {}}>
-          <View style={{flexDirection: 'row', justifyContent:"flex-end",}}>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
             <Text
               style={{
                 color: COLORS.primary,
@@ -108,9 +108,6 @@ const Settings = ({navigation}) => {
             </Text>
           </View>
         </TouchableOpacity>
-
-      
-
         <FormInput
           // onChangeText={handleChange('lastName')}
           // onBlur={handleBlur('lastName')}
@@ -146,13 +143,13 @@ const Settings = ({navigation}) => {
           {errors.lastName}
         </Text>
       )} */}
-      <TouchableOpacity
+        <TouchableOpacity
           style={{
             marginTop: SIZES.base,
-            marginBottom: -SIZES.radius
+            marginBottom: -SIZES.radius,
           }}
           onPress={() => {}}>
-          <View style={{flexDirection: 'row', justifyContent:"flex-end"}}>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
             <Text
               style={{
                 color: COLORS.primary,
@@ -162,7 +159,6 @@ const Settings = ({navigation}) => {
             </Text>
           </View>
         </TouchableOpacity>
-
         <FormInput
           // onChangeText={handleChange('password')}
           // onBlur={handleBlur('password')}
@@ -177,14 +173,13 @@ const Settings = ({navigation}) => {
           customInputStyle={{backgroundColor: COLORS.white}}
           containerStyle={{marginTop: SIZES.radius}}
         />
-
-<TouchableOpacity
+        <TouchableOpacity
           style={{
             marginTop: SIZES.base,
-            marginBottom: -SIZES.radius
+            marginBottom: -SIZES.radius,
           }}
           onPress={() => {}}>
-          <View style={{flexDirection: 'row', justifyContent:"flex-end",}}>
+          <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
             <Text
               style={{
                 color: COLORS.primary,
@@ -194,7 +189,6 @@ const Settings = ({navigation}) => {
             </Text>
           </View>
         </TouchableOpacity>
-
         <TouchableOpacity
           style={{
             marginTop: SIZES.padding,
@@ -225,8 +219,47 @@ const Settings = ({navigation}) => {
             </Text>
           </View>
         </TouchableOpacity>
+        
+
+  <VenorSwitch />
 
       </View>
+    </View>
+  );
+};
+
+const VenorSwitch = () => {
+
+  const navigation = useNavigation();
+  const handleVendorClick = () => {
+    // dispatch(userTypeAction(CUSTOMER_OR_VENDOR.Vendor));
+    navigation.navigate(APP_ROUTES.VendorStack);
+  };
+
+  const handleCustomerClick = () => {
+    // dispatch(userTypeAction(CUSTOMER_OR_VENDOR.Customer));
+    navigation.navigate(APP_ROUTES.UserStack);
+  };
+
+  return (
+    <View style={{justifyContent: 'center', alignItems: 'center'}}>
+      <TextButton
+        onPress={handleCustomerClick}
+        label="Become a Customer"
+        buttonContainerStyle={{
+          borderWidth: 1,
+          borderColor: COLORS.gray3,
+          width: 150,
+          minHeight: SIZES.height / 18,
+          marginTop: SIZES.radius,
+          backgroundColor: COLORS.gray,
+          borderRadius: SIZES.radius,
+        }}
+        labelStyle={{
+          color: COLORS.orange,
+          ...FONTS.body4,
+        }}
+      />
     </View>
   );
 };
