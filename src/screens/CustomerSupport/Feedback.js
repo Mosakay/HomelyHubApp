@@ -9,8 +9,10 @@ import { Rating, AirbnbRating } from 'react-native-ratings';
 
 const Feedback = ({navigation, props}) => {
 
-  const WATER_IMAGE = require('../../assets/icons/star.png');
-
+  const [Btn, setBtn] = React.useState(false);
+  const [Btn2, setBtn2] = React.useState(false);
+  const [Btn3, setBtn3] = React.useState(false);
+  const [Btn4, setBtn4] = React.useState(false);
 
   return (
     <View
@@ -118,6 +120,7 @@ const Feedback = ({navigation, props}) => {
             style={{
               fontSize:SIZES.h2,
               color:COLORS.black,
+              paddingBottom:SIZES.padding
             }}
             >
                 Tell us what can be improved
@@ -125,66 +128,74 @@ const Feedback = ({navigation, props}) => {
               <View>
                 <View
                   style={{
-                    justifyContent:'space-between'
+                    justifyContent:'space-between',
+                    flexDirection:'row',
+                    marginBottom:SIZES.padding,
                   }}
                 >
                   <TextButton
                     label=" Overall service"
                     buttonContainerStyle={{
                       paddingVertical: 5, 
-                      backgroundColor:COLORS.lightGray1,
-                      maxWidth:'30%',
+                      backgroundColor:Btn ? COLORS.green : COLORS.lightGray1,
                       borderRadius:SIZES.radius,
+                      paddingHorizontal:10
                     }}
                     labelStyle={{
                       ...FONTS.body5,
                       color: COLORS.darkGray,
                     }}
-                    // onPress={() => navigation.navigate('ContactPref')}
+                    onPress={() => setBtn(!Btn)}
                   />
                    <TextButton
                   label="Pickup and delivery Service"
                   buttonContainerStyle={{
                     paddingVertical: 5, 
-                    backgroundColor:COLORS.lightGray1,
-                    maxWidth:'55%',
+                    backgroundColor:Btn2 ? COLORS.green : COLORS.lightGray1,
                     borderRadius:SIZES.radius,
+                    paddingHorizontal:10
                   }}
                   labelStyle={{
                     ...FONTS.body5,
                     color: COLORS.darkGray,
                   }}
-                  // onPress={() => navigation.navigate('ContactPref')}
+                  onPress={() => setBtn2(!Btn2)}
                 />                  
                 </View>
-                <View>
+                <View
+                  style={{
+                    justifyContent:'space-between',
+                    flexDirection:'row',
+                    marginBottom:SIZES.padding,
+                  }}
+                >
                 <TextButton
                   label="Speed and Efficency"
                   buttonContainerStyle={{
                     paddingVertical: 5, 
-                    backgroundColor:COLORS.lightGray1,
-                    maxWidth:'50%',
+                    backgroundColor:Btn3 ? COLORS.green : COLORS.lightGray1,
                     borderRadius:SIZES.radius,
+                    paddingHorizontal:10
                   }}
                   labelStyle={{
-                    ...FONTS.body4,
+                    ...FONTS.body5,
                     color: COLORS.darkGray,
                   }}
-                  // onPress={() => navigation.navigate('ContactPref')}
+                  onPress={() => setBtn3(!Btn3)}
                 />
                   <TextButton
                     label="Customer Support"
                     buttonContainerStyle={{
                       paddingVertical: 5, 
-                      backgroundColor:COLORS.lightGray1,
-                      maxWidth:'45%',
+                      backgroundColor:Btn4 ? COLORS.green : COLORS.lightGray1,
                       borderRadius:SIZES.radius,
+                      paddingHorizontal:10
                     }}
                     labelStyle={{
-                      ...FONTS.body4,
+                      ...FONTS.body5,
                       color: COLORS.darkGray,
                     }}
-                    // onPress={() => navigation.navigate('ContactPref')}
+                    onPress={() => setBtn4(!Btn4)}
                   />               
                 </View>
 
