@@ -3,6 +3,7 @@ import {
     View,
     Text
 } from 'react-native';
+import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 
 const Home = () => {
     return (
@@ -13,7 +14,8 @@ const Home = () => {
                 justifyContent: 'center'
             }}
         >
-            <Text>HomelyHub - Eat, Eat, Sleep!</Text>
+            <Text>Home Screen for HomelyHub</Text>
+           
         </View>
     )
 }

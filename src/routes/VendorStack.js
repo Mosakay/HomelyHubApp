@@ -20,6 +20,7 @@ import {
 import {APP_ROUTES} from '../routes/router';
 import {COLORS} from '../constants';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import BusinessProfileCreation from '../screens/Vendor/BusinessProfileCreation';
 
 const Stack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -39,6 +40,7 @@ const VendorNavigation = ({ navigation }) => {
       <Stack.Screen name={APP_ROUTES.ReviewManagement} component={vStoreCreation} />
       <Stack.Screen name={APP_ROUTES.Orders} component={vStoreCreation} />
       <Stack.Screen name={APP_ROUTES.BusinessAnalytics} component={vProfileCreation} />
+      <Stack.Screen name={APP_ROUTES.BusinessProfileCreation} component={BusinessProfileCreation} />
     </Stack.Navigator>
   );
 };

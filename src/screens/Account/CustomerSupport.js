@@ -106,8 +106,8 @@ const CustomerSupport = ({navigation}) => {
             flexDirection:'column',
             backgroundColor:COLORS.white,
             borderRadius:SIZES.radius,
-            minHeight: SIZES.height- 570,
-            minWidth: SIZES.width - 300,
+            minHeight: SIZES.height / 6.5,
+            minWidth: SIZES.width / 3.5,
 
             }}>
             <FAIcon name="lightbulb" size={22} />
@@ -137,16 +137,17 @@ const CustomerSupport = ({navigation}) => {
             flexDirection:'column',
             backgroundColor:COLORS.white,
             borderRadius:SIZES.radius,
-            minHeight: SIZES.height- 570,
-            minWidth: SIZES.width - 300,
+            minHeight: SIZES.height / 6.5,
+            minWidth: SIZES.width / 3.5,
             }}>
             <Icon name="contact-phone" size={22} />
             <Text
             style={{
             }}
             >
-             Contact us
+             Contact Us
             </Text>
+            
           </View>  
         </TouchableOpacity>
         </View>
@@ -171,8 +172,8 @@ const CustomerSupport = ({navigation}) => {
             flexDirection:'column',
             backgroundColor:COLORS.white,
             borderRadius:SIZES.radius,
-            minHeight: SIZES.height- 570,
-            minWidth: SIZES.width - 300,
+            minHeight: SIZES.height / 6.5,
+            minWidth: SIZES.width / 3.5,
             }}>
             <Icon name="feedback" size={22} />
             <Text
@@ -197,8 +198,8 @@ const CustomerSupport = ({navigation}) => {
             flexDirection:'column',
             backgroundColor:COLORS.white,
             borderRadius:SIZES.radius,
-            minHeight: SIZES.height- 570,
-            minWidth: SIZES.width - 300,
+            minHeight: SIZES.height / 6.5,
+            minWidth: SIZES.width / 3.5,
             }}>
             <Ionicons name="documents" size={22} />
             <Text
@@ -219,7 +220,7 @@ const CustomerSupport = ({navigation}) => {
       style={{
         justifyContent:'center',
         alignItems:'center',
-        padding:SIZES.padding,
+        padding:SIZES.radius,
       }}
       >
         <Text
