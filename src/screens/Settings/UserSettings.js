@@ -221,8 +221,6 @@ const Settings = ({navigation}) => {
         </TouchableOpacity>
         
 
-  <VenorSwitch />
-
       </View>
     </View>
   );

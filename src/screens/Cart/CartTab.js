@@ -1,15 +1,31 @@
 import React from 'react';
-import {
-    View,
-    Text
-} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {COLORS, FONTS, SIZES} from '../../constants/theme';
+import {TextButton} from '../../components';
 
 const CartTab = () => {
-    return (
-        <View>
-            <Text>Orders Screen</Text>
-        </View>
-    )
-}
+  return (
+    <View style={{flex: 1}}>
+      {/* HEADER */}
+      <View
+        style={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: SIZES.padding * 3,
+          backgroundColor: COLORS.white,
+          borderBottomWidth: 1,
+          borderBottomColor: COLORS.gray3,
+        }}>
+        <Text style={{...FONTS.h3, color: COLORS.black}}>Orders</Text>
+      </View>
 
-export default CartTab
+      {/* SECTION */}
+        <View>
+            
+        </View>
+    </View>
+  );
+};
+
+export default CartTab;

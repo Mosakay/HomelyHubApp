@@ -97,7 +97,7 @@ const VendorDashboard = ({navigation}) => {
         name={APP_ROUTES.VendorNavigation}
         component={VendorNavigation}
         options={{
-          tabBarLabel: 'Vendor',
+          tabBarLabel: 'Business',
           tabBarIcon: ({color}) => (
             <MaterialIcons name="person-outline" color={color} size={26} />
           ),

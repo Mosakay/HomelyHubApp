@@ -4,14 +4,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
 import {APP_ROUTES} from '../../routes/router';
+import { ScrollView } from 'react-native-gesture-handler';
 
-
+ 
 const Account = ({navigation}) => {
   const [ifIsSignedIn, setIfIsSignedIn] = React.useState(false);
 
 
   return (
     <View style={{flex: 1}}>
+      <ScrollView>
       <View
         style={{
           alignItems: 'center',
@@ -158,6 +160,7 @@ const Account = ({navigation}) => {
           }}
         />
       </View>
+      </ScrollView>
     </View>
   );
 };
