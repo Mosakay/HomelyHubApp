@@ -1,14 +1,20 @@
 import React from 'react';
 import {
     View,
-    Text
+    Text,
+    Alert
 } from 'react-native';
 import {TextButton} from '../../components';
-import {COLORS, FONTS, SIZES} from '../../constants/theme';
+import {COLORS, FONTS, SIZES, constants, icons} from '../../constants';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { abs } from 'react-native-reanimated';
+import { Button } from './HomeButtonComponent.js'; 
+import { ListComponent } from './HomeListComponent.js'; 
 
-const Home = () => {
-    return (
+
+const Home = (navigation) => {
+
+    return(
         <View
             style={{
                 flex: 1,
@@ -17,7 +23,7 @@ const Home = () => {
             {/* check/progress bar */}
             <View
                 style={{
-                    height: '20%',
+                    height: '15%',
                     backgroundColor:COLORS.black,
                 }}
             >
@@ -34,7 +40,7 @@ const Home = () => {
             >
                 <Text
                     style={{
-                        color:COLORS.white,
+                        color:COLORS.black,
                         fontSize:SIZES.body2,
                         justifyContent:'center',
                         alignSelf:'center',
@@ -68,8 +74,34 @@ const Home = () => {
                     Click the '+' button below to get started with bulding your story by adding an item.
                 </Text>
             </View>
-            {/* button to add new item */}
             <View>
+                {/* <Button onClick={renderFooter} text="Call Component"/> */}
+
+                {/* <ListComponent text="Sample Component"/> */}
+                {/* <ListComponent 
+                text="Sample Component"
+                    style={{
+                        color:COLORS.white,
+                        fontSize: 15,
+                        fontFamily: 'Helvetica',
+                        backgroundColor: COLORS.darkBlue,
+                        borderRadius: 15,
+                        padding: 10,
+                        margin: 10,
+                    }}
+                /> */}
+            </View>
+
+            {/* button to add new item */}
+            <View
+                style={{
+                    position: 'absolute',
+                    height: 40,
+                    left: 0, 
+                    bottom:20, 
+                    width: SIZES.width,
+                }}
+            >
                 <TextButton
                     label="New Item"
                     buttonContainerStyle={{
@@ -92,12 +124,13 @@ const Home = () => {
                       ...FONTS.body2,
                       color: COLORS.primary,
                     }}
+                    // onPress={() => navigation.Button}
+                    onPress={() => navigation.navigate('Button')}
                   />
-
             </View>
-
         </View>
     );
-}
+
+};
 
 export default Home;
