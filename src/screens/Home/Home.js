@@ -12,7 +12,7 @@ import { Button } from './HomeButtonComponent.js';
 import { ListComponent } from './HomeListComponent.js'; 
 
 
-const Home = ({navigation}) => {
+const Home = (navigation) => {
 
     return(
         <View
@@ -91,7 +91,6 @@ const Home = ({navigation}) => {
                     }}
                 /> */}
             </View>
-            
 
             {/* button to add new item */}
             <View
