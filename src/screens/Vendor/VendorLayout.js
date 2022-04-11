@@ -15,6 +15,7 @@ const VendorLayout = ({
   formInput,
 }) => {
   return (
+    <KeyboardAwareScrollView>
     <View
     style={{
         flex: 1,
@@ -89,6 +90,7 @@ const VendorLayout = ({
       {children}
       </KeyboardAwareScrollView>  
         </View>
+        </KeyboardAwareScrollView>
   );
 };
 

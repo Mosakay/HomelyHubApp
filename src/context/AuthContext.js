@@ -1,15 +1,16 @@
-import axios from 'axios';
+
 import React, {createContext} from 'react';
-import {BASE_URL} from './config';
-import { REACT_APP_BASEURL } from '@env'
 
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
 
-      
+  const [auth, setAuth] = React.useState({});
+
   return (
-    <AuthContext.Provider value="test value">{children}</AuthContext.Provider>
-  );
+      <AuthContext.Provider value={{ auth, setAuth }}>
+          {children}
+      </AuthContext.Provider>
+  )
 };

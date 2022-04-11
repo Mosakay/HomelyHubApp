@@ -2,15 +2,47 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import VendorLayout from './VendorLayout';
 import {FONTS, SIZES, COLORS, icons} from '../../constants';
-import {FormInput, TextButton} from '../../components';
+import {FormInput, TextButton, CustomSnackbar} from '../../components';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import {useContext} from 'react';
+import axios from 'axios';
+import {BASE_URL} from '../../context/config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {APP_ROUTES} from '../../routes/router';
+import {homelyHubApiQuery} from '../../apis/QueryApi';
+import Snackbar from 'react-native-snackbar';
+import {useNavigation} from '@react-navigation/native';
 
 const Login = ({navigation}) => {
   const [rememberMe, setRememberMe] = React.useState(false);
   const [showPass, setShowPass] = React.useState(false);
   const onToggleSwitch = () => setRememberMe(!rememberMe);
+
+
+  const [vendorLoginMutation, vendorLoginMutationResult] =
+    homelyHubApiQuery.useVendorLoginMutation();
+
+  const loginUser = async user => {
+    try {
+      await vendorLoginMutation(user).unwrap();
+      console.log('Login Success ');
+      console.log(vendorLoginMutationResult);
+      Snackbar.show({
+        text: 'Login Succesful',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: '#00ad00',
+      });
+     navigation.navigate(APP_ROUTES.VendorDashboard);
+    } catch (err) {
+      console.log(err);
+      Snackbar.show({
+        text: err?.data?.message,
+        duration: Snackbar.LENGTH_SHORT,
+      });
+    }
+  };
 
   const loginValidationSchema = yup.object().shape({
     email: yup
@@ -38,10 +70,10 @@ const Login = ({navigation}) => {
         const data = {
           userName: values.email,
           password: values.password,
-          devideId: values.devideId,
+          devideId: values.devideId || 'JustRandomDeviceId',
           rememberMe,
         };
-        alert(JSON.stringify(values));
+        loginUser(data).catch(err => console.error(err));
       }}
       validationSchema={loginValidationSchema}>
       {({
@@ -61,7 +93,7 @@ const Login = ({navigation}) => {
           }}
           subtitle="Login to your business profile using your email and password"
           header="Vendor Account"
-          backButton={() => {}}
+          backButton={() => navigation.goBack()}
           formInput={
             <View>
               <FormInput
@@ -182,7 +214,7 @@ const Login = ({navigation}) => {
                       color: COLORS.gray,
                       ...FONTS.body4,
                     }}
-                    onPress={() => navigation.navigate('ForgotPassword')}
+                    onPress={() => navigation.navigate(APP_ROUTES.vForgotPassword)}
                   />
                 </View>
               </View>
@@ -197,14 +229,26 @@ const Login = ({navigation}) => {
                 }}>
                 <TextButton
                   label="Login"
+                  onPress={handleSubmit}
+                  disabled={!isValid}
+                  labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
                   buttonContainerStyle={{
                     height: 50,
                     width: SIZES.width / 2,
-                    alignItems: 'center',
                     marginTop: SIZES.padding,
-                    borderRadius: SIZES.radius + 5,
-                    backgroundColor: COLORS.primary,
+                    borderRadius: SIZES.base,
+                    borderWidth: 2,
+                    backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
+                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
                   }}
+                  prependComponent={
+                    vendorLoginMutationResult.isLoading && (
+                      <ActivityIndicator
+                        size="small"
+                        color="#fff"
+                      />
+                    )
+                  }
                 />
               </View>
 
@@ -233,9 +277,41 @@ const Login = ({navigation}) => {
                     color: COLORS.green2,
                     fontWeight: 'bold',
                   }}
-                  onPress={() => navigation.navigate('Register')}
+                  onPress={() => navigation.navigate(APP_ROUTES.Register)}
                 />
               </View>
+
+
+              <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: SIZES.radius,
+                    justifyContent: 'center',
+                  }}>
+                  <Text
+                    style={{
+                      color: COLORS.darkGray,
+                      ...FONTS.body3,
+                    }}>
+                    Continue as
+                  </Text>
+
+                  <TextButton
+                    label="@Guest"
+                    buttonContainerStyle={{
+                      backgroundColor: null,
+                      marginLeft: 3,
+                    }}
+                    labelStyle={{
+                      ...FONTS.body3,
+                      color: COLORS.darkGray,
+                      fontWeight: 'bold',
+                    }}
+                    onPress={() => navigation.navigate(APP_ROUTES.VendorDashboard)}
+                  />
+                </View>
+
+
             </View>
           }></VendorLayout>
       )}

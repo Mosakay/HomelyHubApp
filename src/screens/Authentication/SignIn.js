@@ -11,18 +11,36 @@ import {
 import {AuthLayout} from '..';
 import {icons, FONTS, SIZES, COLORS} from '../../constants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {FormInput, TextButton} from '../../components';
+import {FormInput, TextButton, CustomSnackbar} from '../../components';
 import {Switch} from 'react-native-paper';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import DeviceInfo from 'react-native-device-info';
-import {AuthContext} from '../../context/AuthContext';
-import {useContext} from 'react';
-import axios from 'axios';
 import {BASE_URL} from '../../context/config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { APP_ROUTES } from '../../routes/router';
+import {homelyHubApiQuery} from '../../apis/QueryApi';
+import Snackbar from 'react-native-snackbar';
+import {useNavigation} from '@react-navigation/native';
 
-const SignIn = ({navigation}) => {
+const SignIn = () => {
+  const navigation = useNavigation();
+  const [guest, setGuest] = React.useState(null);
+
+  const [userLoginMutuation, userLoginMutuationResult] =
+  homelyHubApiQuery.useUserLoginMutation();
+
+  React.useEffect(() => {
+    AsyncStorage.getItem('guest').then(value => {
+      if (value == null) {
+        AsyncStorage.setItem('guest', 'true');
+        setGuest(true);
+      } else {
+        setGuest(false);
+      }
+    });
+  }, []);
+
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
@@ -30,29 +48,27 @@ const SignIn = ({navigation}) => {
   const [showPass, setShowPass] = React.useState(false);
   const [rememberMe, setRememberMe] = React.useState(false);
 
-  const val = useContext(AuthContext);
 
   const onToggleSwitch = () => setRememberMe(!rememberMe);
 
   const loginUser = async user => {
     try {
-      const userRequest = await axios.post(
-        `${BASE_URL}/Security/Authenticate`,
-        JSON.stringify(user),
-        {headers: {'Content-Type': 'application/json'}},
-      );
-  
-      if (userRequest?.data.id) {
-        const updateboarded = await AsyncStorage.setItem('onboarded', 'true');
-        navigation.navigate('Dashboard');
-      } else {
-        console.log('Incorrect credentials');
-      }
-      
+      await userLoginMutuation(user).unwrap();
+      console.log('Login Success ');
+      console.log(userLoginMutuationResult);
+      Snackbar.show({
+        text: 'Login Succesful',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: '#00ad00',
+      });
+     navigation.navigate(APP_ROUTES.CustomerDashboard);
     } catch (err) {
-      console.log(err.message)
+      console.log(err);
+      Snackbar.show({
+        text: err?.data?.message,
+        duration: Snackbar.LENGTH_SHORT,
+      });
     }
-
   };
 
   const loginValidationSchema = yup.object().shape({
@@ -62,12 +78,12 @@ const SignIn = ({navigation}) => {
       .required('Email address is required!'),
     password: yup
       .string()
-      .min(6, ({min}) => `Password must be at least ${min} characters.`)
+      .min(6, ({min}) => `Must be at least ${min} characters.`)
       .required('Password is required!'),
-      // .matches(
-      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      //   'Must contain One Uppercase, One Lowercase, One Number and One Special Case Character',
-      // ),
+    // .matches(
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+    //   'Must contain One Uppercase, One Lowercase, One Number and One Special Case Character',
+    // ),
     devideId: yup.string(),
   });
 
@@ -87,11 +103,10 @@ const SignIn = ({navigation}) => {
           userName: values.email,
           password: values.password,
           devideId: values.devideId,
-          rememberMe
-        }
-        
-        loginUser(data)
-        .catch(err => console.error(err))
+          rememberMe,
+        };
+
+        loginUser(data).catch(err => console.error(err));
       }}
       validationSchema={loginValidationSchema}>
       {({
@@ -163,7 +178,7 @@ const SignIn = ({navigation}) => {
             </View>
             <View style={{flex: 1, marginTop: SIZES.padding}}>
               {/* Form Inputs */}
-              <Text>{val}</Text>
+              
               <FormInput
                 onChangeText={handleChange('email')}
                 onBlur={handleBlur('email')}
@@ -174,29 +189,35 @@ const SignIn = ({navigation}) => {
                 label="Email"
                 keyboardType="email-address"
                 onChange={value => setEmail(value)}
+                errorMsg={
+                  errors.email &&
+                  touched.email && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.orange,
+                        marginTop: 5,
+                      }}>
+                      {errors.email}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <View style={{justifyContent: 'center'}}>
                     <Image
-                      source={!errors.email ? icons.correct : icons.cross}
+                      source={!errors.email ? icons.correct : icons.correct}
                       style={{
                         height: 20,
                         width: 20,
-                        tintColor: !errors.email ? COLORS.primary : COLORS.red,
+                        tintColor: !errors.email
+                          ? COLORS.primary
+                          : COLORS.darkGray2,
                       }}
                     />
                   </View>
                 }
               />
-              {errors.email && touched.email && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.email}
-                </Text>
-              )}
+
               <FormInput
                 onChangeText={handleChange('password')}
                 onBlur={handleBlur('password')}
@@ -209,6 +230,19 @@ const SignIn = ({navigation}) => {
                 autoCompleteType="password"
                 containerStyle={{marginTop: SIZES.radius}}
                 onChange={value => setPassword(value)}
+                errorMsg={
+                  errors.password &&
+                  touched.password && (
+                    <Text
+                      style={{
+                        ...FONTS.body5,
+                        color: COLORS.orange,
+                        marginTop: 5,
+                      }}>
+                      {errors.password}
+                    </Text>
+                  )
+                }
                 appendComponent={
                   <TouchableOpacity
                     style={{
@@ -224,17 +258,6 @@ const SignIn = ({navigation}) => {
                   </TouchableOpacity>
                 }
               />
-
-              {errors.password && touched.password && (
-                <Text
-                  style={{
-                    ...FONTS.body4,
-                    color: COLORS.red,
-                    marginTop: 5,
-                  }}>
-                  {errors.password}
-                </Text>
-              )}
 
               {/* Save me & Frogot pass */}
 
@@ -266,7 +289,7 @@ const SignIn = ({navigation}) => {
                     color: COLORS.gray,
                     ...FONTS.body4,
                   }}
-                  onPress={() => navigation.navigate('ForgotPassword')}
+                  onPress={() => navigation.navigate(APP_ROUTES.ForgotPassword)}
                 />
               </View>
 
@@ -286,6 +309,8 @@ const SignIn = ({navigation}) => {
                     backgroundColor: isValid
                       ? COLORS.primary
                       : COLORS.transparentPrimary,
+                    borderColor: isValid ? COLORS.gray3 : '#CBB4B4',
+                    borderWidth: 2,
                   }}
                 />
               </View>
@@ -317,40 +342,42 @@ const SignIn = ({navigation}) => {
                     color: COLORS.green2,
                     fontWeight: 'bold',
                   }}
-                  onPress={() => navigation.navigate('SignUp')}
+                  onPress={() => navigation.navigate(APP_ROUTES.SignUp)}
                 />
               </View>
 
               {/* Guest */}
 
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginTop: SIZES.radius,
-                  justifyContent: 'center',
-                }}>
-                <Text
+              {/* {guest && (
+                <View
                   style={{
-                    color: COLORS.darkGray,
-                    ...FONTS.body3,
+                    flexDirection: 'row',
+                    marginTop: SIZES.radius,
+                    justifyContent: 'center',
                   }}>
-                  Continue as
-                </Text>
+                  <Text
+                    style={{
+                      color: COLORS.darkGray,
+                      ...FONTS.body3,
+                    }}>
+                    Continue as
+                  </Text>
 
-                <TextButton
-                  label="@Guest"
-                  buttonContainerStyle={{
-                    backgroundColor: null,
-                    marginLeft: 3,
-                  }}
-                  labelStyle={{
-                    ...FONTS.body3,
-                    color: COLORS.darkGray,
-                    fontWeight: 'bold',
-                  }}
-                  onPress={() => navigation.navigate('AppStack')}
-                />
-              </View>
+                  <TextButton
+                    label="@Guest"
+                    buttonContainerStyle={{
+                      backgroundColor: null,
+                      marginLeft: 3,
+                    }}
+                    labelStyle={{
+                      ...FONTS.body3,
+                      color: COLORS.darkGray,
+                      fontWeight: 'bold',
+                    }}
+                    onPress={() => navigation.navigate(APP_ROUTES.CustomerDashboard)}
+                  />
+                </View>
+              )} */}
             </View>
           </AuthLayout>
         </ScrollView>

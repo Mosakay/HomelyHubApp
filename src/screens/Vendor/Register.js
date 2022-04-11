@@ -5,10 +5,17 @@ import {FONTS, SIZES, COLORS, icons} from '../../constants';
 import {FormInput, TextButton} from '../../components';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {APP_ROUTES} from '../../routes/router';
+
 
 const Register = ({navigation}) => {
-  const [showPass, setShowPass] = React.useState(false);
-  const [showPass2, setShowPass2] = React.useState(false);
+
+  
+  const registerVendor = async (values) => {
+    const store = await AsyncStorage.setItem('fieldsVendor', JSON.stringify(values))
+    navigation.navigate(APP_ROUTES.Register2)
+  }
 
   const signUpValidationSchema = yup.object().shape({
     email: yup
@@ -24,30 +31,27 @@ const Register = ({navigation}) => {
       )
       .min(8, ({min}) => `Phone number must contain at least ${min} numbers.`)
       .required('Phone number is required!'),
-    password: yup
+      firstName: yup
       .string()
-      .min(6, ({min}) => `Password must be at least ${min} characters.`)
-      .required('Password is required!')
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        'Must Contain 6  Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
-      ),
-    confirmPassword: yup
+      .min(3, ({min}) => `First name must be at least ${min} characters long.`)
+      .required('First name is required!'),
+      lastName: yup
       .string()
-      .required('Password must match')
-      .oneOf([yup.ref('password'), null], 'Passwords must match'),
+      .min(3, ({min}) => `Last name must be at least ${min} characters long.`)
+      .required('Last name name is required!'),
   });
 
   return (
     <Formik
       initialValues={{
         email: '',
-        password: '',
-        confirmPassword: '',
         phoneNumber: '',
+        firstName: '',
+        lastName: '',
+        username: 'Test'
       }}
       validateOnMount={true}
-      onSubmit={values => alert(JSON.stringify(values))}
+      onSubmit={values => registerVendor(values) }
       validationSchema={signUpValidationSchema}>
       {({
         handleChange,
@@ -60,8 +64,8 @@ const Register = ({navigation}) => {
       }) => (
         <VendorLayout
           title="Vendor Register"
-          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2}}
-          subtitle="Register your account now to become a vendor"
+          titleContainerStyle={{paddingHorizontal: SIZES.padding * 2, paddingVertical: SIZES.base,}}
+          // subtitle="Before we create the business profile, first you will need a way to Log In with an email or phone number"
           header="Vendor Account"
           backButton={() => navigation.goBack()}
           formInput={
@@ -76,7 +80,6 @@ const Register = ({navigation}) => {
                 iconSize={19}
                 label="Email"
                 customInputStyle={{backgroundColor: COLORS.white}}
-                containerStyle={{paddingTop: SIZES.padding + 10}}
                 errorMsg={
                   errors.email &&
                   touched.email && (
@@ -106,6 +109,87 @@ const Register = ({navigation}) => {
                   </View>
                 }
               />
+
+            {/* FIRSTNAME */}
+
+            <FormInput
+              onChangeText={handleChange('firstName')}
+              onBlur={handleBlur('firstName')}
+              value={values.firstName}
+              label="First Name"
+              placeholder="Type your first name here"
+              containerStyle={{marginTop: SIZES.radius}}
+              customInputStyle={{backgroundColor: COLORS.white}}
+              onChange={value => setFirstName(value)}
+              errorMsg={
+                errors.firstName &&
+                touched.firstName && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.firstName}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.firstName ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.firstName
+                        ? COLORS.primary
+                        : COLORS.gray2,
+                    }}
+                  />
+                </View>
+              }
+            />
+
+            {/* SURNAME */}
+
+            <FormInput
+              onChangeText={handleChange('lastName')}
+              onBlur={handleBlur('lastName')}
+              value={values.lastName}
+              label="Last name"
+              placeholder="Type your last name here"
+              containerStyle={{marginTop: SIZES.radius}}
+              customInputStyle={{backgroundColor: COLORS.white}}
+              onChange={value => setLastName(value)}
+              errorMsg={
+                errors.lastName &&
+                touched.lastName && (
+                  <Text
+                    style={{
+                      ...FONTS.body5,
+                      color: COLORS.orange,
+                      marginTop: 5,
+                    }}>
+                    {errors.lastName}
+                  </Text>
+                )
+              }
+              appendComponent={
+                <View style={{justifyContent: 'center'}}>
+                  <Image
+                    source={!errors.lastName ? icons.correct : icons.correct}
+                    style={{
+                      height: 20,
+                      width: 20,
+                      tintColor: !errors.lastName
+                        ? COLORS.primary
+                        : COLORS.gray2,
+                    }}
+                  />
+                </View>
+              }
+            />
+
 
               <FormInput
                 onChangeText={handleChange('phoneNumber')}
@@ -150,92 +234,10 @@ const Register = ({navigation}) => {
                   </View>
                 }
               />
-
-              <FormInput
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-                placeholder="Create your password"
-                iconName="lock"
-                iconStyle={{paddingRight: SIZES.base}}
-                iconSize={19}
-                secureTextEntry={!showPass}
-                autoCompleteType="password"
-                label="Password"
-                customInputStyle={{backgroundColor: COLORS.white}}
-                containerStyle={{paddingTop: SIZES.base + 10}}
-                errorMsg={
-                  errors.password &&
-                  touched.password && (
-                    <Text
-                      style={{
-                        ...FONTS.body5,
-                        color: COLORS.red,
-                        marginTop: 5,
-                        paddingHorizontal: SIZES.base,
-                      }}>
-                      {errors.password}
-                    </Text>
-                  )
-                }
-                appendComponent={
-                  <TouchableOpacity
-                    style={{
-                      width: 40,
-                      alignItems: 'flex-end',
-                      justifyContent: 'center',
-                    }}
-                    onPress={() => setShowPass(!showPass)}>
-                    <Image
-                      source={showPass ? icons.eye_close : icons.eye}
-                      style={{height: 20, width: 20, tintColor: COLORS.gray}}
-                    />
-                  </TouchableOpacity>
-                }
-              />
-
-              <FormInput
-                onChangeText={handleChange('confirmPassword')}
-                onBlur={handleBlur('confirmPassword')}
-                value={values.confirmPassword}
-                customInputStyle={{backgroundColor: COLORS.white}}
-                placeholder="Confirm your password"
-                iconName="lock"
-                iconStyle={{paddingRight: SIZES.base}}
-                iconSize={19}
-                label="Confirm Password"
-                secureTextEntry={!showPass2}
-                autoCompleteType="password"
-                containerStyle={{marginTop: SIZES.padding}}
-                onChange={value => setPassword2(value)}
-                errorMsg={
-                  errors.confirmPassword &&
-                  touched.confirmPassword && (
-                    <Text
-                      style={{
-                        ...FONTS.body5,
-                        color: COLORS.red,
-                        marginTop: 5,
-                      }}>
-                      {errors.confirmPassword}
-                    </Text>
-                  )
-                }
-                appendComponent={
-                  <TouchableOpacity
-                    style={{
-                      width: 40,
-                      alignItems: 'flex-end',
-                      justifyContent: 'center',
-                    }}
-                    onPress={() => setShowPass2(!showPass2)}>
-                    <Image
-                      source={showPass2 ? icons.eye_close : icons.eye}
-                      style={{height: 20, width: 20, tintColor: COLORS.gray}}
-                    />
-                  </TouchableOpacity>
-                }
-              />
+        <Text style={{...FONTS.body5, marginVertical: SIZES.base}}>
+         A validation code will be sent to the email address and phone number provided to validate the account.
+        </Text>
+            
             </View>
           }
           children={
@@ -251,15 +253,18 @@ const Register = ({navigation}) => {
                   paddingTop: SIZES.radius,
                 }}>
                 <TextButton
-                  label="Register"
-                  onPress={() => navigation.navigate('vMenuCreation')}
+                  label="Continue"
+                  onPress={handleSubmit}
+                  disabled={!isValid}
+                  labelStyle={{...FONTS.body3, color: isValid ? COLORS.white2 : "#CBB4B4"}}
                   buttonContainerStyle={{
                     height: 50,
                     width: SIZES.width / 2,
-                    alignItems: 'center',
                     marginTop: SIZES.padding,
-                    borderRadius: SIZES.radius + 5,
-                    backgroundColor: COLORS.primary,
+                    borderRadius: SIZES.base,
+                    borderWidth: 2,
+                    backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
+                    borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
                   }}
                 />
               </View>
@@ -289,8 +294,11 @@ const Register = ({navigation}) => {
                     ...FONTS.body3,
                     color: COLORS.green2,
                     fontWeight: 'bold',
+                    textDecorationLine: 'underline'
+
+                    
                   }}
-                  onPress={() => navigation.navigate('Login')}
+                  onPress={() => navigation.navigate(APP_ROUTES.Login)}
                 />
               </View>
             </View>

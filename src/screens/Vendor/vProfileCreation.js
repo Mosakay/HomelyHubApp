@@ -16,6 +16,7 @@ import * as yup from 'yup';
 import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {APP_ROUTES} from '../../routes/router';
 
 const vProfileCreation = ({navigation}) => {
 
@@ -133,7 +134,7 @@ const vProfileCreation = ({navigation}) => {
                   <Text
                     style={{
                       ...FONTS.body5,
-                      color: COLORS.primary,
+                      color: COLORS.orange,
                       marginTop: 5,
                     }}>
                     {errors.businessName}
@@ -216,16 +217,16 @@ const vProfileCreation = ({navigation}) => {
               <TextButton
                 disabled={!isValid}
                 label="Continue"
-                onPress={() => navigation.navigate('vSetLocation')}
-                labelStyle={{...FONTS.body3}}
+                onPress={() => navigation.navigate(APP_ROUTES.vSetLocation)}
+                labelStyle={{...FONTS.body3, color: isValid ? COLORS.white : "#CBB4B4"}}
                 buttonContainerStyle={{
                   height: 50,
                   width: SIZES.width / 2,
                   marginTop: SIZES.padding,
                   borderRadius: SIZES.base,
-                  borderWidth: 1,
-                  backgroundColor: isValid ? COLORS.primary : COLORS.gray3,
-                  borderColor: isValid ? COLORS.gray3 : COLORS.darkGray2,
+                  borderWidth: 2,
+                  backgroundColor: isValid ? COLORS.primary : "#EBEBEB",
+                  borderColor: isValid ? COLORS.gray3 : "#CBB4B4",
                 }}
               />
             </View>

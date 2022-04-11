@@ -3,9 +3,11 @@ import { View, Text, Image } from 'react-native'
 
 import { images, FONTS, SIZES, COLORS } from '../../constants';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
     return (
+        <KeyboardAwareScrollView style={{backgroundColor: COLORS.white}}>
         <View
         style={{
             flex: 1,
@@ -25,7 +27,7 @@ const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
 
         {/* App Icon */}
 
-        <View
+        {/* <View
         style={{
             alignItems:'center'
             
@@ -33,13 +35,13 @@ const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
         >
             <Image 
             source={images.logo_01}
-            resizeMode='contain'
+            // resizeMode='contain'
             style={{
                 height: 100,
                 width: 200
             }}
             />
-        </View>
+        </View> */}
 
         {/* Title & Subtitle */}
             <View
@@ -59,6 +61,7 @@ const AuthLayout = ({title, subtitle, titleContainerStyle, children}) => {
             {children}
         </KeyboardAwareScrollView>  
         </View>
+        </KeyboardAwareScrollView>
     )
 }
 

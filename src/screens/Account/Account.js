@@ -3,10 +3,17 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {COLORS, FONTS, SIZES} from '../../constants/theme';
 import {TextButton} from '../../components';
+import {APP_ROUTES} from '../../routes/router';
+import { ScrollView } from 'react-native-gesture-handler';
+
 
 const Account = ({navigation}) => {
+  const [ifIsSignedIn, setIfIsSignedIn] = React.useState(false);
+
+
   return (
     <View style={{flex: 1}}>
+      <ScrollView>
       <View
         style={{
           alignItems: 'center',
@@ -37,90 +44,100 @@ const Account = ({navigation}) => {
         <View style={{paddingLeft: SIZES.base}}>
           <Text style={{...FONTS.body5}}>Welcome</Text>
           <Text style={{...FONTS.body3, color: COLORS.black}}>
-            Your name here
+            Donald Trump
           </Text>
         </View>
       </View>
 
       {/* TEXT INPUT */}
-      <View style={{padding: 20, borderTopWidth: 1, borderTopColor: '#ccc'}}>
-        <TextButton
-          label="Edit Profile"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 8}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('EditProfile')}
-        />
+      <View
+        style={{
+          padding: 20,
+          borderTopWidth: 1,
+          borderTopColor: '#ccc',
+        }}>
+        <View style={{marginHorizontal: SIZES.padding}}>
+          <TextButton
+            label="Edit Profile"
+            buttonContainerStyle={{
+              paddingVertical: 15,
+              backgroundColor: null,
+              alignItems: null,
+            }}
+            appendComponent={<Ionicons name="person-outline" size={22} />}
+            prependComponent={
+              <Ionicons name="chevron-forward-outline" size={22} />
+            }
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
+            onPress={() => navigation.navigate(APP_ROUTES.EditProfile)}
+          />
 
-        <TextButton
-          label="My Addresses"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="navigate-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 7}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('SavedAddress')}
-        />
+          <TextButton
+            label="My Addresses"
+            buttonContainerStyle={{
+              paddingVertical: 15,
+              backgroundColor: null,
+              alignItems: null,
+            }}
+            appendComponent={<Ionicons name="navigate-outline" size={22} />}
+            prependComponent={
+              <Ionicons name="chevron-forward-outline" size={22} />
+            }
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
+            onPress={() => navigation.navigate(APP_ROUTES.SavedAddress)}
+          />
 
-        <TextButton
-          label="Payment Methods"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 5.7}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('PaymentMethods')}
-        />
+          <TextButton
+            label="Payment Methods"
+            buttonContainerStyle={{
+              paddingVertical: 15,
+              backgroundColor: null,
+              alignItems: null,
+            }}
+            appendComponent={<Ionicons name="person-outline" size={22} />}
+            prependComponent={
+              <Ionicons name="chevron-forward-outline" size={22} />
+            }
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
+            onPress={() => navigation.navigate(APP_ROUTES.PaymentMethods)}
+          />
 
-        <TextButton
-          label="Contact Preferences"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="person-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 5}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => navigation.navigate('ContactPref')}
-        />
+          <TextButton
+            label="Contact Preferences"
+            buttonContainerStyle={{
+              paddingVertical: 15,
+              backgroundColor: null,
+              alignItems: null,
+            }}
+            appendComponent={<Ionicons name="person-outline" size={22} />}
+            prependComponent={
+              <Ionicons name="chevron-forward-outline" size={22} />
+            }
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
+            onPress={() => navigation.navigate(APP_ROUTES.ContactPref)}
+          />
 
-        <TextButton
-          label="Sign Out"
-          buttonContainerStyle={{paddingVertical: 15, backgroundColor: null}}
-          appendComponent={<Ionicons name="exit-outline" size={22} />}
-          prependComponent={
-            <Ionicons
-              style={{paddingLeft: SIZES.padding * 8.5}}
-              name="chevron-forward-outline"
-              size={22}
-            />
-          }
-          labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
-          onPress={() => {}}
-        />
+          <TextButton
+            label={ifIsSignedIn ? 'Sign In' : 'Sign In'}
+            buttonContainerStyle={{
+              paddingVertical: 15,
+              backgroundColor: null,
+              alignItems: null,
+            }}
+            appendComponent={<Ionicons name="exit-outline" size={22} />}
+            prependComponent={
+              <Ionicons name="chevron-forward-outline" size={22} />
+            }
+            labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.darkGray}}
+            onPress={() =>
+              setIfIsSignedIn(!ifIsSignedIn) &
+              navigation.navigate(APP_ROUTES.CustomerAuthStack)
+            }
+          />
+        </View>
       </View>
 
-    {/* BUTTON */}
+      {/* BUTTON */}
 
       <View style={{justifyContent: 'center', flexDirection: 'row'}}>
         <TextButton
@@ -133,6 +150,7 @@ const Account = ({navigation}) => {
           }
           label="Click here for help options"
           labelStyle={{...FONTS.body3}}
+          onPress={() => navigation.navigate(APP_ROUTES.CustomerSupport)}
           buttonContainerStyle={{
             height: 55,
             width: SIZES.width - 50,
@@ -141,22 +159,8 @@ const Account = ({navigation}) => {
             backgroundColor: COLORS.primary,
           }}
         />
-
-        
       </View>
-      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
-        <TextButton
-          label="Business"
-          labelStyle={{...FONTS.h3, color: COLORS.black}}
-          onPress={() => navigation.replace("vendorStack")}
-          buttonContainerStyle={{
-            marginTop: SIZES.base,
-            backgroundColor: null,
-          }}
-        />
-
-        
-      </View>
+      </ScrollView>
     </View>
   );
 };

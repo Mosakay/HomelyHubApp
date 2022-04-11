@@ -1,11 +1,13 @@
 import OnBoarding from "./OnBoarding/OnBoarding"
+import UserOrVendor from "./Authentication/UserOrVendor"
 
 //Routes
 
-import AppStack from "../routes/AppStack"
-import AuthStack from "../routes/AuthStack"
+import UserStack from "../routes/UserStack"
+import VendorStack from "../routes/VendorStack"
 
-// Authentication
+
+// User_Auth
 import AuthLayout from "./Authentication/AuthLayout"
 import SignIn from "./Authentication/SignIn"
 import SignUp from "./Authentication/SignUp"
@@ -19,10 +21,19 @@ import Home from "./Home/Home"
 //Account
 
 import Account from "./Account/Account"
+import CustomerSupport from "./Account/CustomerSupport"
+
+//Customer Support
+
+import ConstactUs from "./CustomerSupport/ContactUs"
+import Feedback from "./CustomerSupport/Feedback"
+import GettingStarted from "./CustomerSupport/GettingStarted"
+import Legal from "./CustomerSupport/Legal"
 
 //Settings
 
-import Settings from "./Settings/Settings"
+import UserSettings from "./Settings/UserSettings"
+import VendorSettings from "./Settings/VendorSettings"
 
 
 // Search
@@ -41,9 +52,12 @@ import Notification from "./Notification/Notification"
 
 import Login from './Vendor/Login'
 import Register from './Vendor/Register'
-import vMenuCreation from './Vendor/vMenuCreation'
+import Register2 from './Vendor/Register2'
+import vForgotPassword from './Vendor/vForgotPassword'
+import vStoreCreation from './Vendor/vStoreCreation'
 import vProfileCreation from './Vendor/vProfileCreation'
 import vSetLocation from './Vendor/vSetLocation'
+import VendorProfile from "./Vendor/VendorProfile"
 
 export {
     OnBoarding,
@@ -58,13 +72,23 @@ export {
     CartTab,
     Favourite,
     Notification,
-    Settings,
+    UserSettings,
+    VendorSettings,
     Account,
-    AppStack,
-    AuthStack,
     Login,
     Register,
-    vMenuCreation,
+    Register2,
+    vStoreCreation,
     vProfileCreation,
-    vSetLocation
+    vSetLocation,
+    vForgotPassword,
+    UserOrVendor,
+    UserStack,
+    VendorStack,
+    VendorProfile,
+    CustomerSupport,
+    ConstactUs,
+    Feedback,
+    GettingStarted,
+    Legal,
 }

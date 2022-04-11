@@ -13,7 +13,7 @@ const Home = () => {
                 justifyContent: 'center'
             }}
         >
-            <Text>Home Screen</Text>
+            <Text>HomelyHub - Eat, Eat, Sleep!</Text>
         </View>
     )
 }

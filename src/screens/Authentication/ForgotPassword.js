@@ -61,24 +61,11 @@ const ForgotPassword = ({navigation}) => {
               appendComponent={
                 <View style={{justifyContent: 'center'}}>
                   <Image
-                    source={ !errors.email ? icons.correct : icons.cross }
+                    source={ !errors.email ? icons.correct : icons.correct }
                     style={{
                       height: 20,
                       width: 20,
-                      tintColor: !errors.email ? COLORS.primary : COLORS.red
-                    }}
-                  />
-                </View>
-              }
-              prependComponent={
-                
-                <View style={{justifyContent: 'center'}}>
-                  <Image
-                    source={ !errors.email ? icons.correct : icons.cross }
-                    style={{
-                      height: 20,
-                      width: 20,
-                      tintColor: !errors.email ? COLORS.primary : COLORS.red
+                      tintColor: !errors.email ? COLORS.primary : COLORS.gray2
                     }}
                   />
                 </View>
@@ -99,17 +86,31 @@ const ForgotPassword = ({navigation}) => {
 
       {/* Button */}
 
-      <TextButton
-        label="Send Email"
-        buttonContainerStyle={{
-          height: 55,
-          alignItems: 'center',
-          marginTop: SIZES.padding,
-          borderRadius: SIZES.radius,
-          backgroundColor: isValid ? COLORS.primary : COLORS.transparentPrimary
-        }}
-        onPress={handleSubmit}
-      />
+      <View
+            style={{
+              justifyContent: 'center',
+              flexDirection: 'row',
+              paddingTop: SIZES.padding,
+            }}>
+            <TextButton
+              label="Send Email"
+              disabled={!isValid}
+              labelStyle={{
+                ...FONTS.body3,
+                color: isValid ? COLORS.white2 : '#CBB4B4',
+              }}
+              buttonContainerStyle={{
+                height: 50,
+                width: SIZES.width / 2,
+                marginTop: SIZES.padding,
+                borderRadius: SIZES.base,
+                borderWidth: 2,
+                backgroundColor: isValid ? COLORS.primary : '#EBEBEB',
+                borderColor: isValid ? COLORS.gray3 : '#CBB4B4',
+              }}
+              onPress={handleSubmit}
+            />
+          </View>
     </AuthLayout>
           )}
           </Formik>
