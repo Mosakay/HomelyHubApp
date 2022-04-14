@@ -68,6 +68,7 @@ export const APP_ROUTES={
     ReviewManagement:'Review_Management',
     Orders:'Orders',
     BusinessAnalytics:'Business_Analytics',
+    BusinessProfileCreation:'Business_Profile_Creation',
 
   
   }

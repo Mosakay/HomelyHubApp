@@ -17,6 +17,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from 'reanimated-bottom-sheet';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {APP_ROUTES} from '../../routes/router';
+import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 
 const vProfileCreation = ({navigation}) => {
 
@@ -108,6 +109,7 @@ const vProfileCreation = ({navigation}) => {
         errors,
         isValid,
       }) => (
+    
         <VendorLayout
           header="Business Profile"
           title="Business Profile Creation"
@@ -164,7 +166,7 @@ const vProfileCreation = ({navigation}) => {
               app.
             </Text>
 
-                     {/* IMAGE PICKER */}
+                     {/* IMAGE PICKER LOGO*/}
 
             <View style={{alignItems: 'center'}}>
               <TouchableOpacity onPress={() => this.bs.current.snapTo(0)}>
@@ -208,9 +210,55 @@ const vProfileCreation = ({navigation}) => {
             </View>
 
             <Text style={{...FONTS.body5, marginVertical: SIZES.base}}>
-              Click on the icon above to add an Business Logo, this is the photo
-              that will display to customers scrolling trough vendors in their
-              area.
+This is  the photo that will display to cutomers scrolling through vendors in their area.
+            </Text>
+
+
+              {/* IMAGE PICKER COVEER*/}
+
+              <View style={{alignItems: 'center'}}>
+              <TouchableOpacity onPress={() => this.bs.current.snapTo(0)}>
+                <View
+                  style={{
+                    height: 80,
+                    width: SIZES.width,
+                    borderRadius: 15,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  <ImageBackground
+                    source={{
+                      uri: image,
+                    }}
+                    style={{height: 80, width: SIZES.width / 1.2}}
+                    imageStyle={{borderRadius: 15}}>
+                    <View
+                      style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Icon
+                        name="camera"
+                        size={35}
+                        color={COLORS.gray}
+                        style={{
+                          opacity: 0.7,
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          borderWidth: 1,
+                          borderColor: '#fff',
+                          borderRadius: 10,
+                        }}
+                      />
+                    </View>
+                  </ImageBackground>
+                </View>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={{...FONTS.body5, marginVertical: SIZES.base}}>
+This is a cover photo that will display behind your business profile logo.
             </Text>
 
             <View style={{justifyContent: 'center', flexDirection: 'row'}}>
@@ -231,7 +279,6 @@ const vProfileCreation = ({navigation}) => {
               />
             </View>
 
-
           </View>
 
           <BottomSheet
@@ -244,6 +291,7 @@ const vProfileCreation = ({navigation}) => {
                 enabledGestureInteraction={true}
               />
         </VendorLayout>
+
       )}
     </Formik>
   );

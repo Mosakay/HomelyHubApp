@@ -171,7 +171,7 @@ const VendorProfile = ({navigation}) => {
             <Ionicons name="chevron-forward-outline" size={22} />
           }
           labelStyle={{marginLeft: 5, ...FONTS.body4, color: COLORS.black}}
-          onPress={() => navigation.navigate(APP_ROUTES.BusinessAnalytics)}
+          onPress={() => navigation.navigate(APP_ROUTES.BusinessProfileCreation)}
         />
       </View>
       <VendorProfileModal />

@@ -6,7 +6,7 @@ import {TextButton} from '../../components';
 import {APP_ROUTES} from '../../routes/router';
 import { ScrollView } from 'react-native-gesture-handler';
 
-
+ 
 const Account = ({navigation}) => {
   const [ifIsSignedIn, setIfIsSignedIn] = React.useState(false);
 
