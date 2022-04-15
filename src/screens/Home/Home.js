@@ -209,7 +209,7 @@ const Home = () => {
                       ...FONTS.body2,
                     //   paddingVertical: SIZES.padding, 
                     }}
-                    // onPress={() => navigation.Button}
+                    // onPress={() => navigation.Bu0tton}
                     onPress={() => console.log('yo')}
                   />
             </View>
